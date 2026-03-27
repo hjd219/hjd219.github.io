@@ -59,7 +59,7 @@ input,select {
   color:#555;
 }
 
-/* 플로팅 버튼 */
+/* 플로팅 */
 .floating {
   position:fixed;
   right:15px;
@@ -175,12 +175,13 @@ function calc(){
   let court = (type==="법인설립"||type==="본점주소이전_관외") ? 35000 : 7000;
   let stamp = (type==="법인설립"||type==="상호변경") ? 30000 : 0;
 
+  // 🔥 공증 최종 조건
   let notar1 = 0;
   let notar2 = 0;
 
-  if(type==="본점주소이전_관외"){
-    notar1 = 100000;
-    notar2 = 150000;
+  if(type !== "법인설립" && type !== "본점주소이전_관내"){
+    notar1 = 30000;
+    notar2 = 30000;
   }
 
   let extra = 10000;
