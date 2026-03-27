@@ -21,7 +21,6 @@ body {font-family:'Noto Sans KR',sans-serif;margin:0;background:#f4f6f9;}
 h1,h2 {text-align:center;}
 
 .btn {
-  display:block;
   width:100%;
   padding:15px;
   border:none;
@@ -29,19 +28,11 @@ h1,h2 {text-align:center;}
   font-size:16px;
   margin-top:10px;
   cursor:pointer;
-  text-align:center;
-  text-decoration:none;
 }
 
 .tel {background:#4a90e2;color:white;}
 .kakao {background:#FEE500;color:#3c1e1e;}
 .blog {background:#27ae60;color:white;}
-
-.tel.strong {
-  font-size:18px;
-  font-weight:800;
-  background:linear-gradient(135deg,#4a90e2,#2c6ed5);
-}
 
 input,select {
   width:100%;
@@ -86,29 +77,11 @@ input,select {
   font-size:14px;
   font-weight:bold;
   cursor:pointer;
-  text-decoration:none;
   box-shadow:0 4px 10px rgba(0,0,0,0.2);
 }
 
-.float-btn.tel {
-  background:#4a90e2;
-  color:#fff;
-}
-
-.float-btn.kakao {
-  background:#FEE500;
-  color:#3c1e1e;
-}
-
-.float-btn.pulse {
-  animation:pulse 1.5s infinite;
-}
-
-@keyframes pulse {
-  0% {box-shadow:0 0 0 0 rgba(74,144,226,0.6);}
-  70% {box-shadow:0 0 0 10px rgba(74,144,226,0);}
-  100% {box-shadow:0 0 0 0 rgba(74,144,226,0);}
-}
+.float-btn.tel {background:#4a90e2;color:#fff;}
+.float-btn.kakao {background:#FEE500;color:#3c1e1e;}
 </style>
 
 </head>
@@ -123,17 +96,8 @@ input,select {
 <h1>현재두 법무사 사무소</h1>
 <p style="text-align:center;">법인등기 · 상속 전문</p>
 
-<a href="tel:0324251500" class="btn tel strong">
-📞 전화 상담하기
-</a>
+<button class="btn tel" onclick="call()">📞 전화 상담하기</button> <button class="btn kakao" onclick="kakao()">💬 카카오톡 상담</button> <button class="btn blog" onclick="blog()">📝 블로그 바로가기</button>
 
-<button class="btn kakao" onclick="kakao()">
-💬 카카오톡 상담
-</button>
-
-<button class="btn blog" onclick="blog()">
-📝 블로그 바로가기
-</button>
 </div>
 
 <!-- 계산기 -->
@@ -165,14 +129,19 @@ input,select {
 
 </div>
 
-<!-- 플로팅 -->
+<!-- 플로팅 버튼 -->
 
 <div class="floating">
-  <a href="tel:0324251500" class="float-btn tel pulse">📞 전화</a>
+  <button class="float-btn tel" onclick="call()">📞 전화</button>
   <button class="float-btn kakao" onclick="kakao()">💬 카톡</button>
 </div>
 
 <script>
+function call(){
+  location.href="tel:0324251500";
+}
+
+// 👉 오픈카톡 연결
 function kakao(){
   window.open("https://open.kakao.com/o/soZresni","_blank");
 }
@@ -207,6 +176,7 @@ function calc(){
   let court = (type==="법인설립"||type==="본점주소이전_관외") ? 35000 : 7000;
   let stamp = (type==="법인설립"||type==="상호변경") ? 30000 : 0;
 
+  // 공증 조건
   let notar1 = 0;
   let notar2 = 0;
 
@@ -249,4 +219,3 @@ calc();
 
 </body>
 </html>
-
