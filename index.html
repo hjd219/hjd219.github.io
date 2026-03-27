@@ -58,29 +58,11 @@ input,select {
   color:#555;
 }
 
-/* 하단 상담문의 카드 */
-.info {
-  text-align:center;
-  font-size:20px;
-  font-weight:bold;
-  color:#4a90e2;
-  padding:15px;
-  background:#f0f4f8;
-  border-radius:15px;
-  box-shadow:0 4px 15px rgba(0,0,0,0.05);
-  margin-top:30px;
-}
-
-.info a {
-  color:#4a90e2;
-  text-decoration:none;
-}
-
 /* 플로팅 버튼 */
 .floating {
   position:fixed;
   right:15px;
-  bottom:20px;
+  bottom:80px; /* 하단 카드 위로 위치 */
   display:flex;
   flex-direction:column;
   gap:10px;
@@ -99,8 +81,34 @@ input,select {
 
 .float-btn.tel {background:#4a90e2;color:#fff;}
 .float-btn.kakao {background:#FEE500;color:#3c1e1e;}
-</style>
 
+/* 하단 고정 상담문의 버튼 */
+.fixed-info {
+  position: fixed;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  background: linear-gradient(135deg, #4a90e2, #357ABD);
+  padding: 12px 30px;
+  z-index: 999;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+  border-radius: 30px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.fixed-info a {
+  color: #fff;
+  text-decoration: none;
+}
+.fixed-info:hover {
+  transform: translateX(-50%) scale(1.05);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+  cursor: pointer;
+}
+</style>
 </head>
 <body>
 
@@ -109,7 +117,7 @@ input,select {
 <!-- 상단 -->
 <div class="card">
 <h1>현재두 법무사 사무소</h1>
-<p style="text-align:center;">법인등기 · 상속등기 </p>
+<p style="text-align:center;">법인등기 · 상속 전문</p>
 
 <button class="btn tel" onclick="call()">📞 전화 상담하기</button> 
 <button class="btn kakao" onclick="kakao()">💬 카카오톡 상담</button> 
@@ -141,11 +149,6 @@ input,select {
 <div class="detail" id="detail"></div>
 </div>
 
-<!-- 하단 카드: 상담문의 전화번호 -->
-<div class="info">
-  📞 상담문의: <a href="tel:0324251500">032-425-1500</a>
-</div>
-
 </div>
 
 <!-- 플로팅 버튼 -->
@@ -154,19 +157,15 @@ input,select {
   <button class="float-btn kakao" onclick="kakao()">💬 카톡</button>
 </div>
 
+<!-- 하단 고정 상담문의 버튼 -->
+<div class="fixed-info">
+  📞 <a href="tel:0324251500">상담문의 032-425-1500</a>
+</div>
+
 <script>
-function call(){
-  location.href="tel:0324251500";
-}
-
-function kakao(){
-  window.open("https://open.kakao.com/o/soZresni","_blank");
-}
-
-function blog(){
-  window.open("https://blog.naver.com/hjd21","_blank");
-}
-
+function call(){ location.href="tel:0324251500"; }
+function kakao(){ window.open("https://open.kakao.com/o/soZresni","_blank"); }
+function blog(){ window.open("https://blog.naver.com/hjd21","_blank"); }
 function format(n){return Math.round(n).toLocaleString()+"원"}
 
 function calc(){
@@ -174,49 +173,48 @@ function calc(){
   let capital = parseFloat(document.getElementById("capital").value.replace(/,/g,''))||0;
   let dense = document.getElementById("dense").value==="true";
 
-  let tax = 40200;
-  let applyDense = dense && (type==="법인설립"||type==="자본금증자"||type==="본점주소이전_관외");
+  let tax=0, edu=0, court=0, lawFee=0, lawVAT=0, stamp=0, notar1=0, notar2=0, extra=10000;
 
-  if(type==="법인설립"||type==="자본금증자"||type==="본점주소이전_관외"){
+  if(type === "본점주소이전_관내"){
+    tax = 112500;
+    edu = tax*0.2;
+    court = 7000;
+    lawFee = 150000;
+    lawVAT = lawFee*0.1;
+    stamp = 0;
+  } else if(type==="법인설립" || type==="자본금증자" || type==="본점주소이전_관외"){
+    let applyDense = dense && (type==="법인설립"||type==="자본금증자"||type==="본점주소이전_관외");
     if(capital<=0){
       document.getElementById("total").innerText="자본금을 입력하세요";
       document.getElementById("detail").innerHTML="";
       return;
     }
-    let base=Math.max(capital*0.004,112500);
-    tax=base*(applyDense?3:1);
+    let base = Math.max(capital*0.004,112500);
+    tax = base*(applyDense?3:1);
+    edu = tax*0.2;
+    court = (type==="법인설립"||type==="본점주소이전_관외") ? 35000 : 7000;
+    lawFee = (type==="법인설립"||type==="자본금증자") ? 300000 : 150000;
+    lawVAT = lawFee*0.1;
+    stamp = (type==="법인설립"||type==="상호변경") ? 30000 : 0;
+    if(type !== "법인설립" && type !== "본점주소이전_관내"){ notar1=30000; notar2=30000; }
+  } else {
+    tax=40200; edu=tax*0.2; court=7000; lawFee=150000; lawVAT=lawFee*0.1; 
+    stamp=(type==="상호변경")?30000:0; 
+    if(type !== "법인설립" && type !== "본점주소이전_관내"){ notar1=30000; notar2=30000; }
   }
-
-  let edu = tax*0.2;
-  let lawFee = (type==="법인설립"||type==="자본금증자") ? 300000 : 150000;
-  let lawVAT = lawFee*0.1;
-  let court = (type==="법인설립"||type==="본점주소이전_관외") ? 35000 : 7000;
-  let stamp = (type==="법인설립"||type==="상호변경") ? 30000 : 0;
-
-  let notar1 = 0;
-  let notar2 = 0;
-
-  if(type !== "법인설립" && type !== "본점주소이전_관내"){
-    notar1 = 30000;
-    notar2 = 30000;
-  }
-
-  let extra = 10000;
 
   let total = tax+edu+lawFee+lawVAT+court+stamp+notar1+notar2+extra;
-
-  document.getElementById("total").innerText = "총 비용: " + format(total);
-
-  document.getElementById("detail").innerHTML = `
-  등록세: ${format(tax)}<br>
-  교육세: ${format(edu)}<br>
-  법무사: ${format(lawFee)}<br>
-  부가세: ${format(lawVAT)}<br>
-  공증대행: ${format(notar1)}<br>
-  공증료: ${format(notar2)}<br>
-  수수료: ${format(court)}<br>
-  도장: ${format(stamp)}<br>
-  제증명: ${format(extra)}
+  document.getElementById("total").innerText = "총 비용: "+format(total);
+  document.getElementById("detail").innerHTML=`
+    등록세: ${format(tax)}<br>
+    교육세: ${format(edu)}<br>
+    법무사: ${format(lawFee)}<br>
+    부가세: ${format(lawVAT)}<br>
+    공증대행: ${format(notar1)}<br>
+    공증료: ${format(notar2)}<br>
+    수수료: ${format(court)}<br>
+    도장: ${format(stamp)}<br>
+    제증명: ${format(extra)}
   `;
 }
 
