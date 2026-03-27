@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>현재두 법무사 사무소 | 법인설립 비용 계산기</title>
+
+<style>
+body {font-family:'Noto Sans KR',sans-serif;margin:0;background:#f4f6f9;}
+.container {max-width:720px;margin:auto;padding:20px;}
+.card {
+  background:white;
+  border-radius:15px;
+  padding:20px;
+  margin-bottom:20px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+}
+h1,h2 {text-align:center;}
+.btn {
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:10px;
+  font-size:16px;
+  margin-top:10px;
+  cursor:pointer;
+}
+.tel {background:#2c3e50;color:white;}
+.kakao {background:#f9e000;color:#3c1e1e;}
+.blog {background:#03c75a;color:white;}
+input,select {
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  border-radius:8px;
+  border:1px solid #ddd;
+}
+.result {
+  font-size:20px;
+  font-weight:bold;
+  text-align:center;
+  margin-top:15px;
+}
+.notice {
+  font-size:13px;
+  color:#666;
+  margin-top:10px;
+  text-align:center;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="card">
+<h1>현재두 법무사 사무소</h1>
+<p style="text-align:center;">법인설립 · 상속 · 등기 전문</p>
+
+<button class="btn tel" onclick="call()">📞 지금 바로 상담하기 (전화)</button> <button class="btn kakao" onclick="kakao()">💬 카톡으로 1분 상담</button> <button class="btn blog" onclick="blog()">📝 블로그 바로가기</button>
+
+<p class="notice">
+현재 법인설립 문의가 증가하여 상담이 지연될 수 있습니다.<br>
+빠른 상담은 전화 이용을 권장드립니다.
+</p>
+</div>
+
+<div class="card">
+<h2>법인설립 비용 계산기</h2>
+
+<select id="region">
+<option value="1">일반과세</option>
+<option value="3">과밀지역 (3배 중과)</option>
+</select>
+
+<input type="number" id="capital" placeholder="자본금 입력 (예: 10000000)">
+
+<button class="btn tel" onclick="calc()">비용 계산하기</button>
+
+<div class="result" id="result">총 비용: 0원</div>
+
+<p class="notice">※ 실제 비용은 상황에 따라 달라질 수 있습니다</p>
+</div>
+
+<div class="card">
+<h2>왜 선택해야 할까요?</h2>
+<p>✔ 1:1 맞춤 상담 진행</p>
+<p>✔ 빠른 등기 처리</p>
+<p>✔ 추가 비용 없는 투명한 견적</p>
+<p>✔ 최근 법인설립 문의 증가</p>
+</div>
+
+</div>
+
+<script>
+function call(){
+  location.href = "tel:0324251500";
+}
+
+function kakao(){
+  alert("카카오톡 링크를 넣어주세요");
+  // 예: window.open("https://open.kakao.com/o/xxxxx");
+}
+
+function blog(){
+  window.open("https://blog.naver.com/hjd21");
+}
+
+function calc(){
+  let capital = document.getElementById("capital").value;
+  let multi = document.getElementById("region").value;
+
+  if(!capital){
+    alert("자본금을 입력하세요");
+    return;
+  }
+
+  let tax = capital * 0.004 * multi;
+  if(tax < 112500) tax = 112500;
+
+  let edu = tax * 0.2;
+  let fee = 35000;
+  let lawyer = 300000;
+  let stamp = 30000;
+  let doc = 10000;
+
+  let total = tax + edu + fee + lawyer + stamp + doc;
+
+  document.getElementById("result").innerText =
+    "총 비용: " + total.toLocaleString() + "원";
+}
+</script>
+
+</body>
+</html>
