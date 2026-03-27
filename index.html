@@ -4,48 +4,118 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>법인등기 비용 계산기</title>
+<title>법인등기 비용 계산기 | 현재두 법무사</title>
 
 <style>
 body {
   font-family:'Noto Sans KR',sans-serif;
-  background:#f4f6f9;
   margin:0;
-  padding:20px;
+  background:#f4f7fb;
 }
-#wrap {
-  max-width:600px;
-  margin:auto;
+
+/* 상단 */
+.header {
+  background:#4a90e2;
+  color:#fff;
+  padding:30px 20px;
+  text-align:center;
+}
+
+.header h1 {margin:0; font-size:24px;}
+.header p {margin:5px 0 0; font-size:14px;}
+
+.call-top {
+  margin-top:15px;
   background:#fff;
-  padding:30px;
-  border-radius:15px;
-  box-shadow:0 8px 20px rgba(0,0,0,0.12);
+  color:#4a90e2;
+  padding:10px 20px;
+  border-radius:25px;
+  display:inline-block;
+  cursor:pointer;
+  font-weight:bold;
 }
+
+/* 컨텐츠 */
+.wrap {
+  max-width:520px;
+  margin:30px auto;
+  padding:0 15px;
+}
+
+/* 카드 */
+.card {
+  background:#fff;
+  border-radius:15px;
+  padding:25px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+  margin-bottom:20px;
+}
+
+/* 계산기 */
 h2 {
   text-align:center;
-  margin-bottom:25px;
+  margin-bottom:20px;
+  color:#2c3e50;
 }
+
+label {
+  font-weight:600;
+  margin-top:15px;
+  display:block;
+}
+
 select,input {
   width:100%;
   padding:12px;
-  margin-top:10px;
-  border-radius:8px;
-  border:1px solid #ccc;
-  font-size:16px;
-}
-#total {
-  margin-top:20px;
-  padding:15px;
-  background:#2c3e50;
-  color:#fff;
+  margin-top:8px;
   border-radius:10px;
+  border:1px solid #ddd;
+}
+
+.result {
+  margin-top:20px;
+  padding:18px;
+  background:linear-gradient(135deg,#4a90e2,#357ABD);
+  color:#fff;
+  border-radius:12px;
   text-align:center;
   font-size:20px;
   font-weight:bold;
 }
+
 .detail {
   margin-top:10px;
   font-size:14px;
+  color:#555;
+}
+
+/* 버튼 */
+.btn {
+  margin-top:20px;
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:12px;
+  background:#4a90e2;
+  color:#fff;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+/* 서비스 설명 */
+.service {
+  font-size:14px;
+  line-height:1.6;
+  color:#444;
+}
+
+/* 하단 */
+.footer {
+  text-align:center;
+  padding:20px;
+  font-size:13px;
+  color:#888;
 }
 </style>
 
@@ -53,11 +123,19 @@ select,input {
 
 <body>
 
-<div id="wrap">
+<div class="header">
+  <h1>현재두 법무사 사무소</h1>
+  <p>법인등기 · 상속 전문</p>
+  <div class="call-top" onclick="call()">📞 032-425-1500</div>
+</div>
 
+<div class="wrap">
+
+<div class="card">
 <h2>법인등기 비용 계산기</h2>
 
-<select id="type">
+<label>등기 종류</label> <select id="type">
+
   <option value="법인설립">법인설립</option>
   <option value="자본금증자">자본금증자</option>
   <option value="상호변경">상호변경</option>
@@ -67,16 +145,39 @@ select,input {
   <option value="본점주소이전_관외">본점주소이전 (관외)</option>
 </select>
 
-<input id="capital" placeholder="자본금 입력 (예: 50,000,000)">
+<label>자본금</label> <input id="capital" placeholder="예: 50,000,000">
 
-<select id="dense">
+<label>지역</label> <select id="dense">
+
   <option value="false">비과밀지역</option>
   <option value="true">과밀지역 (3배)</option>
 </select>
 
-<div id="total">총 비용: 0원</div>
-<div id="detail" class="detail"></div>
+<div class="result" id="total">총 비용: 0원</div>
+<div class="detail" id="detail"></div>
 
+<button class="btn" onclick="call()">📞 상담 바로 연결</button>
+
+</div>
+
+<div class="card">
+<h2>서비스 안내</h2>
+<div class="service">
+✔ 법인설립 등기<br>
+✔ 임원 변경 / 상호 변경<br>
+✔ 본점 이전 (관내 / 관외)<br>
+✔ 상속 / 부동산 등기<br><br>
+
+👉 빠르고 정확한 등기 진행<br>
+👉 전화 상담 즉시 안내 가능
+
+</div>
+</div>
+
+</div>
+
+<div class="footer">
+현재두 법무사 사무소 | 032-425-1500
 </div>
 
 <script>
@@ -102,20 +203,17 @@ function calc(){
   }
 
   let edu = tax*0.2;
-
   let lawFee = (type==="법인설립"||type==="자본금증자") ? 300000 : 150000;
   let lawVAT = lawFee*0.1;
-
   let court = (type==="법인설립"||type==="본점주소이전_관외") ? 35000 : 7000;
-
   let stamp = (type==="법인설립"||type==="상호변경") ? 30000 : 0;
 
   let notar1 = 0;
   let notar2 = 0;
 
   if(type==="본점주소이전_관외"){
-    notar1 = 100000; // 공증대행
-    notar2 = 150000; // 공증료
+    notar1 = 100000;
+    notar2 = 150000;
   }
 
   let extra = 10000;
@@ -137,6 +235,10 @@ function calc(){
   `;
 }
 
+function call(){
+  location.href="tel:0324251500";
+}
+
 document.querySelectorAll("#type,#capital,#dense").forEach(el=>{
   el.addEventListener("input",calc);
   el.addEventListener("change",calc);
@@ -152,3 +254,4 @@ calc();
 
 </body>
 </html>
+
