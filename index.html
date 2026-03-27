@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>법인등기 비용 계산기 | 현재두 법무사</title>
-
 <style>
 body {font-family:'Noto Sans KR',sans-serif;margin:0;background:#f4f6f9;}
 .container {max-width:600px;margin:auto;padding:20px;}
@@ -169,31 +168,16 @@ function calc(){
   let capital = parseFloat(document.getElementById("capital").value.replace(/,/g,''))||0;
   let dense = document.getElementById("dense").value==="true";
 
-  let tax=0, edu=0, court=0, lawFee=0, lawVAT=0, stamp=0, notar1=30000, notar2=30000, extra=10000;
+  let tax=0, edu=0, court=0, lawFee=0, lawVAT=0, stamp=0, extra=10000;
+  let notar1=0, notar2=0; // 법인설립일 경우 항상 0
 
-  if(type === "본점주소이전_관내"){
-    tax = 112500;
-    edu = tax*0.2;
-    court = 7000;
-    lawFee = 150000;
-    lawVAT = lawFee*0.1;
-    stamp = 0;
-  }
-  else if(type === "본점주소이전_관외" && !dense){
-    tax = 112500;
-    edu = tax*0.2;
-    court = 35000;
-    lawFee = 150000;
-    lawVAT = lawFee*0.1;
-    stamp = 0;
-  }
-  else if(type==="법인설립" || type==="자본금증자" || (type==="본점주소이전_관외" && dense)){
-    let applyDense = dense && (type==="법인설립"||type==="자본금증자"||type==="본점주소이전_관외");
+  if(type === "법인설립" || type === "자본금증자" || type==="본점주소이전_관외" && dense){
     if(capital<=0){
       document.getElementById("total").innerText="자본금을 입력하세요";
       document.getElementById("detail").innerHTML="";
       return;
     }
+    let applyDense = dense && (type==="법인설립"||type==="자본금증자"||type==="본점주소이전_관외");
     let base = Math.max(capital*0.004,112500);
     tax = base*(applyDense?3:1);
     edu = tax*0.2;
@@ -201,10 +185,20 @@ function calc(){
     lawFee = (type==="법인설립"||type==="자본금증자") ? 300000 : 150000;
     lawVAT = lawFee*0.1;
     stamp = (type==="법인설립"||type==="상호변경") ? 30000 : 0;
+    // 법인설립이면 공증 제외
+    if(type !== "법인설립"){
+      notar1=30000; notar2=30000;
+    }
+  }
+  else if(type==="본점주소이전_관내"){
+    tax = 112500; edu=tax*0.2; court=7000; lawFee=150000; lawVAT=lawFee*0.1; stamp=0;
+  }
+  else if(type==="본점주소이전_관외" && !dense){
+    tax=112500; edu=tax*0.2; court=35000; lawFee=150000; lawVAT=lawFee*0.1; stamp=0;
   }
   else{
-    tax=40200; edu=tax*0.2; court=7000; lawFee=150000; lawVAT=lawFee*0.1; 
-    stamp=(type==="상호변경")?30000:0;
+    tax=40200; edu=tax*0.2; court=7000; lawFee=150000; lawVAT=lawFee*0.1; stamp=(type==="상호변경")?30000:0;
+    notar1=30000; notar2=30000;
   }
 
   let total = tax+edu+lawFee+lawVAT+court+stamp+notar1+notar2+extra;
