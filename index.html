@@ -59,15 +59,29 @@ input,select {
   color:#555;
 }
 
-.badge {
-  background:#e74c3c;
-  color:#fff;
-  padding:6px 10px;
-  border-radius:20px;
-  font-size:12px;
-  display:inline-block;
-  margin-bottom:10px;
+/* 플로팅 버튼 */
+.floating {
+  position:fixed;
+  right:15px;
+  bottom:20px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  z-index:999;
 }
+
+.float-btn {
+  padding:12px 15px;
+  border:none;
+  border-radius:30px;
+  font-size:14px;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 4px 10px rgba(0,0,0,0.2);
+}
+
+.float-btn.tel {background:#4a90e2;color:#fff;}
+.float-btn.kakao {background:#FEE500;color:#3c1e1e;}
 </style>
 
 </head>
@@ -81,10 +95,6 @@ input,select {
 <div class="card">
 <h1>현재두 법무사 사무소</h1>
 <p style="text-align:center;">법인등기 · 상속 전문</p>
-
-<div style="text-align:center;">
-<span class="badge">🔥 오늘 상담 문의 많음</span>
-</div>
 
 <button class="btn tel" onclick="call()">📞 전화 상담하기</button> <button class="btn kakao" onclick="kakao()">💬 카카오톡 상담</button> <button class="btn blog" onclick="blog()">📝 블로그 바로가기</button>
 
@@ -115,10 +125,15 @@ input,select {
 <div class="result" id="total">총 비용: 0원</div>
 <div class="detail" id="detail"></div>
 
-<button class="btn tel" onclick="call()">📞 바로 전화 상담</button> <button class="btn kakao" onclick="kakao()">💬 카카오톡 상담하기</button>
+</div>
 
 </div>
 
+<!-- 플로팅 버튼 -->
+
+<div class="floating">
+  <button class="float-btn tel" onclick="call()">📞 전화</button>
+  <button class="float-btn kakao" onclick="kakao()">💬 카톡</button>
 </div>
 
 <script>
@@ -126,12 +141,10 @@ function call(){
   location.href="tel:0324251500";
 }
 
-// 카카오톡 (적용 완료)
 function kakao(){
   window.open("https://open.kakao.com/o/hjd21","_blank");
 }
 
-// 블로그 (적용 완료)
 function blog(){
   window.open("https://blog.naver.com/hjd21","_blank");
 }
@@ -204,3 +217,4 @@ calc();
 
 </body>
 </html>
+
