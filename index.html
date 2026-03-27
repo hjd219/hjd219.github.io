@@ -62,7 +62,7 @@ input,select {
 .floating {
   position:fixed;
   right:15px;
-  bottom:80px; /* 하단 카드 위로 위치 */
+  bottom:80px;
   display:flex;
   flex-direction:column;
   gap:10px;
@@ -114,7 +114,6 @@ input,select {
 
 <div class="container">
 
-<!-- 상단 -->
 <div class="card">
 <h1>현재두 법무사 사무소</h1>
 <p style="text-align:center;">법인등기 · 상속 전문</p>
@@ -124,7 +123,6 @@ input,select {
 <button class="btn blog" onclick="blog()">📝 블로그 바로가기</button>
 </div>
 
-<!-- 계산기 -->
 <div class="card">
 <h2>법인등기 비용 계산기</h2>
 
@@ -151,13 +149,11 @@ input,select {
 
 </div>
 
-<!-- 플로팅 버튼 -->
 <div class="floating">
   <button class="float-btn tel" onclick="call()">📞 상담문의</button>
   <button class="float-btn kakao" onclick="kakao()">💬 카톡</button>
 </div>
 
-<!-- 하단 고정 상담문의 버튼 -->
 <div class="fixed-info">
   📞 <a href="tel:0324251500">상담문의 032-425-1500</a>
 </div>
@@ -173,7 +169,7 @@ function calc(){
   let capital = parseFloat(document.getElementById("capital").value.replace(/,/g,''))||0;
   let dense = document.getElementById("dense").value==="true";
 
-  let tax=0, edu=0, court=0, lawFee=0, lawVAT=0, stamp=0, notar1=0, notar2=0, extra=10000;
+  let tax=0, edu=0, court=0, lawFee=0, lawVAT=0, stamp=0, notar1=30000, notar2=30000, extra=10000;
 
   if(type === "본점주소이전_관내"){
     tax = 112500;
@@ -182,7 +178,16 @@ function calc(){
     lawFee = 150000;
     lawVAT = lawFee*0.1;
     stamp = 0;
-  } else if(type==="법인설립" || type==="자본금증자" || type==="본점주소이전_관외"){
+  }
+  else if(type === "본점주소이전_관외" && !dense){
+    tax = 112500;
+    edu = tax*0.2;
+    court = 35000;
+    lawFee = 150000;
+    lawVAT = lawFee*0.1;
+    stamp = 0;
+  }
+  else if(type==="법인설립" || type==="자본금증자" || (type==="본점주소이전_관외" && dense)){
     let applyDense = dense && (type==="법인설립"||type==="자본금증자"||type==="본점주소이전_관외");
     if(capital<=0){
       document.getElementById("total").innerText="자본금을 입력하세요";
@@ -196,11 +201,10 @@ function calc(){
     lawFee = (type==="법인설립"||type==="자본금증자") ? 300000 : 150000;
     lawVAT = lawFee*0.1;
     stamp = (type==="법인설립"||type==="상호변경") ? 30000 : 0;
-    if(type !== "법인설립" && type !== "본점주소이전_관내"){ notar1=30000; notar2=30000; }
-  } else {
+  }
+  else{
     tax=40200; edu=tax*0.2; court=7000; lawFee=150000; lawVAT=lawFee*0.1; 
-    stamp=(type==="상호변경")?30000:0; 
-    if(type !== "법인설립" && type !== "본점주소이전_관내"){ notar1=30000; notar2=30000; }
+    stamp=(type==="상호변경")?30000:0;
   }
 
   let total = tax+edu+lawFee+lawVAT+court+stamp+notar1+notar2+extra;
