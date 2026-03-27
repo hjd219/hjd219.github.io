@@ -7,80 +7,50 @@
 <title>법인등기 비용 계산기 | 현재두 법무사</title>
 
 <style>
-body {
-  font-family:'Noto Sans KR',sans-serif;
-  margin:0;
-  background:#f4f7fb;
-}
+body {font-family:'Noto Sans KR',sans-serif;margin:0;background:#f4f6f9;}
+.container {max-width:600px;margin:auto;padding:20px;}
 
-/* 상단 */
-.header {
-  background:#4a90e2;
-  color:#fff;
-  padding:30px 20px;
-  text-align:center;
-}
-
-.header h1 {margin:0; font-size:24px;}
-.header p {margin:5px 0 0; font-size:14px;}
-
-.call-top {
-  margin-top:15px;
-  background:#fff;
-  color:#4a90e2;
-  padding:10px 20px;
-  border-radius:25px;
-  display:inline-block;
-  cursor:pointer;
-  font-weight:bold;
-}
-
-/* 컨텐츠 */
-.wrap {
-  max-width:520px;
-  margin:30px auto;
-  padding:0 15px;
-}
-
-/* 카드 */
 .card {
   background:#fff;
   border-radius:15px;
   padding:25px;
+  margin-bottom:20px;
   box-shadow:0 8px 20px rgba(0,0,0,0.08);
-  margin-bottom:20px;
 }
 
-/* 계산기 */
-h2 {
-  text-align:center;
-  margin-bottom:20px;
-  color:#2c3e50;
+h1,h2 {text-align:center;}
+
+.btn {
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:10px;
+  font-size:16px;
+  margin-top:10px;
+  cursor:pointer;
 }
 
-label {
-  font-weight:600;
-  margin-top:15px;
-  display:block;
-}
+.tel {background:#4a90e2;color:white;}
+.kakao {background:#FEE500;color:#3c1e1e;}
+.blog {background:#27ae60;color:white;}
 
-select,input {
+input,select {
   width:100%;
   padding:12px;
-  margin-top:8px;
-  border-radius:10px;
+  margin-top:10px;
+  border-radius:8px;
   border:1px solid #ddd;
 }
 
 .result {
-  margin-top:20px;
-  padding:18px;
+  font-size:20px;
+  font-weight:bold;
+  text-align:center;
+  margin-top:15px;
+  padding:15px;
   background:linear-gradient(135deg,#4a90e2,#357ABD);
   color:#fff;
   border-radius:12px;
-  text-align:center;
-  font-size:20px;
-  font-weight:bold;
 }
 
 .detail {
@@ -89,33 +59,14 @@ select,input {
   color:#555;
 }
 
-/* 버튼 */
-.btn {
-  margin-top:20px;
-  width:100%;
-  padding:15px;
-  border:none;
-  border-radius:12px;
-  background:#4a90e2;
+.badge {
+  background:#e74c3c;
   color:#fff;
-  font-size:16px;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-/* 서비스 설명 */
-.service {
-  font-size:14px;
-  line-height:1.6;
-  color:#444;
-}
-
-/* 하단 */
-.footer {
-  text-align:center;
-  padding:20px;
-  font-size:13px;
-  color:#888;
+  padding:6px 10px;
+  border-radius:20px;
+  font-size:12px;
+  display:inline-block;
+  margin-bottom:10px;
 }
 </style>
 
@@ -123,19 +74,28 @@ select,input {
 
 <body>
 
-<div class="header">
-  <h1>현재두 법무사 사무소</h1>
-  <p>법인등기 · 상속 전문</p>
-  <div class="call-top" onclick="call()">📞 032-425-1500</div>
+<div class="container">
+
+<!-- 상단 -->
+
+<div class="card">
+<h1>현재두 법무사 사무소</h1>
+<p style="text-align:center;">법인등기 · 상속 전문</p>
+
+<div style="text-align:center;">
+<span class="badge">🔥 오늘 상담 문의 많음</span>
 </div>
 
-<div class="wrap">
+<button class="btn tel" onclick="call()">📞 전화 상담하기</button> <button class="btn kakao" onclick="kakao()">💬 카카오톡 상담</button> <button class="btn blog" onclick="blog()">📝 블로그 바로가기</button>
+
+</div>
+
+<!-- 계산기 -->
 
 <div class="card">
 <h2>법인등기 비용 계산기</h2>
 
-<label>등기 종류</label> <select id="type">
-
+<select id="type">
   <option value="법인설립">법인설립</option>
   <option value="자본금증자">자본금증자</option>
   <option value="상호변경">상호변경</option>
@@ -145,46 +105,40 @@ select,input {
   <option value="본점주소이전_관외">본점주소이전 (관외)</option>
 </select>
 
-<label>자본금</label> <input id="capital" placeholder="예: 50,000,000">
-
-<label>지역</label> <select id="dense">
-
+<select id="dense">
   <option value="false">비과밀지역</option>
   <option value="true">과밀지역 (3배)</option>
 </select>
 
+<input id="capital" placeholder="자본금 입력 (예: 50,000,000)">
+
 <div class="result" id="total">총 비용: 0원</div>
 <div class="detail" id="detail"></div>
 
-<button class="btn" onclick="call()">📞 상담 바로 연결</button>
+<button class="btn tel" onclick="call()">📞 바로 전화 상담</button> <button class="btn kakao" onclick="kakao()">💬 카카오톡 상담하기</button>
 
 </div>
 
-<div class="card">
-<h2>서비스 안내</h2>
-<div class="service">
-✔ 법인설립 등기<br>
-✔ 임원 변경 / 상호 변경<br>
-✔ 본점 이전 (관내 / 관외)<br>
-✔ 상속 / 부동산 등기<br><br>
-
-👉 빠르고 정확한 등기 진행<br>
-👉 전화 상담 즉시 안내 가능
-
-</div>
-</div>
-
-</div>
-
-<div class="footer">
-현재두 법무사 사무소 | 032-425-1500
 </div>
 
 <script>
+function call(){
+  location.href="tel:0324251500";
+}
+
+// 카카오톡 (적용 완료)
+function kakao(){
+  window.open("https://open.kakao.com/o/hjd21","_blank");
+}
+
+// 블로그 (적용 완료)
+function blog(){
+  window.open("https://blog.naver.com/hjd21","_blank");
+}
+
 function format(n){return Math.round(n).toLocaleString()+"원"}
 
 function calc(){
-
   let type = document.getElementById("type").value;
   let capital = parseFloat(document.getElementById("capital").value.replace(/,/g,''))||0;
   let dense = document.getElementById("dense").value==="true";
@@ -235,10 +189,6 @@ function calc(){
   `;
 }
 
-function call(){
-  location.href="tel:0324251500";
-}
-
 document.querySelectorAll("#type,#capital,#dense").forEach(el=>{
   el.addEventListener("input",calc);
   el.addEventListener("change",calc);
@@ -254,4 +204,3 @@ calc();
 
 </body>
 </html>
-
