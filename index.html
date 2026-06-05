@@ -1,223 +1,181 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>법인등기 비용 계산기 | 현재두 법무사</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>법인 설립 및 변경등기 통합 세무 가이드</title>
+    <style>
+        :root {
+            --gold-primary: #a38446;
+            --gold-dark: #735b2f;
+            --bg-light: #f9f9fb;
+            --card-bg: #ffffff;
+            --text-dark: #222222;
+            --text-muted: #666666;
+            --accent-blue: #0056b3;
+        }
 
-<style>
-body {font-family:'Noto Sans KR',sans-serif;margin:0;background:#f4f6f9;}
-.container {max-width:600px;margin:auto;padding:20px;}
-.card {background:#fff;border-radius:15px;padding:25px;margin-bottom:20px;box-shadow:0 8px 20px rgba(0,0,0,0.08);}
-h1,h2 {text-align:center;margin-bottom:15px;}
+        body, html {
+            margin: 0; padding: 0;
+            width: 100%; height: 100%;
+            font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
+            background-color: #eef0f3;
+            display: flex; justify-content: center; align-items: center;
+            overflow: hidden;
+            user-select: none;
+            color: var(--text-dark);
+        }
 
-.btn {width:100%;height:50px;border:none;border-radius:10px;font-size:16px;margin-top:10px;cursor:pointer;font-weight:bold;}
-.tel {background:#4a90e2;color:white;}
-.kakao {background:#FEE500;color:#3c1e1e;}
-.blog {background:#27ae60;color:white;}
+        /* 전체 슬라이드 컨테이너 (1280x720 고정 비율) */
+        .presentation-container {
+            width: 1280px; height: 720px;
+            position: relative;
+            background-color: var(--bg-light);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            overflow: hidden;
+            border-radius: 12px;
+        }
 
-input, select {
-  width:100%;height:48px;padding:0 12px;margin-top:10px;
-  border-radius:8px;border:1px solid #ddd;box-sizing:border-box;font-size:15px;
-}
+        /* 개별 슬라이드 공통 스타일 */
+        .slide {
+            position: absolute;
+            top: 0; left: 0;
+            width: 1280px; height: 720px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+            box-sizing: border-box;
+            background-color: var(--bg-light);
+        }
 
-.result {
-  font-size:20px;font-weight:bold;text-align:center;margin-top:15px;
-  padding:15px;background:linear-gradient(135deg,#4a90e2,#357ABD);
-  color:#fff;border-radius:12px;
-}
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+        }
 
-.detail {margin-top:10px;font-size:14px;color:#555;line-height:1.6;}
+        /* 네비게이션 컨트롤러 버튼 */
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid var(--gold-primary);
+            color: var(--gold-primary);
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 10;
+            display: flex; justify-content: center; align-items: center;
+            transition: all 0.2s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
 
-.floating {
-  position:fixed;right:15px;bottom:90px;
-  display:flex;flex-direction:column;gap:10px;z-index:999;
-}
+        .nav-btn:hover {
+            background-color: var(--gold-primary);
+            color: white;
+        }
 
-.float-btn {
-  padding:12px 15px;border:none;border-radius:30px;
-  font-size:14px;font-weight:bold;cursor:pointer;
-}
+        .prev-btn { left: 20px; }
+        .next-btn { right: 20px; }
 
-.float-btn.tel {background:#4a90e2;color:#fff;}
-.float-btn.kakao {background:#FEE500;color:#3c1e1e;}
+        /* 공통 푸터 */
+        .slide-footer {
+            position: absolute;
+            bottom: 25px;
+            left: 50px; right: 50px;
+            display: flex; justify-content: space-between;
+            font-size: 13px;
+            color: var(--text-muted);
+            border-top: 1px solid #e1e4e6;
+            padding-top: 15px;
+            z-index: 5;
+        }
 
-.fixed-info {
-  position: fixed;bottom: 15px;left: 50%;
-  transform: translateX(-50%);
-  font-size: 18px;font-weight: bold;color: #fff;
-  background: linear-gradient(135deg, #4a90e2, #357ABD);
-  padding: 12px 25px;border-radius: 30px;
-}
-</style>
+        /* 레이아웃 스타일 디자인 */
+        .full-cover {
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            text-align: center; 
+            background: linear-gradient(135deg, #f5f1e6 0%, #e8e1d0 100%);
+        }
+
+        .slide-title {
+            font-size: 42px; color: var(--gold-dark); margin: 0 0 20px 0; font-weight: bold;
+        }
+
+        .content-box {
+            padding: 60px 100px; height: 100%; box-sizing: border-box;
+            background-color: var(--bg-light);
+        }
+
+        .section-title {
+            font-size: 28px; color: var(--gold-dark); border-bottom: 2px solid var(--gold-primary);
+            padding-bottom: 10px; margin-bottom: 25px; font-weight: bold;
+        }
+
+        .grid-2 {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 15px;
+        }
+
+        .card {
+            background-color: var(--card-bg); border: 1px solid #e1e4e6;
+            border-radius: 12px; padding: 22px; box-sizing: border-box;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+        }
+
+        .card h3 { color: var(--gold-dark); margin-top: 0; font-size: 18px; margin-bottom: 10px; }
+        .card p, .card li { font-size: 14px; line-height: 1.6; color: #444; }
+        .card ul { padding-left: 20px; margin: 5px 0; }
+
+        /* 계산기 전용 분할 배정 레이아웃 */
+        .split-layout {
+            display: flex; width: 100%; height: 100%;
+            background-color: var(--bg-light);
+        }
+
+        .left-panel {
+            width: 40%; height: 100%; padding: 60px 45px; box-sizing: border-box;
+            display: flex; flex-direction: column; justify-content: space-between;
+            background: linear-gradient(to right, #f2ece0 80%, var(--bg-light));
+        }
+
+        .right-panel {
+            width: 60%; height: 100%; display: flex; justify-content: center; align-items: center; padding-right: 35px; box-sizing: border-box;
+        }
+
+        /* 계산기 폼 카드 */
+        .calculator-card {
+            background-color: #ffffff; border-radius: 16px;
+            width: 100%; max-width: 540px; padding: 22px 25px; box-sizing: border-box;
+            border: 1.5px solid var(--gold-primary); box-shadow: 0 15px 35px rgba(0,0,0,0.08); color: #333;
+        }
+
+        .calculator-card h2 { font-size: 19px; margin: 0 0 15px 0; text-align: center; font-weight: bold; color: var(--gold-dark); }
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; font-size: 12px; font-weight: bold; margin-bottom: 5px; color: #444; }
+        select, input[type="text"] { width: 100%; padding: 9px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; box-sizing: border-box; background-color: #fff; }
+        
+        .price-container { background-color: #fffdf4; border: 1.5px solid var(--gold-primary); border-radius: 8px; padding: 10px; }
+        .quick-buttons { display: flex; gap: 6px; margin-top: 6px; }
+        .quick-btn { flex: 1; background-color: #eaf0f6; border: none; padding: 6px; border-radius: 4px; font-size: 11px; cursor: pointer; font-weight: bold; color: #333; }
+        .quick-btn:hover { background-color: var(--gold-primary); color: white; }
+        
+        .notice-badge { display: block; margin-top: 4px; font-size: 11px; color: var(--accent-blue); font-weight: bold; }
+        .result-container { margin-top: 12px; background-color: #f8f9fa; border-radius: 8px; padding: 12px; border: 1px solid #e1e4e6; }
+        .result-row { display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 13px; color: #555; }
+        .result-row.total { margin-top: 6px; padding-top: 6px; border-top: 1.5px dashed #ccc; font-size: 15px; font-weight: bold; color: #d9534f; }
+        
+        .hidden { display: none !important; }
+
+        /* 테이블 스타일 */
+        table { width: 100%; border-collapse: collapse; margin-top: 8px; color: #333; background-color: #fff; }
+        th, td { padding: 9px 11px; border: 1px solid #e1e4e6; text-align: center; font-size: 13.5px; line-height: 1.4; }
+        th { background-color: #f2ece0; color: var(--gold-dark); font-weight: bold; }
+    </style>
 </head>
-
 <body>
 
-<div class="container">
-
-<!-- 소개 -->
-<div class="card">
-<h1>현재두 법무사 사무소</h1>
-<p style="text-align:center;">법인등기 · 상속 · 증여</p>
-
-<button class="btn tel" onclick="call()">📞 전화 상담</button> 
-<button class="btn kakao" onclick="kakao()">💬 카카오톡 상담</button> 
-<button class="btn blog" onclick="blog()">📝 블로그</button>
-</div>
-
-<!-- 계산기 -->
-<div class="card">
-<h2>법인등기 비용 계산기</h2>
-
-<select id="type">
-  <option value="법인설립">법인설립</option>
-  <option value="자본금증자">자본금증자</option>
-  <option value="상호변경">상호변경</option>
-  <option value="목적변경">목적변경</option>
-  <option value="임원변경">임원변경</option>
-  <option value="본점주소이전_관내">본점주소이전 (관내)</option>
-  <option value="본점주소이전_관외">본점주소이전 (관외)</option>
-</select>
-
-<select id="dense">
-  <option value="false">비과밀지역</option>
-  <option value="true">과밀지역 (3배)</option>
-</select>
-
-<input id="capital" placeholder="자본금 입력 (예: 50,000,000)">
-
-<div class="result" id="total">총 비용: 0원</div>
-<div class="detail" id="detail"></div>
-</div>
-
-</div>
-
-<div class="floating">
-<button class="float-btn tel" onclick="call()">📞</button>
-<button class="float-btn kakao" onclick="kakao()">💬</button>
-</div>
-
-<div class="fixed-info">
-📞 <a href="tel:0324251500" style="color:#fff;text-decoration:none;">032-425-1500</a>
-</div>
-
-<script>
-function call(){ location.href="tel:0324251500"; }
-function kakao(){ window.open("https://open.kakao.com/o/soZresni","_blank"); }
-function blog(){ window.open("https://blog.naver.com/hjd21","_blank"); }
-
-function format(n){return Math.round(n).toLocaleString()+"원"}
-
-function calc(){
-  let type = document.getElementById("type").value;
-  let capital = parseFloat(document.getElementById("capital").value.replace(/,/g,''))||0;
-  let dense = document.getElementById("dense").value==="true";
-
-  let tax=0, edu=0, court=0, lawFee=0, lawVAT=0, stamp=0, extra=10000;
-  let notar1=0, notar2=0;
-
-  /* 설립 */
-  if(type==="법인설립"){
-    if(capital<=0){ total.innerText="자본금 입력"; return;}
-    let base=Math.max(capital*0.004,112500);
-    tax=dense?base*3:base;
-    edu=tax*0.2;
-    court=35000;
-    lawFee=300000;
-    lawVAT=lawFee*0.1;
-    stamp=30000;
-  }
-
-  /* 증자 */
-  else if(type==="자본금증자"){
-    if(capital<=0){ total.innerText="자본금 입력"; return;}
-    let base=Math.max(capital*0.004,112500);
-    tax=dense?base*3:base;
-    edu=tax*0.2;
-    court=35000;
-    lawFee=300000;
-    lawVAT=lawFee*0.1;
-  }
-
-  /* 상호 */
-  else if(type==="상호변경"){
-    tax=40200;
-    edu=tax*0.2;
-    court=7000;
-    lawFee=150000;
-    lawVAT=lawFee*0.1;
-    notar1=30000;
-    notar2=30000;
-    stamp=30000;
-  }
-
-  /* 기타 */
-  else if(type==="목적변경" || type==="임원변경"){
-    tax=40200;
-    edu=tax*0.2;
-    court=7000;
-    lawFee=150000;
-    lawVAT=lawFee*0.1;
-    notar1=30000;
-    notar2=30000;
-  }
-
-  /* 관내 */
-  else if(type==="본점주소이전_관내"){
-    tax=112500;
-    edu=tax*0.2;
-    court=7000;
-    lawFee=150000;
-    lawVAT=lawFee*0.1;
-  }
-
-  /* 관외 */
-  else if(type==="본점주소이전_관외"){
-    if(dense){
-      if(capital<=0){ total.innerText="자본금 입력"; return;}
-      let base=Math.max(capital*0.004,112500);
-      tax=base*3;
-    }else{
-      tax=112500;
-    }
-    edu=tax*0.2;
-    court=35000;
-    lawFee=150000;
-    lawVAT=lawFee*0.1;
-    notar1=30000;
-    notar2=30000;
-  }
-
-  let totalCost = tax+edu+lawFee+lawVAT+court+stamp+notar1+notar2+extra;
-
-  total.innerText="총 비용: "+format(totalCost);
-
-  detail.innerHTML=`
-  등록세: ${format(tax)}<br>
-  교육세: ${format(edu)}<br>
-  법무사: ${format(lawFee)}<br>
-  부가세: ${format(lawVAT)}<br>
-  공증대행: ${format(notar1)}<br>
-  공증료: ${format(notar2)}<br>
-  수수료: ${format(court)}<br>
-  도장: ${format(stamp)}<br>
-  제증명: ${format(extra)}
-  `;
-}
-
-document.querySelectorAll("#type,#capital,#dense").forEach(el=>{
-  el.addEventListener("input",calc);
-  el.addEventListener("change",calc);
-});
-
-document.getElementById("capital").addEventListener("input",function(){
-  let v=this.value.replace(/,/g,'');
-  this.value=v.replace(/\B(?=(\d{3})+(?!\d))/g,",");
-});
-
-calc();
-</script>
-
-</body>
-</html>
+<div class="presentation-container">
+    <button class="nav-btn prev-btn" onclick="changeSlide(-1)">❮</button>
+    <button class="nav-btn next-btn" onclick="changeSlide(1)">❯</button>
