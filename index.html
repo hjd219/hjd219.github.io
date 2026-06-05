@@ -179,3 +179,308 @@
 <div class="presentation-container">
     <button class="nav-btn prev-btn" onclick="changeSlide(-1)">❮</button>
     <button class="nav-btn next-btn" onclick="changeSlide(1)">❯</button>
+
+    <div class="slide active full-cover">
+        <div style="border: 2px solid var(--gold-primary); padding: 40px 60px; background-color: rgba(255,255,255,0.9); border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+            <div class="slide-title">법인 설립 및 변경등기 세무 가이드</div>
+            <p style="font-size: 18px; color: #555; margin: 0;">설립 · 임원 · 상호 · 목적 변경 및 관내 · 관외 본점이전 세액 시뮬레이터</p>
+        </div>
+        <div class="slide-footer"><span>현재두법무사사무소</span><span>슬라이드 1 / 4</span></div>
+    </div>
+
+    <div class="slide content-box">
+        <div class="section-title">법인 등기 유형별 세목 및 세율 요약</div>
+        <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 10px;">법인의 설립 및 자본금 규모, 권역에 따라 다르게 작용하는 표준 세액 구조 요약표입니다.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 20%;">등기 유형</th>
+                    <th style="width: 32%;">과세 기준 및 권역 조건</th>
+                    <th style="width: 16%;">등록면허세 (본세)</th>
+                    <th style="width: 16%;">지방교육세 (20%)</th>
+                    <th style="width: 16%;">총 공과금 계</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>법인 설립 (비과밀)</strong></td>
+                    <td>일반지역 신설: 자본금의 <strong>0.4%</strong> 정률 적용</td>
+                    <td>최소 112,500원 제한</td>
+                    <td>본세의 20%</td>
+                    <td><strong>자본금 비례 (최소 13.5만)</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>법인 설립 (과밀)</strong></td>
+                    <td>과밀억제권역 신설: 자본금의 <strong>1.2%</strong> (3배 중과)</td>
+                    <td>최소 337,500원 제한</td>
+                    <td>본세의 20%</td>
+                    <td><strong>자본금 중과 (최소 40.5만)</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>임원 · 상호 · 목적</strong></td>
+                    <td>변경 사유별 신청서 건당 부과 (정액세 항목)</td>
+                    <td>40,500 원</td>
+                    <td>8,100 원</td>
+                    <td><strong>48,600 원</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>본점 관내이전</strong></td>
+                    <td>동일한 등기소 관할 구역 내 주소 이동 (정액세)</td>
+                    <td>40,500 원</td>
+                    <td>8,100 원</td>
+                    <td><strong>48,600 원</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>본점 관외이전<br>(비과밀 ↔ 비과밀)</strong></td>
+                    <td>타 관할 이전 (구등기소 정액세 + 신등기소 정액세)</td>
+                    <td>40,500원 × 2</td>
+                    <td>8,100원 × 2</td>
+                    <td><strong>97,200 원</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>본점 관외이전<br>(비과밀 → 과밀 전입)</strong></td>
+                    <td>비과밀 구역에서 과밀권역 진입 (설립에 준해 <strong>1.2% 중과</strong>)</td>
+                    <td>자본금의 1.2%<br>(최소 337,500원) + 40,500원</td>
+                    <td>본세의 20%</td>
+                    <td><strong>자본금 비례 중과<br>(최소 453,600원)</strong></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="slide-footer"><span>현재두법무사사무소</span><span>슬라이드 2 / 4</span></div>
+    </div>
+
+    <div class="slide split-layout">
+        <div class="left-panel">
+            <div>
+                <h2 style="font-size: 25px; color: var(--gold-dark); margin: 0 0 10px 0; border-bottom: 2px solid var(--gold-primary); padding-bottom: 10px;">통합 세무 연산 엔진</h2>
+                <p style="color: #444; font-size: 13.5px; line-height: 1.6;">등기 항목을 변경하면 최저한세 보장 및 자본금 기준 권역별 중과세 요건이 즉시 가동됩니다.</p>
+                <ul style="padding-left: 18px; font-size: 12.5px; color: #555; line-height: 1.7; margin-top: 12px;">
+                    <li><strong>설립/전입 중과 리스크:</strong> 자본금이 높을수록 과밀억제권역 등록세 부담이 급증하므로 사전에 정밀 모니터링이 필요합니다.</li>
+                    <li><strong>최저한세 보장:</strong> 자본금이 소액(예: 100만 원 등)이더라도 법정 최소 기본세 단가가 자동 보정되어 계산됩니다.</li>
+                </ul>
+            </div>
+            <div style="font-size: 13px; color: var(--text-muted);">현재두법무사사무소 | 슬라이드 3 / 4</div>
+        </div>
+        <div class="right-panel">
+            <div class="calculator-card">
+                <h2>설립 · 변경등기 권역별 실시간 계산기</h2>
+                
+                <div class="form-group">
+                    <label>신청할 등기 유형 선택</label>
+                    <select id="登記-type" onchange="toggleFormFields()">
+                        <option value="incorporation">법인 설립 (신규 등기)</option>
+                        <option value="fixed-change">임원 / 상호 / 목적 변경 (정액 변경등기)</option>
+                        <option value="move-inside">본점 관내이전 (동일 관할 내 이동)</option>
+                        <option value="move-outside">본점 관외이전 (타 관할 구역으로 이동)</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="area-group">
+                    <label id="area-label">지역 권역 요건 선택</label>
+                    <select id="area-condition" onchange="calculateTotalTax()">
+                        <option value="non-regulated">비과밀억제권역 (일반지역 설립 또는 일반지역 간 관외이전)</option>
+                        <option value="regulated">과밀억제권역 (수도권 과밀지역 설립 또는 과밀지역 간 관외이전)</option>
+                        <option value="heavy-in">★ 비과밀지역 → 과밀억제권역으로의 본점 진입 전입 (3배 중과)</option>
+                    </select>
+                </div>
+
+                <div class="form-group price-container" id="capital-group">
+                    <label style="color: var(--gold-dark); font-weight: bold;">법인 자본금 액수 기준 (원)</label>
+                    <input type="text" id="corp-capital" value="28,000,000" onkeyup="formatAndCalculateChange(this)">
+                    <div class="quick-buttons">
+                        <button class="quick-btn" onclick="addCorpCapital(10000000)">+ 1천만</button>
+                        <button class="quick-btn" onclick="addCorpCapital(50000000)">+ 5천만</button>
+                        <button class="quick-btn" onclick="addCorpCapital(100000000)">+ 1억</button>
+                        <button class="quick-btn" onclick="resetCorpCapital()" style="background-color: #f8d7da; color: #721c24;">리셋</button>
+                    </div>
+                </div>
+
+                <div class="result-container">
+                    <div class="result-row"><span>적용 세액 구조 유형</span><span id="tax-type-view" style="font-weight: bold; color: var(--gold-dark);">-</span></div>
+                    <div class="result-row">
+                        <span>등록면허세 (본세)</span>
+                        <div style="text-align: right;">
+                            <span id="reg-tax-view">0 원</span>
+                            <span id="limit-notice" class="notice-badge" style="display:none;">(최저한세 규정 법정 최소액 적용됨)</span>
+                        </div>
+                    </div>
+                    <div class="result-row"><span>지방교육세 (본세의 20%)</span><span id="edu-tax-view">0 원</span></div>
+                    <div class="result-row total"><span>법정 세액 공과금 합계</span><span id="total-tax-view">0 원</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide content-box">
+        <div class="section-title">자본금 기준 설립 및 권역 선택 실무 팁</div>
+        <div class="grid-2">
+            <div class="card">
+                <h3>설립 시 자본금과 권역 리스크</h3>
+                <p>법인을 신설할 때 주소지와 자본금 크기에 따라 초기 비용 차이가 극명하게 발생합니다.</p>
+                <ul>
+                    <li><strong>비과밀지역 설립:</strong> 자본금의 0.4% 수준으로 세액이 낮게 책정되며 최저 기준선은 112,500원입니다.</li>
+                    <li><strong>과밀지역 중과세:</strong> 동일 자본금이더라도 서울/지방 주요 과밀권역에 설립 시 3배인 1.2%가 정률 부과되며, 최소 단가도 337,500원으로 가산됩니다. 자본금이 대형화될수록 차액 규모가 심화됩니다.</li>
+                </ul>
+            </div>
+            <div class="card" style="border: 1px solid var(--gold-primary); background-color: #fdfbf7;">
+                <h3>비과밀 설립 후 과밀 전입 주의사항</h3>
+                <p>초기 등록세를 아끼기 위해 지방이나 비과밀 구역에 법인을 설립한 뒤, 수도권 과밀지역으로 본점을 이전(관외이전)하는 실무 케이스가 존재합니다.</p>
+                <ul>
+                    <li><strong>우회 등록 차단:</strong> 세법상 비과밀에서 과밀역으로 진입하는 관외 본점이전은 **대도시에 법인을 새로 설립하는 행위**와 완벽히 동일하게 취급하여 이전 시점에 자본금 기준 1.2% 중과세를 전액 추징합니다.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide-footer"><span>현재두법무사사무소</span><span>슬라이드 4 / 4</span></div>
+    </div>
+</div>
+
+<script>
+    // --- 슬라이드 넘기기 컨트롤러 엔진 ---
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+
+    function showSlide(index) {
+        if (index >= slides.length) currentSlide = 0;
+        else if (index < 0) currentSlide = slides.length - 1;
+        else currentSlide = index;
+
+        slides.forEach((slide, idx) => {
+            if (idx === currentSlide) {
+                slide.classList.add('active');
+            } else {
+                slide.classList.remove('active');
+            }
+        });
+    }
+
+    function changeSlide(direction) {
+        showSlide(currentSlide + direction);
+    }
+
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'ArrowRight' || event.key === 'Space') {
+            if(document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'SELECT') changeSlide(1);
+        } else if (event.key === 'ArrowLeft') {
+            if(document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'SELECT') changeSlide(-1);
+        }
+    });
+
+    // --- 계산기 구동 및 폼 제어 자바스크립트 엔진 ---
+    function numToComma(num) { return num.toString().replace(/\B(?=(\d3)+(?!\d))/g, ","); }
+    function commaToNum(str) { return parseInt(str.replace(/,/g, '')) || 0; }
+
+    function formatAndCalculateChange(input) {
+        let num = commaToNum(input.value);
+        input.value = numToComma(num);
+        calculateTotalTax();
+    }
+
+    function addCorpCapital(amount) {
+        let input = document.getElementById('corp-capital');
+        let current = commaToNum(input.value);
+        input.value = numToComma(current + amount);
+        calculateTotalTax();
+    }
+
+    function resetCorpCapital() {
+        document.getElementById('corp-capital').value = "0";
+        calculateTotalTax();
+    }
+
+    // 등기 종류에 따라 하위 선택 폼 항목들을 동적으로 필터링하는 제어 로직
+    function toggleFormFields() {
+        let dType = document.getElementById('登記-type').value;
+        let areaGroup = document.getElementById('area-group');
+        let capitalGroup = document.getElementById('capital-group');
+        let areaCondition = document.getElementById('area-condition');
+
+        // 기본 상태로 활성화
+        areaGroup.classList.remove('hidden');
+        capitalGroup.classList.remove('hidden');
+        
+        // 셀렉트 박스 내부 옵션 전체 노출 초기화
+        for (let i = 0; i < areaCondition.options.length; i++) {
+            areaCondition.options[i].style.display = "block";
+        }
+
+        if (dType === 'fixed-change' || dType === 'move-inside') {
+            // 임원/상호/목적 변경 및 관내이전은 정액세이므로 입력 폼 숨김 처리
+            areaGroup.classList.add('hidden');
+            capitalGroup.classList.add('hidden');
+        } else if (dType === 'incorporation') {
+            // 설립 등기 시 타관할 전입(heavy-in) 옵션은 배제하고 숨김
+            if (areaCondition.value === 'heavy-in') {
+                areaCondition.value = 'non-regulated';
+            }
+            areaCondition.options[2].style.display = "none";
+        } else if (dType === 'move-outside') {
+            // 관외 본점 이전 시 기본 디폴트 값 유도 조율
+            if (areaCondition.value === 'regulated') {
+                areaCondition.value = 'non-regulated'; // 타관할 이동 시 표준 정액 안내 유도
+            }
+        }
+        calculateTotalTax();
+    }
+
+    function calculateTotalTax() {
+        let dType = document.getElementById('登記-type').value;
+        let areaCond = document.getElementById('area-condition').value;
+        let capital = commaToNum(document.getElementById('corp-capital').value);
+
+        let finalTax = 0;
+        let taxTypeLabel = "";
+        let showLimitNotice = false;
+
+        if (dType === 'fixed-change' || dType === 'move-inside') {
+            // 1. 임원/상호/목적 변경 및 본점 관내이전 -> 고정 정액세 40,500원 부과
+            finalTax = 40500;
+            taxTypeLabel = "표준 변경 정액등록세";
+        } 
+        else if (dType === 'incorporation') {
+            // 2. 법인 신규 설립 등기 정률 연산 구간
+            if (areaCond === 'regulated') {
+                // 과밀억제권역 내 신설 (3배 중과세율 1.2% 적용, 최저한세 337,500원)
+                finalTax = Math.floor(capital * 0.012);
+                taxTypeLabel = "과밀권역 설립 중과세 (1.2%)";
+                if (finalTax < 337500) { finalTax = 337500; showLimitNotice = true; }
+            } else {
+                // 일반지역 내 신설 (표준세율 0.4% 적용, 최저한세 112,500원)
+                finalTax = Math.floor(capital * 0.004);
+                taxTypeLabel = "일반지역 설립 표준세 (0.4%)";
+                if (finalTax < 112500) { finalTax = 112500; showLimitNotice = true; }
+            }
+        } 
+        else if (dType === 'move-outside') {
+            // 3. 본점 관외이전 등기 연산 구간
+            if (areaCond === 'heavy-in') {
+                // 비과밀 -> 과밀 진입 이전 (신등기소 설립 준용 중과세 1.2% + 구등기소 정액세 40,500원)
+                let mainTax = Math.floor(capital * 0.012);
+                if (mainTax < 337500) { mainTax = 337500; showLimitNotice = true; }
+                finalTax = mainTax + 40500;
+                taxTypeLabel = "과밀권역 진입 전입 중과세";
+            } else {
+                // 일반 지역 간 관외 이동 (구등기소 정액세 40,500원 + 신등기소 정액세 40,500원 합산)
+                finalTax = 40500 + 40500;
+                taxTypeLabel = "관외 전출입 표준 정액세";
+            }
+        }
+
+        // 지방교육세 (산출된 최종 결정 본세의 20%) 및 최종 세액 합계 산출
+        let eduTax = Math.floor(finalTax * 0.2);
+        let totalSum = finalTax + eduTax;
+
+        // 결과 인터페이스 출력 반영
+        document.getElementById('tax-type-view').innerText = taxTypeLabel;
+        document.getElementById('reg-tax-view').innerText = numToComma(finalTax) + " 원";
+        document.getElementById('edu-tax-view').innerText = numToComma(eduTax) + " 원";
+        document.getElementById('total-tax-view').innerText = numToComma(totalSum) + " 원";
+        document.getElementById('limit-notice').style.display = showLimitNotice ? "block" : "none";
+    }
+
+    // 윈도우 로드 시 실시간 인터페이스 조율 자동 실행
+    window.onload = function() {
+        toggleFormFields();
+    }
+</script>
+</body>
+</html>
