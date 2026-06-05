@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>법인 설립 및 변경등기 통합 등록세 가이드</title>
+    <title>법인 설립 및 변경등기 통합 세무 가이드</title>
     <style>
         :root {
             --gold-primary: #a38446;
@@ -135,13 +135,27 @@
         }
 
         .left-panel {
-            width: 38%; height: 100%; padding: 60px 40px; box-sizing: border-box;
+            width: 38%; height: 100%; padding: 45px 40px; box-sizing: border-box;
             display: flex; flex-direction: column; justify-content: space-between;
             background: linear-gradient(to right, #f2ece0 80%, var(--bg-light));
         }
 
         .right-panel {
             width: 62%; height: 100%; display: flex; justify-content: center; align-items: center; padding-right: 35px; box-sizing: border-box;
+        }
+
+        /* 썸네일 이미지 영역 스타일 */
+        .thumbnail-box {
+            width: 100%;
+            height: 140px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border: 1px solid #e1e4e6;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+            box-shadow: inset 0 2px 6px rgba(0,0,0,0.02);
         }
 
         /* 계산기 폼 카드 */
@@ -250,11 +264,22 @@
         <div class="slide-footer"><span>현재두법무사사무소</span><span>슬라이드 2 / 4</span></div>
     </div>
 
-    <!-- 3번 슬라이드: 실시간 통합 계산기 프로그램 -->
+    <!-- 3번 슬라이드: 실시간 통합 계산기 프로그램 (왼쪽 패널에 썸네일 탑재) -->
     <div class="slide split-layout">
         <div class="left-panel">
             <div>
-                <h2 style="font-size: 25px; color: var(--gold-dark); margin: 0 0 10px 0; border-bottom: 2px solid var(--gold-primary); padding-bottom: 10px;">통합 실무 시뮬레이터</h2>
+                <!-- 썸네일 이미지 컨테이너 (고급스러운 인라인 벡터 일러스트 삽입) -->
+                <div class="thumbnail-box">
+                    <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 21H5C3.89543 21 3 20.1046 3 19V5C3 3.89543 3.89543 3 5 3H14L21 10V19C21 20.1046 20.1046 21 19 21Z" stroke="#735b2f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M14 3V10H21" stroke="#735b2f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M7 10H10" stroke="#a38446" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M7 14H17" stroke="#a38446" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M7 17H14" stroke="#a38446" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                
+                <h2 style="font-size: 24px; color: var(--gold-dark); margin: 0 0 10px 0; border-bottom: 2px solid var(--gold-primary); padding-bottom: 8px;">통합 실무 시뮬레이터</h2>
                 <p style="color: #444; font-size: 13.5px; line-height: 1.6;">법정 등기신청수수료 정밀 분기 및 설립 후 5년 내 과밀억제권역 중과세 엔진입니다.</p>
                 <ul style="padding-left: 18px; font-size: 12.5px; color: #555; line-height: 1.7; margin-top: 10px;">
                     <li><strong>수수료 매칭 구조:</strong> 설립 및 관외 본점이전은 30,000원이 부과되며 증자, 관내이전, 임원·상호·목적 등 일반 변경등기는 7,000원이 가산됩니다.</li>
@@ -326,7 +351,7 @@
                         </div>
                     </div>
                     <div class="result-row"><span>지방교육세 (본세의 20%)</span><span id="edu-tax-view">0 원</span></div>
-                    <div class="result-row"><span style="color:var(--accent-blue); font-weight:bold;">등기신청수수료</span><span id="filing-fee-view" style="font-weight:bold; color:var(--accent-blue);">0 원</span></div>
+                    <div class="result-row"><span>등기신청수수료</span><span id="filing-fee-view" style="font-weight:bold; color:var(--accent-blue);">0 원</span></div>
                     <div class="result-row"><span>공증수수료 (정액 의사록 검인료)</span><span id="notary-fee-view">0 원</span></div>
                     <div class="result-row total"><span>실제 총 공과금 합계</span><span id="total-tax-view">0 원</span></div>
                 </div>
@@ -405,6 +430,11 @@
         let current = commaToNum(input.value);
         input.value = numToComma(current + amount);
         calculateTotalTax();
+    }
+
+    // 자본금 단위 퀵 가산 버튼 공유용 분기 함수
+    function addCapital(amount) {
+        addCorpCapital(amount);
     }
 
     function resetCorpCapital() {
