@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>법인 설립 및 변경등기 통합 세무 가이드</title>
+    <title>법인 설립 및 변경등기 통합 가이드</title>
     <style>
         :root {
             --gold-primary: #a38446;
@@ -111,7 +111,7 @@
 
         .section-title {
             font-size: 28px; color: var(--gold-dark); border-bottom: 2px solid var(--gold-primary);
-            padding-bottom: 10px; margin-bottom: 25px; font-weight: bold;
+            padding-bottom: 10px; margin-bottom: 20px; font-weight: bold;
         }
 
         .grid-2 {
@@ -147,21 +147,21 @@
         /* 계산기 폼 카드 */
         .calculator-card {
             background-color: #ffffff; border-radius: 16px;
-            width: 100%; max-width: 560px; padding: 20px 25px; box-sizing: border-box;
+            width: 100%; max-width: 560px; padding: 18px 25px; box-sizing: border-box;
             border: 1.5px solid var(--gold-primary); box-shadow: 0 15px 35px rgba(0,0,0,0.08); color: #333;
         }
 
         .calculator-card h2 { font-size: 19px; margin: 0 0 12px 0; text-align: center; font-weight: bold; color: var(--gold-dark); }
-        .form-group { margin-bottom: 10px; }
+        .form-group { margin-bottom: 8px; }
         .form-group label { display: block; font-size: 12px; font-weight: bold; margin-bottom: 4px; color: #444; }
         select, input[type="text"] { width: 100%; padding: 8px 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; box-sizing: border-box; background-color: #fff; }
         
-        .price-container { background-color: #fffdf4; border: 1.5px solid var(--gold-primary); border-radius: 8px; padding: 10px; }
+        .price-container { background-color: #fffdf4; border: 1.5px solid var(--gold-primary); border-radius: 8px; padding: 8px 10px; }
         .quick-buttons { display: flex; gap: 6px; margin-top: 6px; }
         .quick-btn { flex: 1; background-color: #eaf0f6; border: none; padding: 6px; border-radius: 4px; font-size: 11px; cursor: pointer; font-weight: bold; color: #333; }
         .quick-btn:hover { background-color: var(--gold-primary); color: white; }
         
-        .checkbox-group { display: flex; align-items: center; gap: 8px; background-color: #f0f7ff; padding: 10px; border-radius: 6px; border: 1px solid #ccdfff; }
+        .checkbox-group { display: flex; align-items: center; gap: 8px; background-color: #f0f7ff; padding: 8px 10px; border-radius: 6px; border: 1px solid #ccdfff; }
         .checkbox-group input { width: 16px; height: 16px; margin: 0; cursor: pointer; }
         .checkbox-group label { margin-bottom: 0; cursor: pointer; color: #004085; font-size: 12.5px; }
 
@@ -188,63 +188,42 @@
     <div class="slide active full-cover">
         <div style="border: 2px solid var(--gold-primary); padding: 40px 60px; background-color: rgba(255,255,255,0.9); border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
             <div class="slide-title">법인 설립 및 변경등기 실무 가이드</div>
-            <p style="font-size: 18px; color: #555; margin: 0;">통합 1건 기준 관외이전 세액 · 공증료 · 등기신청수수료 정밀 계산 시스템</p>
+            <p style="font-size: 18px; color: #555; margin: 0;">접수 방식별 등기신청수수료 정밀 연동 및 실시간 공과금 연산 시스템</p>
         </div>
         <div class="slide-footer"><span>현재두법무사사무소</span><span>슬라이드 1 / 4</span></div>
     </div>
 
-    <!-- 2번 슬라이드: 등기 항목별 법정 세액 구조 요약표 -->
+    <!-- 2번 슬라이드: 대법원 법정 등기신청수수료 요약표 -->
     <div class="slide content-box">
-        <div class="section-title">법인 등기 유형별 법정 공과금 요약 (실무 기준)</div>
-        <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 8px;">지방세법 개정 실무를 반영한 1건 통합 과세 기준 표준 공과금 정보 테이블입니다.</p>
+        <div class="section-title">대법원 법정 등기신청수수료(증지) 기준표</div>
+        <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 12px;">인터넷등기소 규정에 따른 접수 방법 및 등기 유형별 법정 수수료 일람표입니다.</p>
         <table>
             <thead>
                 <tr>
-                    <th>등기 유형</th>
-                    <th>등록면허세 (본세)</th>
-                    <th>지방교육세 (20%)</th>
-                    <th>등기신청수수료 (표준)</th>
-                    <th>의사록 공증 실무 요건</th>
+                    <th>등기 유형 구분</th>
+                    <th>전자신청 (인터넷등기소)</th>
+                    <th>e-Form 신청 (전산작성 후 방문)</th>
+                    <th>서면 신청 (방문 서류접수)</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td><strong>임원 · 상호 · 목적</strong></td>
-                    <td><strong>40,200 원</strong></td>
-                    <td>8,040 원</td>
-                    <td>4,000 원 (이폼 기준)</td>
-                    <td>주총/이사회 의사록 정액 대상</td>
+                    <td><strong>회사 설립<br>관할 외 본점 이전</strong></td>
+                    <td style="color:var(--accent-blue); font-weight:bold;">20,000 원</td>
+                    <td>28,000 원</td>
+                    <td>30,000 원</td>
                 </tr>
                 <tr>
-                    <td><strong>본점 관내이전</strong></td>
-                    <td><strong>112,500 원</strong></td>
-                    <td>22,500 원</td>
-                    <td>4,000 원 (이폼 기준)</td>
-                    <td>이사회 서면결의 대체 가능</td>
-                </tr>
-                <tr>
-                    <td><strong>본점 관외이전<br>(비과밀 표준)</strong></td>
-                    <td><strong>112,500 원</strong> <span style="font-size:11px; color:blue;">(통합 1건 적용)</span></td>
-                    <td>22,500 원</td>
-                    <td>24,000 원 <span style="font-size:11px; color:#666;">(구+신관할 합산)</span></td>
-                    <td>정관 변경 유무별 주총 공증</td>
-                </tr>
-                <tr>
-                    <td><strong>본점 관외이전<br>(비과밀 → 과밀 전입)</strong></td>
-                    <td>자본금의 <strong>1.2%</strong> <span style="font-size:11px; color:red;">(3배 중과)</span><br>(최소 337,500원 제한)</td>
-                    <td>본세의 20%</td>
-                    <td>24,000 원 <span style="font-size:11px; color:#666;">(구+신관할 합산)</span></td>
-                    <td>대도시 진입 의제 주총 공증</td>
-                </tr>
-                <tr>
-                    <td><strong>법인 설립 (비과밀)</strong></td>
-                    <td>자본금 <strong>0.4%</strong> (최소 112,500원)</td>
-                    <td>본세의 20%</td>
-                    <td>20,000 원 (전자 기준)</td>
-                    <td>자본금 1억 미만 발기설립 면제</td>
+                    <td><strong>상호 · 목적 · 임원 변경<br>관내 본점 이전 · 해산</strong></td>
+                    <td style="color:var(--accent-blue); font-weight:bold;">2,000 원</td>
+                    <td>5,000 원</td>
+                    <td>7,000 원</td>
                 </tr>
             </tbody>
         </table>
+        <div style="margin-top: 15px; font-size: 13px; color: #666; line-height: 1.6;">
+            * <strong>실무 절세 조언:</strong> 전산으로 서식을 사전 입력하는 전자신청이나 e-Form 방식을 활용하면, 순수 방문 서면 제출 방식에 비해 등기신청수수료를 건당 최대 10,000원까지 절감할 수 있습니다.
+        </div>
         <div class="slide-footer"><span>현재두법무사사무소</span><span>슬라이드 2 / 4</span></div>
     </div>
 
@@ -253,10 +232,10 @@
         <div class="left-panel">
             <div>
                 <h2 style="font-size: 25px; color: var(--gold-dark); margin: 0 0 10px 0; border-bottom: 2px solid var(--gold-primary); padding-bottom: 10px;">통합 실무 시뮬레이터</h2>
-                <p style="color: #444; font-size: 13.5px; line-height: 1.6;">본점이전 1건 신청 특례 및 최저한세(112,500원 / 337,500원) 연산 알고리즘이 완벽 가동됩니다.</p>
-                <ul style="padding-left: 18px; font-size: 12.5px; color: #555; line-height: 1.7; margin-top: 12px;">
-                    <li><strong>본점이전 세액 일원화:</strong> 관내이전과 일반 관외이전 모두 등록면허세 본세는 분할 청구 없이 동일하게 112,500원 1건으로 정산됩니다.</li>
-                    <li><strong>관외이전 수수료 구성:</strong> 등록세 본세는 1건이지만, 등기 서류가 거치는 관할 등기소 행정 비용(구관할 4,000원 + 신관할 20,000원)은 합산 표기됩니다.</li>
+                <p style="color: #444; font-size: 13.5px; line-height: 1.6;">본점이전 1건 신청 특례 및 선택된 접수 방식별 법정 증지대가 실시간 연동됩니다.</p>
+                <ul style="padding-left: 18px; font-size: 12.5px; color: #555; line-height: 1.7; margin-top: 10px;">
+                    <li><strong>신청 수수료 다이나믹 매칭:</strong> 설립·관외이전 그룹과 일반 변경·관내이전 그룹의 수수료 분기가 접수 방식에 맞춰 자동 연산됩니다.</li>
+                    <li><strong>본점이전 세액 일원화:</strong> 관외 본점이전등기는 신청서 1건 통합 특례에 의해 등록면허세 본세 112,500원(정액)이 산출됩니다.</li>
                 </ul>
             </div>
             <div style="font-size: 13px; color: var(--text-muted);">현재두법무사사무소 | 슬라이드 3 / 4</div>
@@ -272,6 +251,16 @@
                         <option value="move-inside">본점 관내이전 (동일 관할 내 이동)</option>
                         <option value="move-outside">본점 관외이전 (타 관할 구역으로 이동)</option>
                         <option value="incorporation">법인 설립 (신규 등기)</option>
+                    </select>
+                </div>
+
+                <!-- 접수 방식 선택 필드 -->
+                <div class="form-group">
+                    <label>등기 신청 접수 방식 선택</label>
+                    <select id="submit-method" onchange="calculateTotalTax()">
+                        <option value="electronic">전자신청 (인터넷등기소 전용 소프트웨어 접수)</option>
+                        <option value="eform">e-Form 신청 (인터넷 전산 작성 후 등기소 방문)</option>
+                        <option value="paper">서면 신청 (일반 등기소 방문 서류 접수)</option>
                     </select>
                 </div>
 
@@ -315,7 +304,7 @@
                         </div>
                     </div>
                     <div class="result-row"><span>지방교육세 (본세의 20%)</span><span id="edu-tax-view">0 원</span></div>
-                    <div class="result-row"><span>등기신청수수료 (대법원 증지액)</span><span id="filing-fee-view">0 원</span></div>
+                    <div class="result-row"><span style="color:var(--accent-blue); font-weight:bold;">등기신청수수료 (법정 증지액)</span><span id="filing-fee-view" style="font-weight:bold;">0 원</span></div>
                     <div class="result-row"><span>공증수수료 (정액 의사록 검인료)</span><span id="notary-fee-view">0 원</span></div>
                     <div class="result-row total"><span>실제 총 공과금 합계</span><span id="total-tax-view">0 원</span></div>
                 </div>
@@ -323,24 +312,23 @@
         </div>
     </div>
 
-    <!-- 4번 슬라이드: 관외이전 특례 및 실무 가이드 -->
+    <!-- 4번 슬라이드: 변경등기 신청 정보 실무 가이드 -->
     <div class="slide content-box">
-        <div class="section-title">본점이전 세법 단일화 및 실무 핵심 가이드</div>
+        <div class="section-title">본점이전 및 수수료 체계 실무 핵심 포인트</div>
         <div class="grid-2">
             <div class="card">
-                <h3>본점이전 과세체계 일원화 원칙</h3>
-                <p>과거 행정 해석 혼선과 달리 현재 관외 본점이전등기는 단일한 이전 행위로 규정되어 과세 효율성이 높습니다.</p>
+                <h3>대법원 등기신청수수료 차등제 의미</h3>
+                <p>사법부 전산화 및 등기소 서류 검토 공수를 감안하여 접수 방식별로 수수료가 입체적으로 규정되어 있습니다.</p>
                 <ul>
-                    <li><strong>일반 관외이전 본세 세팅:</strong> 타 시·도 등 관할 등기소가 바인딩되더라도 등록면허세 고정 정액 본세는 <strong>112,500원(1건)</strong>만 납부하여 절차를 개시합니다.</li>
-                    <li><strong>관내이전과의 비교:</strong> 동일 행정구역 내 이동(관내)과 타 관할 이동(관외) 모두 지방세법상 기본 정액 등록세 과세 표준 단가는 112,500원으로 동일하게 묶여 있습니다.</li>
+                    <li><strong>전자신청 효율성:</strong> 인터넷등기소 전용 소프트웨어를 통해 완전히 디지털 파일로 접수하면, 대형 등기(설립/관외이전)도 단 <strong>20,000원</strong>, 일반 변경은 <strong>2,000원</strong>이라는 최저 수수료 혜택을 받습니다.</li>
+                    <li><strong>e-Form 과 서면:</strong> 전산 출력물 지참 시(e-Form) 설립은 28,000원, 완전 수기 서면 제출 시에는 30,000원의 비용이 발생합니다.</li>
                 </ul>
             </div>
             <div class="card" style="border: 1px solid var(--gold-primary); background-color: #fdfbf7;">
-                <h3>과밀권역 진입 시 정률 중과 메커니즘</h3>
-                <p>일반 정액세 단일 적용 원칙을 깨고 자본금 비례 정률 과세가 발동하는 예외 구간입니다.</p>
+                <h3>관외이전 1건 신청 시 수수료 적용</h3>
+                <p>과세 관청에 납부하는 등록면허세 본세는 통합 1건(112,500원) 처리 규정이 확립되어 세제 혜택을 받습니다.</p>
                 <ul>
-                    <li><strong>대도시 설립 의제 조항:</strong> 비과밀 구역에서 수도권 과밀억제권역 내부로 전입하는 관외이전은 정액세가 제외되고, 해당 법인의 전체 **자본금의 1.2% 중과세율**이 일시에 타겟팅됩니다.</li>
-                    <li><strong>최저 한도 보장:</strong> 전입 시 자본금 비례 1.2% 산출액이 최소 기준선보다 낮더라도 과밀 기준 설립 최저한세인 **337,500원**이 본세 하한선으로 자동 보정 적용됩니다.</li>
+                    <li><strong>수수료 매칭 세부사항:</strong> 등록세 본세와 달리, 관외이전은 등기 시스템 내부적으로 기존 등기소와 신규 등기소 간 이관 작업이 일어납니다. 따라서 등기신청수수료 과세 카테고리는 상위 등기군인 **[회사 설립, 관할 외 본점 이전]** 단가가 고스란히 매칭되어 연산됩니다.</li>
                 </ul>
             </div>
         </div>
@@ -407,7 +395,7 @@
         let capitalGroup = document.getElementById('capital-group');
         let areaCondition = document.getElementById('area-condition');
 
-        // 초기 노출 유도 리셋
+        // 초기 유도 가시화 상태 처리
         areaGroup.classList.remove('hidden');
         capitalGroup.classList.remove('hidden');
         
@@ -416,18 +404,15 @@
         }
 
         if (dType === 'fixed-change' || dType === 'move-inside') {
-            // 완전 고정 정액세 항목은 입력 유도창 비활성화
             areaGroup.classList.add('hidden');
             capitalGroup.classList.add('hidden');
         } else if (dType === 'incorporation') {
-            // 신규 설립 등기 시 타관할 전입(heavy-in) 옵션 임시 배제
             if (areaCondition.value === 'heavy-in') {
                 areaCondition.value = 'normal';
             }
             areaCondition.options[2].style.display = "none";
         } else if (dType === 'move-outside') {
-            // 관외 본점이전 등기 진행 시 (설립 정률 옵션 중 과밀 전입 제외 항목 마스킹)
-            areaCondition.options[1].style.display = "none"; // 일반 과밀설립 옵션 노출 제거
+            areaCondition.options[1].style.display = "none";
             if (areaCondition.value === 'overcrowded') {
                 areaCondition.value = 'normal';
             }
@@ -437,6 +422,7 @@
 
     function calculateTotalTax() {
         let dType = document.getElementById('登記-type').value;
+        let method = document.getElementById('submit-method').value;
         let areaCond = document.getElementById('area-condition').value;
         let capital = commaToNum(document.getElementById('corp-capital').value);
         let needNotary = document.getElementById('need-notary').checked;
@@ -447,33 +433,26 @@
         let taxTypeLabel = "";
         let showLimitNotice = false;
 
+        // 1. 등록면허세 본세 산출 분기 로직
         if (dType === 'fixed-change') {
             finalTax = 40200;
-            filingFee = 4000;
             taxTypeLabel = "임원·상호·목적 표준 정액세";
         } 
         else if (dType === 'move-inside') {
             finalTax = 112500;
-            filingFee = 4000;
             taxTypeLabel = "본점 관내이전 표준 정액세";
         }
         else if (dType === 'move-outside') {
-            // 관외이전 신청서 통합 1건 처리 실무 매칭
             if (areaCond === 'heavy-in') {
-                // 비과밀 -> 과밀지역 진입 (대도시 중과세율 1.2% 정률 타겟팅 및 최저한세 337,500원 연동)
                 finalTax = Math.floor(capital * 0.012);
                 taxTypeLabel = "과밀지역 진입 전입 중과세";
                 if (finalTax < 337500) { finalTax = 337500; showLimitNotice = true; }
             } else {
-                // 일반 관외이전 (중과 지역 외 이동은 관내이전과 마찬가지로 본세 112,500원 1건 처리)
                 finalTax = 112500;
                 taxTypeLabel = "본점 관외이전 표준 정액세";
             }
-            // 수수료는 신청서 통합 연계에 따라 구관할 통지분(4,000원) + 신관할 전입신청분(20,000원) 합산 처리
-            filingFee = 24000;
         }
         else if (dType === 'incorporation') {
-            filingFee = 20000; 
             if (areaCond === 'overcrowded') {
                 finalTax = Math.floor(capital * 0.012);
                 taxTypeLabel = "과밀권역 설립 중과세 (1.2%)";
@@ -485,13 +464,30 @@
             }
         }
 
-        // 통합 산정된 본세 기준 지방교육세(20%) 연산
+        // 2. 대법원 법정 등기신청수수료 매칭 분기 로직 (전해 주신 표 데이터 완벽 대입)
+        if (dType === 'incorporation' || dType === 'move-outside') {
+            // [회사 설립, 관할 외 본점 이전] 카테고리
+            if (method === 'electronic') filingFee = 20000;
+            else if (method === 'eform') filingFee = 28000;
+            else if (method === 'paper') filingFee = 30000;
+        } else {
+            // [상호, 목적, 대표자 주소 변경, 해산, 관내이전 포함 변경등기] 카테고리
+            if (method === 'electronic') filingFee = 20000; // 관내 및 일반변경 전자신청 표준 세팅
+            else if (method === 'eform') filingFee = 5000;
+            else if (method === 'paper') filingFee = 7000;
+            
+            // 일반 변경등기의 순수 인터넷 전자신청(인터넷등기소 직접 직접 파일접수) 법정 최저가는 2,000원입니다.
+            if (dType === 'fixed-change' && method === 'electronic') filingFee = 2000;
+            if (dType === 'move-inside' && method === 'electronic') filingFee = 2000;
+        }
+
+        // 본세 기준 20% 교육세 계산
         let eduTax = Math.floor(finalTax * 0.2);
         
-        // 최종 총 공과금 합산
+        // 최종 실무 결제 총액 (본세 + 교육세 + 신청수수료 + 공증료)
         let totalSum = finalTax + eduTax + filingFee + notaryFee;
 
-        // 결과 출력 반영 인터페이스 매칭
+        // 결과 출력 인터페이스 매칭
         document.getElementById('tax-type-view').innerText = taxTypeLabel;
         document.getElementById('reg-tax-view').innerText = numToComma(finalTax) + " 원";
         document.getElementById('edu-tax-view').innerText = numToComma(eduTax) + " 원";
