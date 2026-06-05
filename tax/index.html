@@ -3,135 +3,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>부동산 취득세 계산기</title>
+    <title>부동산 취득세 계산기 슬라이드</title>
     <style>
         :root {
-            --primary-color: #bfa15f; /* 골드 포인트 컬러 */
-            --bg-color: #f8f9fa;
-            --card-bg: #ffffff;
-            --text-color: #333333;
-            --border-color: #e1e4e6;
+            --gold-primary: #c5a86a;
+            --gold-dark: #8a6d29;
+            --text-light: #ffffff;
+            --text-dark: #333333;
         }
 
-        body {
-            font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+        body, html {
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
+            background-color: #111;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            overflow: hidden;
         }
 
-        .calculator-container {
-            background-color: var(--card-bg);
-            border-radius: 16px;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-            border: 1px solid var(--border-color);
-            width: 100%;
-            max-width: 550px;
-            padding: 30px;
+        /* 1280x720 고정 슬라이드 비율 유지 구조 */
+        .slide-wrapper {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('http://googleusercontent.com/image_collection/image_retrieval/11692065780137914924_0');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            box-sizing: border-box;
+            border: 2px solid #333;
+        }
+
+        /* 왼쪽 설명 영역 */
+        .left-panel {
+            width: 45%;
+            height: 100%;
+            padding: 50px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: linear-gradient(to right, rgba(0,0,0,0.85) 70%, rgba(0,0,0,0));
+            color: var(--text-light);
+            z-index: 2;
+        }
+
+        .left-header h1 {
+            font-size: 32px;
+            color: var(--gold-primary);
+            margin: 0 0 10px 0;
+            font-weight: bold;
+            border-bottom: 2px solid var(--gold-primary);
+            padding-bottom: 15px;
+        }
+
+        .left-content p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #dddddd;
+            margin: 10px 0;
+        }
+
+        .left-content ul {
+            padding-left: 20px;
+            margin: 15px 0;
+        }
+
+        .left-content li {
+            font-size: 15px;
+            margin-bottom: 12px;
+            color: #eee;
+        }
+
+        .left-content strong {
+            color: var(--gold-primary);
+        }
+
+        .footer-text {
+            font-size: 13px;
+            color: #888888;
+        }
+
+        /* 오른쪽 계산기 영역 */
+        .right-panel {
+            width: 55%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+            padding-right: 50px;
             box-sizing: border-box;
         }
 
-        h2 {
+        .calculator-card {
+            background-color: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 500px;
+            padding: 30px;
+            box-sizing: border-box;
+            border: 2px solid var(--gold-primary);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        }
+
+        .calculator-card h2 {
+            font-size: 22px;
+            margin: 0 0 20px 0;
             text-align: center;
             color: #222;
-            margin-bottom: 25px;
-            font-size: 24px;
             font-weight: bold;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
-        label {
+        .form-group label {
             display: block;
+            font-size: 13px;
             font-weight: bold;
-            margin-bottom: 8px;
-            font-size: 14px;
+            margin-bottom: 6px;
+            color: #444;
         }
 
         select, input[type="text"] {
             width: 100%;
-            padding: 12px;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 15px;
+            padding: 10px;
+            border: 1px solid #cccccc;
+            border-radius: 6px;
+            font-size: 14px;
             box-sizing: border-box;
             background-color: #fff;
         }
 
-        /* 가액 입력란 분리 및 강조 디자인 */
+        /* 가액 입력란 독채 분리 */
         .price-container {
-            background-color: #fffdf7;
-            border: 1.5px solid var(--primary-color);
-            border-radius: 10px;
-            padding: 15px;
+            background-color: #fffdf2;
+            border: 1.5px solid var(--gold-primary);
+            border-radius: 8px;
+            padding: 12px;
         }
 
         .quick-buttons {
             display: flex;
-            gap: 8px;
-            margin-top: 8px;
+            gap: 6px;
+            margin-top: 6px;
         }
 
         .quick-btn {
             flex: 1;
-            background-color: #eee;
+            background-color: #e4e7ed;
             border: none;
-            padding: 8px;
-            border-radius: 6px;
-            font-size: 13px;
+            padding: 6px;
+            border-radius: 4px;
+            font-size: 12px;
             cursor: pointer;
-            transition: all 0.2s;
+            font-weight: bold;
         }
 
         .quick-btn:hover {
-            background-color: var(--primary-color);
+            background-color: var(--gold-primary);
             color: white;
         }
 
         .checkbox-group {
             display: flex;
             align-items: center;
-            gap: 8px;
-            background-color: #f0f7ff;
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #d0e3ff;
+            gap: 6px;
+            background-color: #e8f4ff;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #b8daff;
         }
 
         .checkbox-group input {
-            width: 18px;
-            height: 18px;
+            width: 16px;
+            height: 16px;
             cursor: pointer;
         }
 
-        /* 결과 창 디자인 */
+        /* 결과 디자인 */
         .result-container {
-            margin-top: 25px;
-            background-color: #f9fafb;
-            border-radius: 10px;
-            padding: 20px;
-            border: 1px solid var(--border-color);
+            margin-top: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            border: 1px solid #e1e4e6;
         }
 
         .result-row {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 10px;
-            font-size: 14px;
+            margin-bottom: 8px;
+            font-size: 13px;
+            color: #555;
         }
 
         .result-row.total {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 2px dashed var(--border-color);
-            font-size: 18px;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1.5px dashed #ccc;
+            font-size: 16px;
             font-weight: bold;
             color: #d9534f;
         }
@@ -143,78 +221,97 @@
 </head>
 <body>
 
-<div class="calculator-container">
-    <h2>부동산 취득세 계산기</h2>
+<div class="slide-wrapper">
+    <div class="left-panel">
+        <div class="left-header">
+            <h1>통합 취득세 계산 시스템</h1>
+            <p style="color: var(--gold-primary); font-size: 14px; margin: 0;">실무 및 대고객 상담용 최적화 프로그램</p>
+        </div>
+        
+        <div class="left-content">
+            <p>본 시뮬레이터는 부동산 거래 시 발생하는 <strong>세액 구조를 투명하게 분석</strong>하여 신속한 의사결정을 지원합니다.</p>
+            <ul>
+                <li><strong>유상취득:</strong> 가액 비례세율 즉시 반영</li>
+                <li><strong>상속특례:</strong> 무주택 가구 주택 취득 시 2% 감면</li>
+                <li><strong>증여 및 이혼:</strong> 원인별 표준 세목 분리 계산</li>
+                <li><strong>면적 기준:</strong> 국민주택규모 이하 농특세 면제</li>
+            </ul>
+        </div>
 
-    <!-- 1. 취득 원인 -->
-    <div class="form-group">
-        <label for="reason">취득 원인 선택</label>
-        <select id="reason" onchange="toggleOptions()">
-            <option value="sale">매매 / 유상취득</option>
-            <option value="inheritance">상속</option>
-            <option value="gift">증여</option>
-            <option value="divorce">이혼 / 재산분할</option>
-        </select>
-    </div>
-
-    <!-- 2. 가액 입력란 (별도 분리 및 강조) -->
-    <div class="form-group price-container">
-        <label for="price" style="color: #8a6d29;">거래 가액 또는 시가표준액 (원)</label>
-        <input type="text" id="price" value="600,000,000" onkeyup="formatAndCalculate(this)">
-        <div class="quick-buttons">
-            <button class="quick-btn" onclick="addPrice(100000000)">+ 1억</button>
-            <button class="quick-btn" onclick="addPrice(500000000)">+ 5억</button>
-            <button class="quick-btn" onclick="addPrice(1000000000)">+ 10억</button>
-            <button class="quick-btn" onclick="resetPrice()" style="background-color: #f5c6cb; color: #721c24;">정전</button>
+        <div class="footer-text">
+            현재두법무사사무소 | 부동산 취득세 계산기 (슬라이드 3 / 7)
         </div>
     </div>
 
-    <!-- 3. 전용 면적 -->
-    <div class="form-group">
-        <label for="area">전용 면적</label>
-        <select id="area" onchange="calculateTax()">
-            <option value="under">85제곱미터 이하 (국민주택규모)</option>
-            <option value="over">85제곱미터 초과</option>
-        </select>
-    </div>
+    <div class="right-panel">
+        <div class="calculator-card">
+            <h2>취득세 실시간 연산</h2>
 
-    <!-- 4. 조건부 입력란: 상속 무주택 특례 -->
-    <div class="form-group hidden" id="inheritance-option">
-        <div class="checkbox-group">
-            <input type="checkbox" id="homeless" onchange="calculateTax()">
-            <label for="homeless" style="margin-bottom: 0; cursor: pointer; color: #004085;">
-                상속인 세대 기준 무주택자 여부 (1가구 1주택 2% 감면 특례)
-            </label>
-        </div>
-    </div>
+            <div class="form-group">
+                <label>취득 원인 종류</label>
+                <select id="reason" onchange="toggleOptions()">
+                    <option value="sale">매매 / 유상취득</option>
+                    <option value="inheritance">상속</option>
+                    <option value="gift">증여</option>
+                    <option value="divorce">이혼 / 재산분할</option>
+                </select>
+            </div>
 
-    <!-- 세액 출력 구역 -->
-    <div class="result-container">
-        <div class="result-row">
-            <span>취득세율</span>
-            <span id="rate-view">1.00%</span>
-        </div>
-        <div class="result-row">
-            <span>취득세액</span>
-            <span id="tax-view">6,000,000 원</span>
-        </div>
-        <div class="result-row">
-            <span>지방교육세액</span>
-            <span id="edu-view">600,000 원</span>
-        </div>
-        <div class="result-row">
-            <span>농어촌특별세액</span>
-            <span id="rural-view">0 원 (면제)</span>
-        </div>
-        <div class="result-row total">
-            <span>총 합계 세액</span>
-            <span id="total-view">6,600,000 원</span>
+            <div class="form-group price-container">
+                <label style="color: var(--gold-dark);">취득 가액 또는 시가표준액</label>
+                <input type="text" id="price" value="600,000,000" onkeyup="formatAndCalculate(this)">
+                <div class="quick-buttons">
+                    <button class="quick-btn" onclick="addPrice(100000000)">+ 1억</button>
+                    <button class="quick-btn" onclick="addPrice(500000000)">+ 5억</button>
+                    <button class="quick-btn" onclick="addPrice(1000000000)">+ 10억</button>
+                    <button class="quick-btn" onclick="resetPrice()" style="background-color: #f8d7da; color: #721c24;">정전</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>주거 전용 면적</label>
+                <select id="area" onchange="calculateTax()">
+                    <option value="under">85제곱미터 이하 (국민주택규모)</option>
+                    <option value="over">85제곱미터 초과</option>
+                </select>
+            </div>
+
+            <div class="form-group hidden" id="inheritance-option">
+                <div class="checkbox-group">
+                    <input type="checkbox" id="homeless" onchange="calculateTax()">
+                    <label for="homeless" style="margin-bottom: 0; cursor: pointer; color: #004085; font-size: 13px;">
+                        상속인 세대 무주택 (1가구 1주택 2% 감면 특례)
+                    </label>
+                </div>
+            </div>
+
+            <div class="result-container">
+                <div class="result-row">
+                    <span>산출 취득세율</span>
+                    <span id="rate-view" style="font-weight: bold; color: var(--gold-dark);">1.00%</span>
+                </div>
+                <div class="result-row">
+                    <span>취득세액</span>
+                    <span id="tax-view">6,000,000 원</span>
+                </div>
+                <div class="result-row">
+                    <span>지방교육세액</span>
+                    <span id="edu-view">600,000 원</span>
+                </div>
+                <div class="result-row">
+                    <span>농어촌특별세액</span>
+                    <span id="rural-view">0 원 (면제)</span>
+                </div>
+                <div class="result-row total">
+                    <span>예상 총 세액</span>
+                    <span id="total-view">6,600,000 원</span>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
 <script>
-    // 콤마 포맷팅 함수
     function numToComma(num) {
         return num.toString().replace(/\B(?=(\d3)+(?!\d))/g, ",");
     }
@@ -243,7 +340,6 @@
     function toggleOptions() {
         let reason = document.getElementById('reason').value;
         let inhOption = document.getElementById('inheritance-option');
-        
         if (reason === 'inheritance') {
             inhOption.classList.remove('hidden');
         } else {
@@ -253,54 +349,42 @@
         calculateTax();
     }
 
-    // 핵심 세액 연산 로직
     function calculateTax() {
         let reason = document.getElementById('reason').value;
         let price = commaToNum(document.getElementById('price').value);
         let area = document.getElementById('area').value;
         let isHomeless = document.getElementById('homeless').checked;
 
-        let taxRate = 0;
-        let eduRate = 0;
-        let ruralRate = 0;
+        let taxRate = 0; let eduRate = 0; let ruralRate = 0;
 
         if (reason === 'sale') {
-            // 매매 기본 1주택 슬라이딩 주택세율 기준 단순화 계산
             if (price <= 600000000) taxRate = 0.01;
             else if (price <= 900000000) taxRate = (price * (2 / 300000000) - 3) / 100;
             else taxRate = 0.03;
             eduRate = taxRate * 0.1;
         } else if (reason === 'inheritance') {
             if (isHomeless) {
-                taxRate = 0.003; // 2% 감면 특례
-                eduRate = 0.0006;
+                taxRate = 0.003; eduRate = 0.0006;
                 ruralRate = (area === 'under') ? 0 : 0.0006;
             } else {
-                taxRate = 0.023;
-                eduRate = 0.002;
+                taxRate = 0.023; eduRate = 0.002;
                 ruralRate = (area === 'under') ? 0 : 0.003;
             }
         } else if (reason === 'gift') {
-            taxRate = 0.035;
-            eduRate = 0.003;
+            taxRate = 0.035; eduRate = 0.003;
             ruralRate = (area === 'under') ? 0 : 0.002;
         } else if (reason === 'divorce') {
-            taxRate = 0.015;
-            eduRate = 0.003;
+            taxRate = 0.015; eduRate = 0.003;
             ruralRate = (area === 'under') ? 0 : 0.002;
         }
 
-        // 국민주택규모(85이하)일 경우 기본 농특세 면제 매칭
-        if (area === 'under' && !isHomeless) {
-            ruralRate = 0;
-        }
+        if (area === 'under' && !isHomeless) ruralRate = 0;
 
         let tax = Math.floor(price * taxRate);
         let edu = Math.floor(price * eduRate);
         let rural = Math.floor(price * ruralRate);
         let total = tax + edu + rural;
 
-        // 화면 뷰어 업데이트
         document.getElementById('rate-view').innerText = (taxRate * 100).toFixed(2) + "%";
         document.getElementById('tax-view').innerText = numToComma(tax) + " 원";
         document.getElementById('edu-view').innerText = numToComma(edu) + " 원";
@@ -308,10 +392,7 @@
         document.getElementById('total-view').innerText = numToComma(total) + " 원";
     }
 
-    // 초기 실행
-    window.onload = function() {
-        calculateTax();
-    }
+    window.onload = function() { calculateTax(); }
 </script>
 </body>
 </html>
