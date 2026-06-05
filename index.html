@@ -111,7 +111,7 @@
 
         .section-title {
             font-size: 28px; color: var(--gold-dark); border-bottom: 2px solid var(--gold-primary);
-            padding-bottom: 10px; margin-bottom: 25px; font-weight: bold;
+            padding-bottom: 10px; margin-bottom: 20px; font-weight: bold;
         }
 
         .grid-2 {
@@ -147,7 +147,7 @@
         /* 계산기 폼 카드 */
         .calculator-card {
             background-color: #ffffff; border-radius: 16px;
-            width: 100%; max-width: 560px; padding: 22px 25px; box-sizing: border-box;
+            width: 100%; max-width: 560px; padding: 20px 25px; box-sizing: border-box;
             border: 1.5px solid var(--gold-primary); box-shadow: 0 15px 35px rgba(0,0,0,0.08); color: #333;
         }
 
@@ -161,9 +161,11 @@
         .quick-btn { flex: 1; background-color: #eaf0f6; border: none; padding: 6px; border-radius: 4px; font-size: 11px; cursor: pointer; font-weight: bold; color: #333; }
         .quick-btn:hover { background-color: var(--gold-primary); color: white; }
         
-        .checkbox-group { display: flex; align-items: center; gap: 8px; background-color: #f0f7ff; padding: 10px; border-radius: 6px; border: 1px solid #ccdfff; }
+        .checkbox-group { display: flex; align-items: center; gap: 8px; background-color: #f0f7ff; padding: 10px; border-radius: 6px; border: 1px solid #ccdfff; margin-bottom: 8px; }
+        .checkbox-group.heavy-warning { background-color: #fff0f0; border: 1px solid #ffcccc; }
         .checkbox-group input { width: 16px; height: 16px; margin: 0; cursor: pointer; }
         .checkbox-group label { margin-bottom: 0; cursor: pointer; color: #004085; font-size: 12.5px; }
+        .checkbox-group.heavy-warning label { color: #b71c1c; }
 
         .notice-badge { display: block; margin-top: 2px; font-size: 11px; color: var(--accent-blue); font-weight: bold; }
         .result-container { margin-top: 10px; background-color: #f8f9fa; border-radius: 8px; padding: 10px 14px; border: 1px solid #e1e4e6; }
@@ -188,60 +190,60 @@
     <div class="slide active full-cover">
         <div style="border: 2px solid var(--gold-primary); padding: 40px 60px; background-color: rgba(255,255,255,0.9); border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
             <div class="slide-title">법인 설립 및 변경등기 실무 가이드</div>
-            <p style="font-size: 18px; color: #555; margin: 0;">  수도권과밀억제권 비과밀억제권 기준 등록세 · 공증료 통합 연산 시스템</p>
+            <p style="font-size: 18px; color: #555; margin: 0;">설립 · 증자(5년 내 과밀 중과) · 본점이전 통합 서면신청 연산 시스템</p>
         </div>
         <div class="slide-footer"><span>현재두법무사사무소</span><span>슬라이드 1 / 4</span></div>
     </div>
 
     <!-- 2번 슬라이드: 등기 항목별 법정 세액 구조 요약표 -->
     <div class="slide content-box">
-        <div class="section-title">법인 등기 유형별 법정 공과금 요약 (방문 서면신청 기준)</div>
-        <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 8px;">대법원 규정에 따른 순수 등기소 방문 서면제출용 수수료 체계가 반영된 가이드라인입니다.</p>
+        <div class="section-title">법인 등기 유형별 법정 공과금 요약 (서면신청 기준)</div>
+        <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 8px;">설립 후 5년 이내 과밀억제권역 증자 중과세 규칙이 포함된 종합 공과금 표준 테이블입니다.</p>
         <table>
             <thead>
                 <tr>
                     <th>등기 유형</th>
-                    <th>등록면허세 (본세)</th>
+                    <th>등록면허세 (본세) 요율 및 단가</th>
                     <th>지방교육세 (20%)</th>
-                    <th style="color: var(--accent-blue);">등기신청수수료 (서면고정)</th>
-                    <th>의사록 공증 실무 요건</th>
+                    <th>등기신청수수료</th>
+                    <th>의사록 공증 실무</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
+                    <td><strong>법인 설립 / 증자<br>(일반지역 표준)</strong></td>
+                    <td>자본금(또는 증자액)의 <strong>0.4%</strong> (최소 112,500원)</td>
+                    <td>본세의 20%</td>
+                    <td style="color: var(--accent-blue); font-weight: bold;">30,000 원</td>
+                    <td>1억 미만 발기설립 면제</td>
+                </tr>
+                <tr>
+                    <td><strong>법인 설립 / 증자<br><span style="color:#b71c1c;">(5년 내 과밀 중과)</span></strong></td>
+                    <td>과밀지역 설립 및 **설립 5년 내 증자**: 자본금의 <strong>1.2%</strong></td>
+                    <td>본세의 20%</td>
+                    <td style="color: var(--accent-blue); font-weight: bold;">30,000 원</td>
+                    <td>증자 주총의사록 공증 대상</td>
+                </tr>
+                <tr>
                     <td><strong>임원 · 상호 · 목적</strong></td>
-                    <td><strong>40,200 원</strong></td>
+                    <td>변경 사유별 신청서 건당 <strong>40,200 원</strong></td>
                     <td>8,040 원</td>
-                    <td style="font-weight:bold; color:var(--accent-blue);">7,000 원</td>
-                    <td>주총/이사회 의사록 정액 대상</td>
+                    <td style="color: var(--accent-blue); font-weight: bold;">7,000 원</td>
+                    <td>의사록 정액 공증 발생</td>
                 </tr>
                 <tr>
                     <td><strong>본점 관내이전</strong></td>
-                    <td><strong>112,500 원</strong></td>
+                    <td>동일 관할 구역 내 주소 이동 <strong>112,500 원</strong></td>
                     <td>22,500 원</td>
-                    <td style="font-weight:bold; color:var(--accent-blue);">7,000 원</td>
-                    <td>이사회 서면결의 대체 가능</td>
+                    <td style="color: var(--accent-blue); font-weight: bold;">7,000 원</td>
+                    <td>이사회 서면결의 가능</td>
                 </tr>
                 <tr>
                     <td><strong>본점 관외이전<br>(비과밀 표준)</strong></td>
-                    <td><strong>112,500 원</strong> <span style="font-size:11px; color:blue;">(통합 1건)</span></td>
+                    <td>타 관할 주소 변경 통합 1건 고정 <strong>112,500 원</strong></td>
                     <td>22,500 원</td>
-                    <td style="font-weight:bold; color:var(--accent-blue);">30,000 원</td>
-                    <td>정관 변경 유무별 주총 공증</td>
-                </tr>
-                <tr>
-                    <td><strong>본점 관외이전<br>(비과밀 → 과밀 전입)</strong></td>
-                    <td>자본금의 <strong>1.2%</strong> <span style="font-size:11px; color:red;">(3배 중과)</span><br>(최소 337,500원 제한)</td>
-                    <td>본세의 20%</td>
-                    <td style="font-weight:bold; color:var(--accent-blue);">30,000 원</td>
-                    <td>대도시 진입 의제 주총 공증</td>
-                </tr>
-                <tr>
-                    <td><strong>법인 설립 (비과밀)</strong></td>
-                    <td>자본금 <strong>0.4%</strong> (최소 112,500원)</td>
-                    <td>본세의 20%</td>
-                    <td style="font-weight:bold; color:var(--accent-blue);">30,000 원</td>
-                    <td>자본금 1억 미만 발기설립 면제</td>
+                    <td style="color: var(--accent-blue); font-weight: bold;">30,000 원</td>
+                    <td>주주총회 공증 필요</td>
                 </tr>
             </tbody>
         </table>
@@ -253,9 +255,9 @@
         <div class="left-panel">
             <div>
                 <h2 style="font-size: 25px; color: var(--gold-dark); margin: 0 0 10px 0; border-bottom: 2px solid var(--gold-primary); padding-bottom: 10px;">통합 실무 시뮬레이터</h2>
-                <p style="color: #444; font-size: 13.5px; line-height: 1.6;">등기소 창구 방문 서면 제출 시 적용되는 증지 단가(30,000원 / 7,000원) 연산 구조입니다.</p>
-                <ul style="padding-left: 18px; font-size: 12.5px; color: #555; line-height: 1.7; margin-top: 12px;">
-                    <li><strong>서면 수수료 엄격 반영:</strong> 대형 대분류 등기(설립, 관외이전)는 30,000원이 가산되며, 일반 변경분 및 관내이전 등기는 7,000원의 법정 비용이 매칭됩니다.</li>
+                <p style="color: #444; font-size: 13.5px; line-height: 1.6;">서면 신청 수수료 고정(30,000원 / 7,000원) 및 설립 후 5년 내 과밀억제권역 증자 중과세 엔진입니다.</p>
+                <ul style="padding-left: 18px; font-size: 12.5px; color: #555; line-height: 1.7; margin-top: 10px;">
+                    <li><strong>설립 후 5년 내 증자 중과:</strong> 과밀억제권역에 소재한 법인이 설립일로부터 5년 이내에 자본금을 증자하는 경우, 증자액의 1.2%로 중과세가 강제 빌드됩니다.</li>
                     <li><strong>본점이전 세액 일원화:</strong> 관외 본점이전등기는 신청서 1건 통합 특례에 의해 등록면허세 본세 112,500원(정액)이 산출됩니다.</li>
                 </ul>
             </div>
@@ -263,7 +265,7 @@
         </div>
         <div class="right-panel">
             <div class="calculator-card">
-                <h2>설립 · 변경등기 서면신청 공과금 계산기</h2>
+                <h2>설립 · 변경 · 증자 서면신청 공과금 계산기</h2>
                 
                 <div class="form-group">
                     <label>신청할 등기 유형 선택</label>
@@ -272,6 +274,7 @@
                         <option value="move-inside">본점 관내이전 (동일 관할 내 이동)</option>
                         <option value="move-outside">본점 관외이전 (타 관할 구역으로 이동)</option>
                         <option value="incorporation">법인 설립 (신규 등기)</option>
+                        <option value="capital-increase">자본금 증자 (유상증자 등 자본금 가산)</option>
                     </select>
                 </div>
 
@@ -279,15 +282,23 @@
                 <div class="form-group hidden" id="area-group">
                     <label id="area-label">지역 권역 요건 선택</label>
                     <select id="area-condition" onchange="calculateTotalTax()">
-                        <option value="normal">비과밀억제권역 (일반지역 설립 또는 일반지역 간 관외이전)</option>
-                        <option value="overcrowded">과밀억제권역 (수도권 과밀지역 설립 또는 과밀지역 간 관외이전)</option>
+                        <option value="normal">비과밀억제권역 (일반지역 설립 / 증자 / 일반 관외이전)</option>
+                        <option value="overcrowded">과밀억제권역 (수도권 과밀지역 설립 / 증자 / 과밀간 관외이전)</option>
                         <option value="heavy-in">★ 비과밀지역 → 과밀억제권역으로의 본점 진입 전입 (3배 중과)</option>
                     </select>
                 </div>
 
-                <!-- 자본금 입력 -->
+                <!-- 설립 후 5년 이내 여부 체크박스 (증자 선택 시에만 출력) -->
+                <div class="form-group hidden" id="age-group">
+                    <div class="checkbox-group heavy-warning">
+                        <input type="checkbox" id="within-5years" onchange="calculateTotalTax()" checked>
+                        <label for="within-5years"><strong>현재 법인이 설립 후 5년 이내에 해당함 (과밀 중과세 대상)</strong></label>
+                    </div>
+                </div>
+
+                <!-- 자본금 입력 (설립, 증자, 관외이전 중과세 연산용) -->
                 <div class="form-group price-container hidden" id="capital-group">
-                    <label style="color: var(--gold-dark); font-weight: bold;">법인 자본금 액수 기준 (원)</label>
+                    <label id="capital-title" style="color: var(--gold-dark); font-weight: bold;">법인 자본금 액수 기준 (원)</label>
                     <input type="text" id="corp-capital" value="28,000,000" onkeyup="formatAndCalculateChange(this)">
                     <div class="quick-buttons">
                         <button class="quick-btn" onclick="addCorpCapital(10000000)">+ 1천만</button>
@@ -315,7 +326,7 @@
                         </div>
                     </div>
                     <div class="result-row"><span>지방교육세 (본세의 20%)</span><span id="edu-tax-view">0 원</span></div>
-                    <div class="result-row"><span style="color:var(--accent-blue); font-weight:bold;">등기신청수수료 (방문서면 고정액)</span><span id="filing-fee-view" style="font-weight:bold; color:var(--accent-blue);">0 원</span></div>
+                    <div class="result-row"><span>등기신청수수료 (방문서면 고정액)</span><span id="filing-fee-view" style="font-weight:bold; color:var(--accent-blue);">0 원</span></div>
                     <div class="result-row"><span>공증수수료 (정액 의사록 검인료)</span><span id="notary-fee-view">0 원</span></div>
                     <div class="result-row total"><span>실제 총 공과금 합계</span><span id="total-tax-view">0 원</span></div>
                 </div>
@@ -323,23 +334,24 @@
         </div>
     </div>
 
-    <!-- 4번 슬라이드: 관외이전 특례 및 실무 가이드 -->
+    <!-- 4번 슬라이드: 5년 내 증자 중과세 실무 핵심 가이드 -->
     <div class="slide content-box">
-        <div class="section-title">서면 등기신청수수료 및 실무 핵심 가이드</div>
+        <div class="section-title">설립 후 5년 내 과밀 증자 중과세 실무 체크리스트</div>
         <div class="grid-2">
             <div class="card">
-                <h3>방문 창구 서면수수료 확정</h3>
-                <p>온라인 전산 접수를 배제하고 직접 종이 서류 서식 파일 형태로 접수처 창구에 제출할 때의 기준 비용입니다.</p>
+                <h3>지방세법 제28조 증자 중과세 의제</h3>
+                <p>과밀억제권역 내 법인 인구 과밀화를 차단하기 위해 설립 단계뿐 아니라 성장 단계의 자본 증식도 강력 규제합니다.</p>
                 <ul>
-                    <li><strong>7,000원 적용 대상 등기:</strong> 임원 임기 만료에 따른 중임·퇴임 및 변경, 상호나 목적의 일반 변경등기와 본점 관내이전 신청 시 부과됩니다.</li>
-                    <li><strong>30,000원 적용 대상 등기:</strong> 신규 원시 법인을 설립하거나 등기소 관할을 아예 달리하는 관외 본점이전 신청을 진행할 때 고정 합산됩니다.</li>
+                    <li><strong>중과 발동 타임라인:</strong> 법인 설립 등기일(또는 비과밀에서 과밀로 본점을 전입 등기한 날)로부터 정확히 <strong>5년 이내</strong>에 이루어지는 모든 자본금 증자 액수에 대해 중과세가 발동됩니다.</li>
+                    <li><strong>세율 변동폭:</strong> 일반 증자 등록세율인 자본금의 0.4%가 아닌, 3배 중과된 **1.2% 정률 본세**가 타겟팅되어 부과됩니다.</li>
                 </ul>
             </div>
             <div class="card" style="border: 1px solid var(--gold-primary); background-color: #fdfbf7;">
-                <h3>본점이전 1건 신청 시 정액 매칭</h3>
-                <p>과세 관청에 납부하는 등록면허세 본세는 통합 1건(112,500원) 처리 규정이 확립되어 세제 혜택을 받습니다.</p>
+                <h3>5년 경과 법인의 면제 특례 및 주의점</h3>
+                <p>법인 등록 후 만 5년이 도과한 시점부터는 과밀억제권역에 소재하더라도 증자 비용이 대폭 절감됩니다.</p>
                 <ul>
-                    <li><strong>수수료 매칭 세부사항:</strong> 등록세 본세는 112,500원 정액이지만, 관외 본점이전등기는 구 등기소 폐쇄 및 신규 등기소 신설 이관 행위가 결합된 상위 등기군으로 책정되므로 등기신청수수료는 서면 고정 기준가인 **30,000원**이 그대로 매칭되어 작동합니다.</li>
+                    <li><strong>5년 도과 후 일반세 복귀:</strong> 설립일로부터 5년이 완전히 지나면 과밀지역 내 증자라 하더라도 중과세 대상에서 제외되어 일반 세율인 **0.4%**만 적용받습니다.</li>
+                    <li><strong>휴면법인 인수 리스크:</strong> 5년이 지난 깨끗한 법인을 인수하여 증자하더라도, 인수 시점에 사실상 휴면법인을 재가동하는 형태라면 세법상 신설로 보아 다시 5년 중과 규칙이 역추징될 수 있어 사전 실무 진단이 필수적입니다.</li>
                 </ul>
             </div>
         </div>
@@ -403,11 +415,14 @@
     function toggleFormFields() {
         let dType = document.getElementById('登記-type').value;
         let areaGroup = document.getElementById('area-group');
+        let ageGroup = document.getElementById('age-group');
         let capitalGroup = document.getElementById('capital-group');
         let areaCondition = document.getElementById('area-condition');
+        let capitalTitle = document.getElementById('capital-title');
 
-        // 초기화 가시화 상태 처리
+        // 초기 노출 구조화 리셋
         areaGroup.classList.remove('hidden');
+        ageGroup.classList.add('hidden');
         capitalGroup.classList.remove('hidden');
         
         for (let i = 0; i < areaCondition.options.length; i++) {
@@ -418,15 +433,19 @@
             areaGroup.classList.add('hidden');
             capitalGroup.classList.add('hidden');
         } else if (dType === 'incorporation') {
-            if (areaCondition.value === 'heavy-in') {
-                areaCondition.value = 'normal';
-            }
+            capitalTitle.innerText = "법인 신규 설립 자본금 (원)";
+            if (areaCondition.value === 'heavy-in') areaCondition.value = 'normal';
             areaCondition.options[2].style.display = "none";
         } else if (dType === 'move-outside') {
+            capitalTitle.innerText = "법인 현재 자본금 액수 (원)";
             areaCondition.options[1].style.display = "none";
-            if (areaCondition.value === 'overcrowded') {
-                areaCondition.value = 'normal';
-            }
+            if (areaCondition.value === 'overcrowded') areaCondition.value = 'normal';
+        } else if (dType === 'capital-increase') {
+            // 자본금 증자 선택 시
+            capitalTitle.innerText = "이번에 증자할 자본금 액수 (원)";
+            ageGroup.classList.remove('hidden'); // 5년 내 중과 박스 오픈
+            areaCondition.options[2].style.display = "none"; // 관외이전 전입 옵션 하이드
+            if (areaCondition.value === 'heavy-in') areaCondition.value = 'normal';
         }
         calculateTotalTax();
     }
@@ -436,6 +455,7 @@
         let areaCond = document.getElementById('area-condition').value;
         let capital = commaToNum(document.getElementById('corp-capital').value);
         let needNotary = document.getElementById('need-notary').checked;
+        let isWithin5Years = document.getElementById('within-5years').checked;
 
         let finalTax = 0;
         let filingFee = 0; 
@@ -443,19 +463,18 @@
         let taxTypeLabel = "";
         let showLimitNotice = false;
 
-        // 1. 등록면허세 본세 연산 및 등기신청수수료 서면 고정가 매칭 분기
         if (dType === 'fixed-change') {
             finalTax = 40200;
-            filingFee = 7000; // 서면 변경등기 법정수수료 고정
+            filingFee = 7000;
             taxTypeLabel = "임원·상호·목적 표준 정액세";
         } 
         else if (dType === 'move-inside') {
             finalTax = 112500;
-            filingFee = 7000; // 서면 관내이전 법정수수료 고정
+            filingFee = 7000;
             taxTypeLabel = "본점 관내이전 표준 정액세";
         }
         else if (dType === 'move-outside') {
-            filingFee = 30000; // 서면 관외이전 법정수수료 고정
+            filingFee = 30000;
             if (areaCond === 'heavy-in') {
                 finalTax = Math.floor(capital * 0.012);
                 taxTypeLabel = "과밀지역 진입 전입 중과세";
@@ -466,7 +485,7 @@
             }
         }
         else if (dType === 'incorporation') {
-            filingFee = 30000; // 서면 설립등기 법정수수료 고정
+            filingFee = 30000;
             if (areaCond === 'overcrowded') {
                 finalTax = Math.floor(capital * 0.012);
                 taxTypeLabel = "과밀권역 설립 중과세 (1.2%)";
@@ -477,14 +496,35 @@
                 if (finalTax < 112500) { finalTax = 112500; showLimitNotice = true; }
             }
         }
+        else if (dType === 'capital-increase') {
+            // 5. 자본금 증자 등기 요건 분기
+            filingFee = 30000; // 증자 등기는 '회사 설립, 관할 외 본점 이전'군에 준하는 서면 대행 요율 부과
+            
+            if (areaCond === 'overcrowded' && isWithin5Years) {
+                // 과밀억제권역에 본점이 있고 + 설립 5년 이내인 법인의 증자 -> 3배 중과세(1.2%)
+                finalTax = Math.floor(capital * 0.012);
+                taxTypeLabel = "설립 5년 내 과밀증자 중과세 (1.2%)";
+                if (finalTax < 337500) { finalTax = 337500; showLimitNotice = true; }
+            } else if (areaCond === 'overcrowded' && !isWithin5Years) {
+                // 과밀억제권역이지만 + 설립 5년이 경과한 법인의 증자 -> 일반세율 복귀(0.4%)
+                finalTax = Math.floor(capital * 0.004);
+                taxTypeLabel = "5년 경과 과밀증자 일반세 (0.4%)";
+                if (finalTax < 112500) { finalTax = 112500; showLimitNotice = true; }
+            } else {
+                // 일반지역 비과밀 법인의 증자 -> 일반세율(0.4%)
+                finalTax = Math.floor(capital * 0.004);
+                taxTypeLabel = "비과밀 일반증자 표준세 (0.4%)";
+                if (finalTax < 112500) { finalTax = 112500; showLimitNotice = true; }
+            }
+        }
 
-        // 본세 기준 20% 교육세 계산
+        // 최종 확정 본세 기준 지방교육세(20%) 연산
         let eduTax = Math.floor(finalTax * 0.2);
         
         // 최종 서면신청 기준 총 공과금 합산
         let totalSum = finalTax + eduTax + filingFee + notaryFee;
 
-        // 결과 출력 인터페이스 매칭
+        // 결과 인터페이스 갱신 출력
         document.getElementById('tax-type-view').innerText = taxTypeLabel;
         document.getElementById('reg-tax-view').innerText = numToComma(finalTax) + " 원";
         document.getElementById('edu-tax-view').innerText = numToComma(eduTax) + " 원";
