@@ -17,248 +17,427 @@
 
         body, html {
             margin: 0; padding: 0;
-            width: 100%; height: 100%;
-            font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
             background-color: #eef0f3;
-            display: flex; justify-content: center; align-items: center;
-            overflow: hidden;
-            user-select: none;
+            font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
             color: var(--text-dark);
+            -webkit-text-size-adjust: none;
         }
 
-        /* 전체 슬라이드 컨테이너 (1280x720 고정 비율) */
-        .presentation-container {
-            width: 1280px; height: 720px;
-            position: relative;
-            background-color: var(--bg-light);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-            overflow: hidden;
-            border-radius: 12px;
-        }
-
-        /* 개별 슬라이드 공통 스타일 */
-        .slide {
-            position: absolute;
-            top: 0; left: 0;
-            width: 1280px; height: 720px;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.4s ease, visibility 0.4s ease;
+        /* 전체 반응형 래퍼 */
+        .container {
+            width: 100%;
+            max-width: 850px; /* PC 접속 시에도 안정적인 가독성 종횡비 유지 */
+            margin: 0 auto;
+            padding: 15px;
             box-sizing: border-box;
-            background-color: var(--bg-light);
         }
 
-        .slide.active {
-            opacity: 1;
-            visibility: visible;
+        /* 각 영역 콘텐츠 박스 공통 */
+        .section {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            box-sizing: border-box;
         }
 
-        /* 네비게이션 컨트롤러 버튼 */
-        .nav-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(255, 255, 255, 0.8);
-            border: 1px solid var(--gold-primary);
-            color: var(--gold-primary);
-            width: 50px; height: 50px;
-            border-radius: 50%;
-            font-size: 24px;
-            cursor: pointer;
-            z-index: 10;
-            display: flex; justify-content: center; align-items: center;
-            transition: all 0.2s;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        }
-
-        .nav-btn:hover {
-            background-color: var(--gold-primary);
-            color: white;
-        }
-
-        .prev-btn { left: 20px; }
-        .next-btn { right: 20px; }
-
-        /* 공통 푸터 */
-        .slide-footer {
-            position: absolute;
-            bottom: 25px;
-            left: 50px; right: 50px;
-            display: flex; justify-content: space-between;
-            font-size: 13px;
-            color: var(--text-muted);
-            border-top: 1px solid #e1e4e6;
-            padding-top: 15px;
-            z-index: 5;
-        }
-
-        /* --- 레이아웃 스타일 디자인 --- */
-        .full-cover {
-            display: flex; flex-direction: column;
-            justify-content: center; align-items: center;
-            text-align: center; 
+        /* 타이틀 메인 커버 */
+        .cover-section {
             background: linear-gradient(135deg, #f5f1e6 0%, #e8e1d0 100%);
+            text-align: center;
+            border: 2px solid var(--gold-primary);
         }
 
-        .slide-title {
-            font-size: 42px; color: var(--gold-dark); margin: 0 0 20px 0; font-weight: bold;
+        .main-title {
+            font-size: 26px;
+            color: var(--gold-dark);
+            margin: 0 0 10px 0;
+            font-weight: bold;
+            line-height: 1.3;
         }
 
-        .content-box {
-            padding: 60px 100px; height: 100%; box-sizing: border-box;
-            background-color: var(--bg-light);
+        .main-subtitle {
+            font-size: 14px;
+            color: #555;
+            margin: 0;
+            line-height: 1.5;
         }
 
         .section-title {
-            font-size: 28px; color: var(--gold-dark); border-bottom: 2px solid var(--gold-primary);
-            padding-bottom: 10px; margin-bottom: 30px; font-weight: bold;
+            font-size: 20px;
+            color: var(--gold-dark);
+            border-bottom: 2px solid var(--gold-primary);
+            padding-bottom: 8px;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-weight: bold;
         }
 
+        .section-desc {
+            color: var(--text-muted);
+            font-size: 13.5px;
+            margin-top: 0;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        /* 요약표 반응형 터치 스크롤 처리 */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin-bottom: 5px;
+            border-radius: 8px;
+            border: 1px solid #e1e4e6;
+        }
+
+        table {
+            width: 100%;
+            min-width: 650px; /* 모바일 가로 좁아짐 시 글자 찌그러짐 방지 */
+            border-collapse: collapse;
+            background-color: #fff;
+        }
+
+        th, td {
+            padding: 12px 10px;
+            border: 1px solid #e1e4e6;
+            text-align: center;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        th {
+            background-color: #f2ece0;
+            color: var(--gold-dark);
+            font-weight: bold;
+        }
+
+        /* 시뮬레이터 카드 정렬 */
+        .simulator-box {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .info-panel {
+            background-color: #f2ece0;
+            padding: 20px;
+            border-radius: 10px;
+            box-sizing: border-box;
+        }
+
+        .info-panel h2 {
+            font-size: 18px;
+            color: var(--gold-dark);
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .info-panel p {
+            font-size: 13px;
+            line-height: 1.6;
+            margin: 0 0 12px 0;
+            color: #333;
+        }
+
+        .info-panel ul {
+            padding-left: 20px;
+            font-size: 12.5px;
+            color: #444;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .calculator-card {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .calculator-card h2 {
+            font-size: 18px;
+            margin: 0 0 15px 0;
+            text-align: center;
+            font-weight: bold;
+            color: var(--gold-dark);
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-group.row {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12.5px;
+            font-weight: bold;
+            margin-bottom: 6px;
+            color: #444;
+        }
+
+        select, input[type="text"] {
+            width: 100%;
+            padding: 11px; /* 모바일 터치 영역 최적화 확장 */
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            box-sizing: border-box;
+            background-color: #fff;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+        select {
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23735b2f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px;
+            padding-right: 35px;
+        }
+
+        .price-container {
+            background-color: #fffdf4;
+            border: 1.5px solid var(--gold-primary);
+            border-radius: 8px;
+            padding: 12px;
+        }
+
+        .quick-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .quick-btn {
+            background-color: #eaf0f6;
+            border: none;
+            padding: 10px 2px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #e8f4ff;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #b8daff;
+        }
+
+        .checkbox-group input {
+            width: 18px; height: 18px;
+            margin: 0;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            margin-bottom: 0;
+            color: #004085;
+            font-size: 13px;
+            line-height: 1.4;
+            cursor: pointer;
+        }
+
+        .result-container {
+            margin-top: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            border: 1px solid #e1e4e6;
+        }
+
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 13.5px;
+            color: #555;
+        }
+
+        .result-row.total {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1.5px dashed #ccc;
+            font-size: 16px;
+            font-weight: bold;
+            color: #d9534f;
+        }
+
+        /* 브리핑 안내 그리드 시스템 */
         .grid-2 {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
 
         .card {
-            background-color: var(--card-bg); border: 1px solid #e1e4e6;
-            border-radius: 12px; padding: 25px; box-sizing: border-box;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            background-color: var(--card-bg);
+            border: 1px solid #e1e4e6;
+            border-radius: 12px;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
-        .card h3 { color: var(--gold-dark); margin-top: 0; font-size: 20px; }
-        .card p, .card li { font-size: 15px; line-height: 1.7; color: #444; }
-
-        /* 3번 슬라이드 (계산기 전용 배치 레이아웃) */
-        .split-layout {
-            display: flex; width: 100%; height: 100%;
-            background-color: var(--bg-light);
+        .card.highlight {
+            border: 1px solid var(--gold-primary);
+            background-color: #fdfbf7;
         }
 
-        .left-panel {
-            width: 42%; height: 100%; padding: 60px 50px; box-sizing: border-box;
-            display: flex; flex-direction: column; justify-content: space-between;
-            background: linear-gradient(to right, #f2ece0 80%, var(--bg-light));
+        .card h3 {
+            color: var(--gold-dark);
+            margin-top: 0;
+            font-size: 16px;
+            margin-bottom: 10px;
+            font-weight: bold;
         }
 
-        .right-panel {
-            width: 58%; height: 100%; display: flex; justify-content: center; align-items: center; padding-right: 40px; box-sizing: border-box;
+        .card p, .card li {
+            font-size: 13.5px;
+            line-height: 1.6;
+            color: #444;
         }
-
-        /* 계산기 디자인 원복 및 고도화 */
-        .calculator-card {
-            background-color: #ffffff; border-radius: 16px;
-            width: 100%; max-width: 500px; padding: 22px 25px; box-sizing: border-box;
-            border: 1.5px solid var(--gold-primary); box-shadow: 0 15px 35px rgba(0,0,0,0.08); color: #333;
-        }
-
-        .calculator-card h2 { font-size: 20px; margin: 0 0 15px 0; text-align: center; font-weight: bold; color: var(--gold-dark); }
-        .form-group { margin-bottom: 10px; }
-        .form-group.row { display: flex; gap: 10px; }
-        .form-group.row > div { flex: 1; }
-        .form-group label { display: block; font-size: 12px; font-weight: bold; margin-bottom: 5px; color: #444; }
-        select, input[type="text"] { width: 100%; padding: 9px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; box-sizing: border-box; background-color: #fff; }
         
-        .price-container { background-color: #fffdf4; border: 1.5px solid var(--gold-primary); border-radius: 8px; padding: 10px; }
-        .quick-buttons { display: flex; gap: 6px; margin-top: 6px; }
-        .quick-btn { flex: 1; background-color: #eaf0f6; border: none; padding: 6px; border-radius: 4px; font-size: 11px; cursor: pointer; font-weight: bold; color: #333; }
-        .quick-btn:hover { background-color: var(--gold-primary); color: white; }
-        
-        .checkbox-group { display: flex; align-items: center; gap: 6px; background-color: #e8f4ff; padding: 8px; border-radius: 6px; border: 1px solid #b8daff; }
-        .result-container { margin-top: 10px; background-color: #f8f9fa; border-radius: 8px; padding: 12px; border: 1px solid #e1e4e6; }
-        .result-row { display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 13px; color: #555; }
-        .result-row.total { margin-top: 6px; padding-top: 6px; border-top: 1.5px dashed #ccc; font-size: 15px; font-weight: bold; color: #d9534f; }
+        .card p { margin-top: 0; margin-bottom: 12px; }
+        .card ul { padding-left: 20px; margin: 0; }
+        .card li { margin-bottom: 6px; }
+
+        .formula-box {
+            background-color: #f7f3eb;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid var(--gold-primary);
+        }
+
+        /* 하단 푸터 */
+        .office-footer {
+            text-align: center;
+            padding: 20px 0;
+            font-size: 12.5px;
+            color: var(--text-muted);
+            border-top: 1px solid #e1e4e6;
+            margin-top: 10px;
+        }
+
         .hidden { display: none !important; }
-        
-        /* 테이블 스타일 */
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; color: #333; background-color: #fff; }
-        th, td { padding: 11px; border: 1px solid #e1e4e6; text-align: center; font-size: 14px; }
-        th { background-color: #f2ece0; color: var(--gold-dark); font-weight: bold; }
+
+        /*태블릿 및 태블릿 가로 / PC 웹 뷰 환경 미디어 쿼리 */
+        @media (min-width: 600px) {
+            .form-group.row {
+                flex-direction: row;
+            }
+            .form-group.row > div {
+                flex: 1;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .main-title { font-size: 34px; }
+            .section { padding: 35px 40px; }
+            .simulator-box { flex-direction: row; }
+            .info-panel { width: 40%; flex-shrink: 0; display: flex; flex-direction: column; justify-content: space-between; }
+            .calculator-card { flex-grow: 1; }
+            .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+            .grid-span-2 { grid-column: span 2; }
+        }
     </style>
 </head>
 <body>
 
-<div class="presentation-container">
-    <button class="nav-btn prev-btn" onclick="changeSlide(-1)">❮</button>
-    <button class="nav-btn next-btn" onclick="changeSlide(1)">❯</button>
+<div class="container">
 
-    <!-- 1번 슬라이드: 표지 -->
-    <div class="slide active full-cover">
-        <div style="border: 2px solid var(--gold-primary); padding: 40px 60px; background-color: rgba(255,255,255,0.9); border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
-            <div class="slide-title">부동산 취득세 핵심 가이드</div>
-            <p style="font-size: 18px; color: #555; margin: 0;">매매 · 상속 · 증여 · 이혼 원인별 세액 연산 및 실무 총괄 브리핑</p>
+    <!-- 1. 표지 섹션 -->
+    <div class="section cover-section">
+        <h1 class="main-title">부동산 취득세 핵심 가이드</h1>
+        <p class="main-subtitle">매매 · 상속 · 증여 · 이혼 원인별 세액 연산 및 실무 총괄 브리핑</p>
+    </div>
+
+    <!-- 2. 요약 비교표 섹션 -->
+    <div class="section">
+        <h2 class="section-title">취득 원인별 표준 세율 요약 비교</h2>
+        <p class="section-desc">각 원인별 법정 표준세율 및 부가세목 구조 요약표입니다. (기본 비중과 기준이며 좌우로 스크롤 가능합니다.)</p>
+        
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>취득 원인 종류</th>
+                        <th>기본 취득세율</th>
+                        <th>지방교육세율</th>
+                        <th>농어촌특별세율</th>
+                        <th>총합계 세율</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>매매 (유상취득)</strong></td>
+                        <td>1.0% ~ 3.0% (주택기준)</td>
+                        <td>취득세액의 10%</td>
+                        <td>0.2% (85㎡ 이하 면제)</td>
+                        <td>가액·주택수별 상이</td>
+                    </tr>
+                    <tr>
+                        <td><strong>상속 (일반 표준)</strong></td>
+                        <td>2.3%</td>
+                        <td>0.2%</td>
+                        <td>0.3% (85㎡ 이하 면제)</td>
+                        <td><strong>2.8%</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>상속 (무주택 특례)</strong></td>
+                        <td><strong>0.3% (2% 감면)</strong></td>
+                        <td>0.06%</td>
+                        <td>면제 (85㎡ 이하 면제)</td>
+                        <td><strong>0.36%</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>증여 (일반 용도)</strong></td>
+                        <td>3.5%</td>
+                        <td>0.3%</td>
+                        <td>0.2% (85㎡ 이하 면제)</td>
+                        <td><strong>4.0%</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>이혼 (재산분할)</strong></td>
+                        <td>1.5%</td>
+                        <td>0.3%</td>
+                        <td>0.2% (85㎡ 이하 면제)</td>
+                        <td><strong>2.0%</strong></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        <div class="slide-footer"><span>현재두법무사사무소</span><span>슬라이드 1 / 7</span></div>
     </div>
 
-    <!-- 2번 슬라이드: 원인별 표준 세율 요약 비교표 -->
-    <div class="slide content-box">
-        <div class="section-title">취득 원인별 표준 세율 요약 비교</div>
-        <p style="color: var(--text-muted); font-size: 15px;">각 원인별 법정 표준세율 및 부가세목 구조 요약표입니다. (기본 비중과 기준)</p>
-        <table>
-            <thead>
-                <tr>
-                    <th>취득 원인 종류</th>
-                    <th>기본 취득세율</th>
-                    <th>지방교육세율</th>
-                    <th>농어촌특별세율</th>
-                    <th>총합계 세율</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>매매 (유상취득)</strong></td>
-                    <td>1.0% ~ 3.0% (주택기준)</td>
-                    <td>취득세액의 10%</td>
-                    <td>0.2% (85㎡ 이하 면제)</td>
-                    <td>가액·주택수별 상이</td>
-                </tr>
-                <tr>
-                    <td><strong>상속 (일반 표준)</strong></td>
-                    <td>2.3%</td>
-                    <td>0.2%</td>
-                    <td>0.3% (85㎡ 이하 면제)</td>
-                    <td><strong>2.8%</strong></td>
-                </tr>
-                <tr>
-                    <td><strong>상속 (무주택 특례)</strong></td>
-                    <td><strong>0.3% (2% 감면)</strong></td>
-                    <td>0.06%</td>
-                    <td>면제 (85㎡ 이하 면제)</td>
-                    <td><strong>0.36%</strong></td>
-                </tr>
-                <tr>
-                    <td><strong>증여 (일반 용도)</strong></td>
-                    <td>3.5%</td>
-                    <td>0.3%</td>
-                    <td>0.2% (85㎡ 이하 면제)</td>
-                    <td><strong>4.0%</strong></td>
-                </tr>
-                <tr>
-                    <td><strong>이혼 (재산분할)</strong></td>
-                    <td>1.5%</td>
-                    <td>0.3%</td>
-                    <td>0.2% (85㎡ 이하 면제)</td>
-                    <td><strong>2.0%</strong></td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="slide-footer"><span>현재두법무사사무소</span><span>슬라이드 2 / 7</span></div>
-    </div>
-
-    <!-- 3번 슬라이드: 핵심 실시간 계산기 프로그램 -->
-    <div class="slide split-layout">
-        <div class="left-panel">
-            <div>
-                <h2 style="font-size: 26px; color: var(--gold-dark); margin: 0 0 10px 0; border-bottom: 2px solid var(--gold-primary); padding-bottom: 10px;">통합 취득세 계산 시스템</h2>
-                <p style="color: #444; font-size: 14px; line-height: 1.7;">본 시뮬레이터는 규제지역(조정대상지역) 여부 및 보유 주택 수에 따른 세액 구조를 즉시 분석합니다.</p>
-                <ul style="padding-left: 20px; font-size: 13px; color: #555; line-height: 1.8; margin-top: 15px;">
-                    <li><strong>유상거래:</strong> 조정/비조정지역 및 주택수별 중과세 반영</li>
-                    <li><strong>증여취득:</strong> 조정지역 내 3억 이상 주택 증여 시 중과세(12%) 적용</li>
-                    <li><strong>면적제한:</strong> 전용면적 85㎡ 이하 농특세 비과세 원칙</li>
-                </ul>
+    <!-- 3. 계산기 시뮬레이터 섹션 -->
+    <div class="section">
+        <div class="simulator-box">
+            <div class="info-panel">
+                <div>
+                    <h2>통합 취득세 계산 시스템</h2>
+                    <p>본 시뮬레이터는 규제지역(조정대상지역) 여부 및 보유 주택 수에 따른 세액 구조를 즉시 분석합니다.</p>
+                    <ul>
+                        <li><strong>유상거래:</strong> 조정/비조정지역 및 주택수별 중과세 반영</li>
+                        <li><strong>증여취득:</strong> 조정지역 내 3억 이상 주택 증여 시 중과세(12%) 적용</li>
+                        <li><strong>면적제한:</strong> 전용면적 85㎡ 이하 농특세 비과세 원칙</li>
+                    </ul>
+                </div>
             </div>
-            <div style="font-size: 13px; color: var(--text-muted);">현재두법무사사무소 | 슬라이드 3 / 7</div>
-        </div>
-        <div class="right-panel">
+
             <div class="calculator-card">
                 <h2>취득세 실시간 연산 (규제지역 반영)</h2>
                 
@@ -314,9 +493,7 @@
                 <div class="form-group hidden" id="inheritance-option">
                     <div class="checkbox-group">
                         <input type="checkbox" id="homeless" onchange="calculateTax()">
-                        <label for="homeless" style="margin-bottom: 0; cursor: pointer; color: #004085; font-size: 12px; font-weight: bold;">
-                            상속인 세대 기준 무주택자 (1가구 1주택 2% 감면 특례)
-                        </label>
+                        <label for="homeless"><strong>상속인 세대 기준 무주택자 (1가구 1주택 2% 감면 특례)</strong></label>
                     </div>
                 </div>
 
@@ -331,9 +508,9 @@
         </div>
     </div>
 
-    <!-- 4번 슬라이드: 상속 및 무주택 특례 상세 -->
-    <div class="slide content-box">
-        <div class="section-title">상속 취득세 및 무주택 1가구 1주택 감면 특례</div>
+    <!-- 4. 상세 안내 브리핑 (상속 및 감면) -->
+    <div class="section">
+        <h2 class="section-title">상속 취득세 및 무주택 1가구 1주택 감면 특례</h2>
         <div class="grid-2">
             <div class="card">
                 <h3>일반 상속세율 구조</h3>
@@ -344,53 +521,51 @@
                     <li>농어촌특별세: 취득가액의 0.3% 부과</li>
                 </ul>
             </div>
-            <div class="card" style="border: 1px solid var(--gold-primary); background-color: #fdfbf7;">
+            <div class="card highlight">
                 <h3>1가구 1주택 특례 (2% 감면)</h3>
-                <p>상속개시일 현재 상속인 세대 구성원 전원이 주택을 소유하지 않은 무주택 세대인 경우 파격적인 세제 감면이 주어집니다.</p>
+                <p>상속개시일 현재 상속인 세대 구성원 전원이 주택을 소유하지 않은 무주택 세대인 경우 세제 감면이 주어집니다.</p>
                 <ul>
                     <li><strong>취득세 감면율:</strong> 표준세율에서 2.0%를 차감한 <strong>0.3% 특례세율</strong>만 적용</li>
                     <li><strong>부가세 인하 효과:</strong> 취득세 본세 감소로 지방교육세와 농특세 부담이 연쇄 감소합니다.</li>
                 </ul>
             </div>
         </div>
-        <div class="slide-footer"><span>현재두법무사사무소</span><span>슬라이드 4 / 7</span></div>
     </div>
 
-    <!-- 5번 슬라이드: 증여 및 이혼 재산분할 상세 -->
-    <div class="slide content-box">
-        <div class="section-title">증여 중과세 요건 및 이혼 재산분할 특례</div>
+    <!-- 5. 상세 안내 브리핑 (증여 및 이혼) -->
+    <div class="section">
+        <h2 class="section-title">증여 중과세 요건 및 이혼 재산분할 특례</h2>
         <div class="grid-2">
             <div class="card">
                 <h3>증여 취득세와 조정지역 중과</h3>
                 <p>무상으로 재산권을 이전받는 거래 행위로, 증여자의 주택 수와 지역에 따라 중과세가 발동할 수 있습니다.</p>
                 <ul>
                     <li><strong>일반 증여:</strong> 기본 표준세율 3.5% 적용</li>
-                    <li><strong>조정대상지역 중과:</strong> 조정지역 내 공시가격 3억 원 이상 주택을 다주택자로부터 증여받는 경우 <strong>최고 12%</strong>까지 세율이 상향될 수 있어 사전 검토가 필수적입니다.</li>
+                    <li><strong>조정대상지역 중과:</strong> 조정지역 내 공시가격 3억 원 이상 주택을 다주택자로부터 증여받는 경우 <strong>최고 12%</strong>까지 세율이 상향될 수 있습니다.</li>
                 </ul>
             </div>
             <div class="card">
                 <h3>이혼 재산분할 특례 (1.5%)</h3>
                 <p>혼인 중 공동으로 형성한 재산을 이혼 시 분할하는 소유권 이전 형태입니다.</p>
                 <ul>
-                    <li><strong>형식적 취득 간주:</strong> 실질적 재산 증식이 아닌 본인 몫의 환원으로 평가</li>
+                    <li><strong>형식적 취득 간주:</strong> 실질적 재산 증식이 아닌 본인 몫의 환원으로 평가합니다.</li>
                     <li><strong>세율 산식:</strong> 표준세율(2.3%)에서 중과기준세율(2.0%)을 뺀 특례 결과치에 등록 면허 성격이 가산되어 <strong>최종 1.5%의 취득세율</strong>만 부과됩니다.</li>
                 </ul>
             </div>
         </div>
-        <div class="slide-footer"><span>현재두법무사사무소</span><span>슬라이드 5 / 7</span></div>
     </div>
 
-    <!-- 6번 슬라이드: 매매 유상거래 비례세율 산식 안내 -->
-    <div class="slide content-box">
-        <div class="section-title">주택 유상취득 가액 비례세율 산식 구조</div>
+    <!-- 6. 산식 안내 섹션 -->
+    <div class="section">
+        <h2 class="section-title">주택 유상취득 가액 비례세율 산식 구조</h2>
         <div class="grid-2">
-            <div class="card" style="grid-column: span 2;">
+            <div class="card grid-span-2">
                 <h3>6억 초과 ~ 9억 이하 비례 연산 매칭 구간 (비조정 1주택 기준)</h3>
-                <p>매매를 원인으로 주택을 취득할 때 세부 문턱 효과(세율이 급격히 튀는 현상)를 방지하기 위해 금액 단위별 비례 스케일 산식을 가동합니다.</p>
-                <div style="background-color: #f7f3eb; padding: 20px; border-radius: 8px; margin: 15px 0; border-left: 4px solid var(--gold-primary);">
-                    <strong style="color: var(--gold-dark); font-size: 18px;">세율 산출 공식:</strong><br>
-                    <span style="font-size: 20px; letter-spacing: 1px; color: var(--text-dark);">세율(%) = ( 취득가액 × 2 / 3억원 ) - 3</span>
-                    <br><span style="font-size: 13px; color: #777;">* 계산 결과 소수점 이하 다섯째 자리에서 반올림 처리하여 적용</span>
+                <p>매매를 원인으로 주택을 취득할 때 세부 문턱 효과(세율이 금액에 따라 갑자기 튀는 현상)를 방지하기 위해 비례 스케일 산식을 가동합니다.</p>
+                <div class="formula-box">
+                    <strong style="color: var(--gold-dark); font-size: 16px;">세율 산출 공식:</strong><br>
+                    <span style="font-size: 18px; font-weight: bold; letter-spacing: 0.5px; color: var(--text-dark); display: inline-block; margin-top: 5px;">세율(%) = ( 취득가액 × 2 / 3억원 ) - 3</span>
+                    <br><span style="font-size: 12px; color: #777; display: inline-block; margin-top: 5px;">* 계산 결과 소수점 이하 다섯째 자리에서 반올림 처리하여 적용</span>
                 </div>
                 <ul>
                     <li>가액 6억 원 이하 정착점: **1.0% 고정 세율**</li>
@@ -399,61 +574,32 @@
                 </ul>
             </div>
         </div>
-        <div class="slide-footer"><span>현재두법무사사무소</span><span>슬라이드 6 / 7</span></div>
     </div>
 
-    <!-- 7번 슬라이드: 신고 및 납부 기한 가이드 -->
-    <div class="slide content-box">
-        <div class="section-title">원인별 취득세 신고 · 납부 기한 가이드</div>
+    <!-- 7. 기한 가이드 섹션 -->
+    <div class="section">
+        <h2 class="section-title">원인별 취득세 신고 · 납부 기한 가이드</h2>
         <div class="grid-2">
-            <div class="card" style="grid-column: span 2;">
-                <p style="font-size: 16px; color: #333; margin-top: 0;">각 원인에 따라 세법상 지정된 법정 자진 신고 및 납부 기한이 상이하므로 실무 집행 시 시기를 놓치지 않도록 주의해야 합니다.</p>
-                <ul style="line-height: 2; font-size: 16px; color: #444;">
+            <div class="card grid-span-2">
+                <p style="font-size: 14.5px; color: #333; margin-top: 0;">각 원인에 따라 세법상 지정된 법정 자진 신고 및 납부 기한이 상이하므로 시기를 놓치지 않도록 주의해야 합니다.</p>
+                <ul style="line-height: 1.9; font-size: 14px; color: #444;">
                     <li>📆 <strong>매매 / 유상취득 거래:</strong> 잔금지급일(또는 등기접수일 중 빠른 날)로부터 <strong>60일 이내</strong></li>
                     <li>📆 <strong>증여 / 무상양도 거래:</strong> 증여계약서 작성일이 속하는 달의 말일부터 <strong>3개월 이내</strong></li>
                     <li>📆 <strong>상속 원인 자산 취득:</strong> 상속개시일(사망일)이 속하는 달의 말일부터 <strong>6개월 이내</strong> (외국 거주 상속인 존재 시 9개월)</li>
-                    <li>⚠️ <strong>미이행 시 패널티 가산세:</strong> 기한 도과 시 신고불성실가산세(기본 20%) 및 납부지연가산세(일일 단위 일할 계산)가 추가 가산되므로 엄수해야 합니다.</li>
+                    <li>⚠️ <strong>미이행 시 패널티 가산세:</strong> 기한 도과 시 신고불성실가산세(기본 20%) 및 납부지연가산세(일일 단위 일할 계산)가 추가 합산되므로 엄수해야 합니다.</li>
                 </ul>
             </div>
         </div>
-        <div class="slide-footer"><span>현재두법무사사무소</span><span>슬라이드 7 / 7</span></div>
+    </div>
+
+    <!-- 하단 고정 푸터 정보 -->
+    <div class="office-footer">
+        <span>현재두법무사사무소</span>
     </div>
 </div>
 
 <script>
-    // --- 슬라이드 넘기기 컨트롤러 엔진 ---
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.slide');
-
-    function showSlide(index) {
-        if (index >= slides.length) currentSlide = 0;
-        else if (index < 0) currentSlide = slides.length - 1;
-        else currentSlide = index;
-
-        slides.forEach((slide, idx) => {
-            if (idx === currentSlide) {
-                slide.classList.add('active');
-            } else {
-                slide.classList.remove('active');
-            }
-        });
-    }
-
-    function changeSlide(direction) {
-        showSlide(currentSlide + direction);
-    }
-
-    // 키보드 방향키 연동 지원
-    document.addEventListener('keydown', function(event) {
-        if (event.key === 'ArrowRight' || event.key === 'Space') {
-            if(document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'SELECT') changeSlide(1);
-        } else if (event.key === 'ArrowLeft') {
-            if(document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'SELECT') changeSlide(-1);
-        }
-    });
-
-    // --- 계산기 구동 자바스크립트 엔진 ---
-    function numToComma(num) { return num.toString().replace(/\B(?=(\d3)+(?!\d))/g, ","); }
+    function numToComma(num) { return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
     function commaToNum(str) { return parseInt(str.replace(/,/g, '')) || 0; }
 
     function formatAndCalculate(input) {
@@ -480,7 +626,6 @@
         let houseOption = document.getElementById('house-count-option');
         let regionOption = document.getElementById('region-option');
         
-        // 초기화
         inhOption.classList.add('hidden');
         houseOption.classList.add('hidden');
         regionOption.classList.add('hidden');
@@ -492,7 +637,7 @@
         } else if (reason === 'inheritance') {
             inhOption.classList.remove('hidden');
         } else if (reason === 'gift') {
-            regionOption.classList.remove('hidden'); // 증여 조정지역 중과 체크용
+            regionOption.classList.remove('hidden');
         }
         calculateTax();
     }
@@ -508,36 +653,31 @@
         let taxRate = 0; let eduRate = 0; let ruralRate = 0;
 
         if (reason === 'sale') {
-            // 주택 유상취득 중과세 및 일반세율 로직
-            if (region === 'regulated') { // 조정대상지역
+            if (region === 'regulated') {
                 if (houseCount === '1') {
-                    // 1주택은 가액별 1~3%
                     if (price <= 600000000) taxRate = 0.01;
                     else if (price <= 900000000) taxRate = (price * (2 / 300000000) - 3) / 100;
                     else taxRate = 0.03;
                 } else if (houseCount === '2') {
-                    taxRate = 0.08; // 조정 2주택 8%
+                    taxRate = 0.08;
                 } else {
-                    taxRate = 0.12; // 조정 3주택 이상 12%
+                    taxRate = 0.12;
                 }
-            } else { // 비조정대상지역
+            } else {
                 if (houseCount === '1' || houseCount === '2') {
-                    // 1, 2주택은 가액별 1~3%
                     if (price <= 600000000) taxRate = 0.01;
                     else if (price <= 900000000) taxRate = (price * (2 / 300000000) - 3) / 100;
                     else taxRate = 0.03;
                 } else if (houseCount === '3') {
-                    taxRate = 0.08; // 비조정 3주택 8%
+                    taxRate = 0.08;
                 } else {
-                    taxRate = 0.12; // 비조정 4주택 이상 12%
+                    taxRate = 0.12;
                 }
             }
             
-            // 유상취득 지방교육세율 (중과세율 일 때는 본세의 10%가 아니라 별도 구조가 있으나 단순 계산을 위해 10% 매칭 혹은 0.4% 적용)
             if (taxRate >= 0.08) eduRate = 0.004; 
             else eduRate = taxRate * 0.1;
             
-            // 유상취득 농특세율
             if (area === 'under') {
                 ruralRate = 0;
             } else {
@@ -547,13 +687,12 @@
         } else if (reason === 'inheritance') {
             if (isHomeless) {
                 taxRate = 0.003; eduRate = 0.0006;
-                ruralRate = 0; // 무주택 특례 시 면적 불문 농특세 감면 적용
+                ruralRate = 0;
             } else {
                 taxRate = 0.023; eduRate = 0.002;
                 ruralRate = (area === 'under') ? 0 : 0.003;
             }
         } else if (reason === 'gift') {
-            // 조정지역 내 3억 이상 주택 증여 시 12% 중과
             if (region === 'regulated' && price >= 300000000) {
                 taxRate = 0.12; eduRate = 0.004;
                 ruralRate = (area === 'under') ? 0 : 0.01;
@@ -566,7 +705,6 @@
             ruralRate = (area === 'under') ? 0 : 0.002;
         }
 
-        // 공통 면적 예외 (국민주택규모 이하 농특세 면제)
         if (area === 'under') ruralRate = 0;
 
         let tax = Math.floor(price * taxRate);
