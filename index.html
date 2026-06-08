@@ -17,281 +17,422 @@
 
         body, html {
             margin: 0; padding: 0;
-            width: 100%; height: 100%;
-            font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
             background-color: #eef0f3;
-            display: flex; justify-content: center; align-items: center;
-            overflow: hidden;
-            user-select: none;
+            font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
             color: var(--text-dark);
+            -webkit-text-size-adjust: none;
         }
 
-        /* 전체 슬라이드 컨테이너 (1280x720 고정 비율) */
-        .presentation-container {
-            width: 1280px; height: 720px;
-            position: relative;
-            background-color: var(--bg-light);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-            overflow: hidden;
-            border-radius: 12px;
-        }
-
-        /* 개별 슬라이드 공통 스타일 */
-        .slide {
-            position: absolute;
-            top: 0; left: 0;
-            width: 1280px; height: 720px;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.4s ease, visibility 0.4s ease;
+        /* 반응형 통합 컨테이너 */
+        .container {
+            width: 100%;
+            max-width: 800px; /* PC 환경에서도 안정적인 가독성 확보 */
+            margin: 0 auto;
+            padding: 15px;
             box-sizing: border-box;
-            background-color: var(--bg-light);
         }
 
-        .slide.active {
-            opacity: 1;
-            visibility: visible;
+        /* 섹션 공통 스타일 */
+        .section {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            box-sizing: border-box;
         }
 
-        /* 네비게이션 컨트롤러 버튼 */
-        .nav-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(255, 255, 255, 0.8);
-            border: 1px solid var(--gold-primary);
-            color: var(--gold-primary);
-            width: 50px; height: 50px;
-            border-radius: 50%;
-            font-size: 24px;
-            cursor: pointer;
-            z-index: 10;
-            display: flex; justify-content: center; align-items: center;
-            transition: all 0.2s;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        }
-
-        .nav-btn:hover {
-            background-color: var(--gold-primary);
-            color: white;
-        }
-
-        .prev-btn { left: 20px; }
-        .next-btn { right: 20px; }
-
-        /* 공통 푸터 */
-        .slide-footer {
-            position: absolute;
-            bottom: 25px;
-            left: 50px; right: 50px;
-            display: flex; justify-content: space-between;
-            font-size: 13px;
-            color: var(--text-muted);
-            border-top: 1px solid #e1e4e6;
-            padding-top: 15px;
-            z-index: 5;
-        }
-
-        /* 레이아웃 스타일 디자인 */
-        .full-cover {
-            display: flex; flex-direction: column;
-            justify-content: center; align-items: center;
-            text-align: center; 
+        /* 1. 메인 타이틀 커버 섹션 */
+        .cover-section {
             background: linear-gradient(135deg, #f5f1e6 0%, #e8e1d0 100%);
+            text-align: center;
+            border: 2px solid var(--gold-primary);
         }
 
-        .slide-title {
-            font-size: 42px; color: var(--gold-dark); margin: 0 0 20px 0; font-weight: bold;
+        .main-title {
+            font-size: 26px;
+            color: var(--gold-dark);
+            margin: 0 0 12px 0;
+            font-weight: bold;
+            line-height: 1.3;
         }
 
-        .content-box {
-            padding: 60px 100px; height: 100%; box-sizing: border-box;
-            background-color: var(--bg-light);
+        .main-subtitle {
+            font-size: 14px;
+            color: #555;
+            margin: 0;
+            line-height: 1.4;
         }
 
         .section-title {
-            font-size: 28px; color: var(--gold-dark); border-bottom: 2px solid var(--gold-primary);
-            padding-bottom: 10px; margin-bottom: 20px; font-weight: bold;
+            font-size: 20px;
+            color: var(--gold-dark);
+            border-bottom: 2px solid var(--gold-primary);
+            padding-bottom: 10px;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-weight: bold;
         }
 
+        .section-desc {
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-top: 0;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        /* 2. 테이블 스크롤 최적화 (모바일에서 표가 잘리지 않도록 좌우스크롤 제공) */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            border: 1px solid #e1e4e6;
+        }
+
+        table {
+            width: 100%;
+            min-width: 600px; /* 모바일에서 표 구조 유지 보장 */
+            border-collapse: collapse;
+            background-color: #fff;
+        }
+
+        th, td {
+            padding: 12px 10px;
+            border: 1px solid #e1e4e6;
+            text-align: center;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        th {
+            background-color: #f2ece0;
+            color: var(--gold-dark);
+            font-weight: bold;
+        }
+
+        /* 3. 시뮬레이터 레이아웃 */
+        .simulator-box {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .info-panel {
+            background-color: #f2ece0;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .thumbnail-box {
+            display: none; /* 모바일 불필요 요소 숨김 처리 */
+        }
+
+        .info-panel h2 {
+            font-size: 18px;
+            color: var(--gold-dark);
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .info-panel p {
+            font-size: 13px;
+            line-height: 1.5;
+            margin: 0 0 10px 0;
+        }
+
+        .info-panel ul {
+            padding-left: 18px;
+            font-size: 12px;
+            color: #555;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* 계산기 폼 구성 */
+        .calculator-card {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 6px;
+            color: #444;
+        }
+
+        select, input[type="text"] {
+            width: 100%;
+            padding: 12px; /* 모바일 터치 최적화 크기 확장 */
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            box-sizing: border-box;
+            background-color: #fff;
+            appearance: none; /* 모바일 기본 브라우저 스타일 제거 */
+            -webkit-appearance: none;
+        }
+
+        select {
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23735b2f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 16px;
+            padding-right: 35px;
+        }
+
+        .price-container {
+            background-color: #fffdf4;
+            border: 1.5px solid var(--gold-primary);
+            border-radius: 8px;
+            padding: 12px;
+        }
+
+        .quick-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .quick-btn {
+            background-color: #eaf0f6;
+            border: none;
+            padding: 10px 4px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: #f0f7ff;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #ccdfff;
+        }
+
+        .checkbox-group.heavy-warning {
+            background-color: #fff0f0;
+            border: 1px solid #ffcccc;
+        }
+
+        .checkbox-group input {
+            width: 20px; height: 20px; /* 모바일 체크 용이성 증대 */
+            margin: 0;
+            flex-shrink: 0;
+        }
+
+        .checkbox-group label {
+            margin-bottom: 0;
+            color: #004085;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .checkbox-group.heavy-warning label {
+            color: #b71c1c;
+        }
+
+        .notice-badge {
+            display: block;
+            margin-top: 4px;
+            font-size: 11px;
+            color: var(--accent-blue);
+            font-weight: bold;
+        }
+
+        .result-container {
+            margin-top: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            border: 1px solid #e1e4e6;
+        }
+
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 13.5px;
+            color: #555;
+        }
+
+        .result-row.total {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1.5px dashed #ccc;
+            font-size: 16px;
+            font-weight: bold;
+            color: #d9534f;
+        }
+
+        /* 4. 그리드 카드 영역 */
         .grid-2 {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
 
         .card {
-            background-color: var(--card-bg); border: 1px solid #e1e4e6;
-            border-radius: 12px; padding: 22px; box-sizing: border-box;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
-        }
-
-        .card h3 { color: var(--gold-dark); margin-top: 0; font-size: 18px; margin-bottom: 10px; }
-        .card p, .card li { font-size: 14px; line-height: 1.6; color: #444; }
-        .card ul { padding-left: 20px; margin: 5px 0; }
-
-        /* 계산기 전용 분할 배정 레이아웃 */
-        .split-layout {
-            display: flex; width: 100%; height: 100%;
-            background-color: var(--bg-light);
-        }
-
-        .left-panel {
-            width: 38%; height: 100%; padding: 45px 40px; box-sizing: border-box;
-            display: flex; flex-direction: column; justify-content: space-between;
-            background: linear-gradient(to right, #f2ece0 80%, var(--bg-light));
-        }
-
-        .right-panel {
-            width: 62%; height: 100%; display: flex; justify-content: center; align-items: center; padding-right: 35px; box-sizing: border-box;
-        }
-
-        /* 썸네일 이미지 영역 스타일 */
-        .thumbnail-box {
-            width: 100%;
-            height: 140px;
-            background-color: rgba(255, 255, 255, 0.7);
+            background-color: var(--card-bg);
             border: 1px solid #e1e4e6;
-            border-radius: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 15px;
-            box-shadow: inset 0 2px 6px rgba(0,0,0,0.02);
+            border-radius: 12px;
+            padding: 18px;
+            box-sizing: border-box;
         }
 
-        /* 계산기 폼 카드 */
-        .calculator-card {
-            background-color: #ffffff; border-radius: 16px;
-            width: 100%; max-width: 560px; padding: 20px 25px; box-sizing: border-box;
-            border: 1.5px solid var(--gold-primary); box-shadow: 0 15px 35px rgba(0,0,0,0.08); color: #333;
+        .card.highlight {
+            border: 1px solid var(--gold-primary);
+            background-color: #fdfbf7;
         }
 
-        .calculator-card h2 { font-size: 19px; margin: 0 0 15px 0; text-align: center; font-weight: bold; color: var(--gold-dark); }
-        .form-group { margin-bottom: 12px; }
-        .form-group label { display: block; font-size: 12px; font-weight: bold; margin-bottom: 5px; color: #444; }
-        select, input[type="text"] { width: 100%; padding: 9px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; box-sizing: border-box; background-color: #fff; }
-        
-        .price-container { background-color: #fffdf4; border: 1.5px solid var(--gold-primary); border-radius: 8px; padding: 10px; }
-        .quick-buttons { display: flex; gap: 6px; margin-top: 6px; }
-        .quick-btn { flex: 1; background-color: #eaf0f6; border: none; padding: 6px; border-radius: 4px; font-size: 11px; cursor: pointer; font-weight: bold; color: #333; }
-        .quick-btn:hover { background-color: var(--gold-primary); color: white; }
-        
-        .checkbox-group { display: flex; align-items: center; gap: 8px; background-color: #f0f7ff; padding: 10px; border-radius: 6px; border: 1px solid #ccdfff; margin-bottom: 8px; }
-        .checkbox-group.heavy-warning { background-color: #fff0f0; border: 1px solid #ffcccc; }
-        .checkbox-group input { width: 16px; height: 16px; margin: 0; cursor: pointer; }
-        .checkbox-group label { margin-bottom: 0; cursor: pointer; color: #004085; font-size: 12.5px; }
-        .checkbox-group.heavy-warning label { color: #b71c1c; }
+        .card h3 {
+            color: var(--gold-dark);
+            margin-top: 0;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
 
-        .notice-badge { display: block; margin-top: 2px; font-size: 11px; color: var(--accent-blue); font-weight: bold; }
-        .result-container { margin-top: 10px; background-color: #f8f9fa; border-radius: 8px; padding: 10px 14px; border: 1px solid #e1e4e6; }
-        .result-row { display: flex; justify-content: space-between; margin-bottom: 4px; font-size: 13px; color: #555; }
-        .result-row.total { margin-top: 6px; padding-top: 6px; border-top: 1.5px dashed #ccc; font-size: 15px; font-weight: bold; color: #d9534f; }
-        
+        .card p {
+            font-size: 13px;
+            line-height: 1.5;
+            color: #444;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .card ul {
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .card li {
+            font-size: 12.5px;
+            line-height: 1.6;
+            color: #444;
+            margin-bottom: 4px;
+        }
+
+        /* 푸터 정보 */
+        .office-footer {
+            text-align: center;
+            padding: 20px 0;
+            font-size: 12px;
+            color: var(--text-muted);
+            border-top: 1px solid #e1e4e6;
+            margin-top: 10px;
+        }
+
         .hidden { display: none !important; }
 
-        /* 테이블 스타일 */
-        table { width: 100%; border-collapse: collapse; margin-top: 8px; color: #333; background-color: #fff; }
-        th, td { padding: 9px 11px; border: 1px solid #e1e4e6; text-align: center; font-size: 13.5px; line-height: 1.4; }
-        th { background-color: #f2ece0; color: var(--gold-dark); font-weight: bold; }
+        /* PC 버전 환경 최적화 미디어 쿼리 */
+        @media (min-width: 768px) {
+            .main-title { font-size: 34px; }
+            .section { padding: 40px; }
+            .simulator-box { flex-direction: row; }
+            .info-panel { width: 40%; flex-shrink: 0; display: flex; flex-direction: column; justify-content: space-between; }
+            .calculator-card { flex-grow: 1; }
+            .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        }
     </style>
 </head>
 <body>
 
-<div class="presentation-container">
-    <button class="nav-btn prev-btn" onclick="changeSlide(-1)">❮</button>
-    <button class="nav-btn next-btn" onclick="changeSlide(1)">❯</button>
+<div class="container">
 
-    <!-- 1번 슬라이드: 표지 -->
-    <div class="slide active full-cover">
-        <div style="border: 2px solid var(--gold-primary); padding: 40px 60px; background-color: rgba(255,255,255,0.9); border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
-            <div class="slide-title">법인 설립 및 변경등기 실무 가이드</div>
-            <p style="font-size: 18px; color: #555; margin: 0;">설립 · 증자(5년 내 과밀 중과) · 본점이전 법정 공과금 연산 시스템</p>
+    <!-- 1번 섹션: 메인 표지 배경 -->
+    <div class="section cover-section">
+        <h1 class="main-title">법인 설립 및 변경등기<br>실무 가이드</h1>
+        <p class="main-subtitle">설립 · 증자(5년 내 과밀 중과) · 본점이전 법정 공과금 연산 시스템</p>
+    </div>
+
+    <!-- 2번 섹션: 요약 표 정보 -->
+    <div class="section">
+        <h2 class="section-title">법인 등기 유형별 법정 공과금 요약</h2>
+        <p class="section-desc">대법원 법정 등기신청수수료 및 자본금 권역별 등록면허세 기준 요약표입니다. (가로 스크롤 가능)</p>
+        
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>등기 유형</th>
+                        <th>등록면허세 (본세) 요율 및 단가</th>
+                        <th>지방교육세 (20%)</th>
+                        <th style="color: var(--accent-blue);">등기신청수수료</th>
+                        <th>의사록 공증 실무</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>임원 · 상호 · 목적</strong></td>
+                        <td>변경 사유별 신청서 건당 <strong>40,200 원</strong></td>
+                        <td>8,040 원</td>
+                        <td style="color: var(--accent-blue); font-weight: bold;">7,000 원</td>
+                        <td>의사록 정액 공증 발생</td>
+                    </tr>
+                    <tr>
+                        <td><strong>본점 관내이전</strong></td>
+                        <td>동일 관할 구역 내 주소 이동 <strong>112,500 원</strong></td>
+                        <td>22,500 원</td>
+                        <td style="color: var(--accent-blue); font-weight: bold;">7,000 원</td>
+                        <td>이사회 서면결의 대체 가능</td>
+                    </tr>
+                    <tr>
+                        <td><strong>자본금 증자 (비과밀)</strong></td>
+                        <td>증자 액수의 <strong>0.4%</strong> (최소 112,500원)</td>
+                        <td>본세의 20%</td>
+                        <td style="color: var(--accent-blue); font-weight: bold;">7,000 원</td>
+                        <td>주주총회 의사록 공증 대상</td>
+                    </tr>
+                    <tr>
+                        <td><strong>자본금 증자 <span style="color:#b71c1c;">(5년 내 과밀)</span></strong></td>
+                        <td>과밀억제권역 내 5년 이내 증자: <strong>1.2%</strong> 중과</td>
+                        <td>본세의 20%</td>
+                        <td style="color: var(--accent-blue); font-weight: bold;">7,000 원</td>
+                        <td>주주총회 의사록 공증 대상</td>
+                    </tr>
+                    <tr>
+                        <td><strong>법인 설립 / 관외 전입</strong></td>
+                        <td>설립(0.4% / 1.2% 중과) 및 관외 본점이전(112,500원)</td>
+                        <td>본세의 20%</td>
+                        <td style="color: var(--accent-blue); font-weight: bold;">30,000 원</td>
+                        <td>각 원인별 법정 기준 충족</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        <div class="slide-footer"><span>현재두법무사사무소</span><span>슬라이드 1 / 4</span></div>
     </div>
 
-    <!-- 2번 슬라이드: 등기 항목별 법정 세액 구조 요약표 -->
-    <div class="slide content-box">
-        <div class="section-title">법인 등기 유형별 법정 공과금 요약</div>
-        <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 8px;">대법원 법정 등기신청수수료 및 자본금 권역별 등록면허세 기준 요약표입니다.</p>
-        <table>
-            <thead>
-                <tr>
-                    <th>등기 유형</th>
-                    <th>등록면허세 (본세) 요율 및 단가</th>
-                    <th>지방교육세 (20%)</th>
-                    <th style="color: var(--accent-blue);">등기신청수수료</th>
-                    <th>의사록 공증 실무</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>임원 · 상호 · 목적</strong></td>
-                    <td>변경 사유별 신청서 건당 <strong>40,200 원</strong></td>
-                    <td>8,040 원</td>
-                    <td style="color: var(--accent-blue); font-weight: bold;">7,000 원</td>
-                    <td>의사록 정액 공증 발생</td>
-                </tr>
-                <tr>
-                    <td><strong>본점 관내이전</strong></td>
-                    <td>동일 관할 구역 내 주소 이동 <strong>112,500 원</strong></td>
-                    <td>22,500 원</td>
-                    <td style="color: var(--accent-blue); font-weight: bold;">7,000 원</td>
-                    <td>이사회 서면결의 대체 가능</td>
-                </tr>
-                <tr>
-                    <td><strong>자본금 증자 (비과밀)</strong></td>
-                    <td>증자 액수의 <strong>0.4%</strong> (최소 112,500원)</td>
-                    <td>본세의 20%</td>
-                    <td style="color: var(--accent-blue); font-weight: bold; background-color: #fffdf0;">7,000 원</td>
-                    <td>주주총회 의사록 공증 대상</td>
-                </tr>
-                <tr>
-                    <td><strong>자본금 증자 <span style="color:#b71c1c;">(5년 내 과밀)</span></strong></td>
-                    <td>과밀억제권역 내 5년 이내 증자: <strong>1.2%</strong> 중과</td>
-                    <td>본세의 20%</td>
-                    <td style="color: var(--accent-blue); font-weight: bold; background-color: #fffdf0;">7,000 원</td>
-                    <td>주주총회 의사록 공증 대상</td>
-                </tr>
-                <tr>
-                    <td><strong>법인 설립 / 관외 전입</strong></td>
-                    <td>설립(0.4% / 1.2% 중과) 및 관외 본점이전(112,500원)</td>
-                    <td>본세의 20%</td>
-                    <td style="color: var(--accent-blue); font-weight: bold;">30,000 원</td>
-                    <td>각 원인별 법정 기준 충족</td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="slide-footer"><span>현재두법무사사무소</span><span>슬라이드 2 / 4</span></div>
-    </div>
-
-    <!-- 3번 슬라이드: 실시간 통합 계산기 프로그램 (왼쪽 패널에 썸네일 탑재) -->
-    <div class="slide split-layout">
-        <div class="left-panel">
-            <div>
-                <!-- 썸네일 이미지 컨테이너 (고급스러운 인라인 벡터 일러스트 삽입) -->
-                <div class="thumbnail-box">
-                    <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M19 21H5C3.89543 21 3 20.1046 3 19V5C3 3.89543 3.89543 3 5 3H14L21 10V19C21 20.1046 20.1046 21 19 21Z" stroke="#735b2f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M14 3V10H21" stroke="#735b2f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M7 10H10" stroke="#a38446" stroke-width="1.5" stroke-linecap="round"/>
-                        <path d="M7 14H17" stroke="#a38446" stroke-width="1.5" stroke-linecap="round"/>
-                        <path d="M7 17H14" stroke="#a38446" stroke-width="1.5" stroke-linecap="round"/>
-                    </svg>
+    <!-- 3번 섹션: 연산 계산기 시뮬레이터 -->
+    <div class="section">
+        <div class="simulator-box">
+            <div class="info-panel">
+                <div>
+                    <h2>통합 실무 시뮬레이터</h2>
+                    <p>법정 등기신청수수료 정밀 분기 및 설립 후 5년 내 과밀억제권역 중과세 엔진입니다.</p>
+                    <ul>
+                        <li><strong>수수료 매칭 구조:</strong> 설립 및 관외 본점이전은 30,000원이 부과되며 증자, 관내이전, 임원·상호·목적 등 일반 변경등기는 7,000원이 가산됩니다.</li>
+                        <li><strong>5년 내 과밀 증자:</strong> 과밀권역 법인이 설립 5년 이내에 자본금을 증자하는 경우 등록세율은 1.2% 중과세율이 적용됩니다.</li>
+                    </ul>
                 </div>
-                
-                <h2 style="font-size: 24px; color: var(--gold-dark); margin: 0 0 10px 0; border-bottom: 2px solid var(--gold-primary); padding-bottom: 8px;">통합 실무 시뮬레이터</h2>
-                <p style="color: #444; font-size: 13.5px; line-height: 1.6;">법정 등기신청수수료 정밀 분기 및 설립 후 5년 내 과밀억제권역 중과세 엔진입니다.</p>
-                <ul style="padding-left: 18px; font-size: 12.5px; color: #555; line-height: 1.7; margin-top: 10px;">
-                    <li><strong>수수료 매칭 구조:</strong> 설립 및 관외 본점이전은 30,000원이 부과되며 증자, 관내이전, 임원·상호·목적 등 일반 변경등기는 7,000원이 가산됩니다.</li>
-                    <li><strong>5년 내 과밀 증자:</strong> 과밀권역 법인이 설립 5년 이내에 자본금을 증자하는 경우 수수료(7,000원)와 별개로 등록세율은 1.2% 중과세율이 적용됩니다.</li>
-                </ul>
             </div>
-            <div style="font-size: 13px; color: var(--text-muted);">현재두법무사사무소 | 슬라이드 3 / 4</div>
-        </div>
-        <div class="right-panel">
+
             <div class="calculator-card">
-                <h2>법인 설립 · 변경 · 증자 공과금 계산기</h2>
-                
                 <div class="form-group">
                     <label>신청할 등기 유형 선택</label>
                     <select id="登記-type" onchange="toggleFormFields()">
@@ -307,9 +448,9 @@
                 <div class="form-group hidden" id="area-group">
                     <label id="area-label">지역 권역 요건 선택</label>
                     <select id="area-condition" onchange="calculateTotalTax()">
-                        <option value="normal">비과밀억제권역 (일반지역 설립 / 증자 / 일반 관외이전)</option>
-                        <option value="overcrowded">과밀억제권역 (수도권 과밀지역 설립 / 증자 / 과밀간 관외이전)</option>
-                        <option value="heavy-in">★ 비과밀지역 → 과밀억제권역으로의 본점 진입 전입 (3배 중과)</option>
+                        <option value="normal">비과밀억제권역 (일반지역 설립/증자/일반 관외이전)</option>
+                        <option value="overcrowded">과밀억제권역 (수도권 과밀 설립/증자/과밀간 이전)</option>
+                        <option value="heavy-in">★ 비과밀지역 → 과밀억제권역으로 본점 전입 (3배 중과)</option>
                     </select>
                 </div>
 
@@ -323,12 +464,12 @@
 
                 <!-- 자본금 입력 -->
                 <div class="form-group price-container hidden" id="capital-group">
-                    <label id="capital-title" style="color: var(--gold-dark); font-weight: bold;">법인 자본금 액수 기준 (원)</label>
+                    <label id="capital-title">법인 자본금 액수 기준 (원)</label>
                     <input type="text" id="corp-capital" value="28,000,000" onkeyup="formatAndCalculateChange(this)">
                     <div class="quick-buttons">
-                        <button class="quick-btn" onclick="addCorpCapital(10000000)">+ 1천만</button>
-                        <button class="quick-btn" onclick="addCorpCapital(50000000)">+ 5천만</button>
-                        <button class="quick-btn" onclick="addCorpCapital(100000000)">+ 1억</button>
+                        <button class="quick-btn" onclick="addCorpCapital(10000000)">+1천만</button>
+                        <button class="quick-btn" onclick="addCorpCapital(50000000)">+5천만</button>
+                        <button class="quick-btn" onclick="addCorpCapital(100000000)">+1억</button>
                         <button class="quick-btn" onclick="resetCorpCapital()" style="background-color: #f8d7da; color: #721c24;">리셋</button>
                     </div>
                 </div>
@@ -342,26 +483,26 @@
                 </div>
 
                 <div class="result-container">
-                    <div class="result-row"><span>적용 세액 구조 유형</span><span id="tax-type-view" style="font-weight: bold; color: var(--gold-dark);">-</span></div>
+                    <div class="result-row"><span>적용 세액 구조</span><span id="tax-type-view" style="font-weight: bold; color: var(--gold-dark); text-align: right;">-</span></div>
                     <div class="result-row">
                         <span>등록면허세 (본세)</span>
                         <div style="text-align: right;">
-                            <span id="reg-tax-view">0 원</span>
+                            <span id="reg-tax-view" style="font-weight: bold;">0 원</span>
                             <span id="limit-notice" class="notice-badge" style="display:none;">(최저한세 규정 법정 최소액 적용됨)</span>
                         </div>
                     </div>
-                    <div class="result-row"><span>지방교육세 (본세의 20%)</span><span id="edu-tax-view">0 원</span></div>
+                    <div class="result-row"><span>지방교육세 (20%)</span><span id="edu-tax-view" style="font-weight: bold;">0 원</span></div>
                     <div class="result-row"><span>등기신청수수료</span><span id="filing-fee-view" style="font-weight:bold; color:var(--accent-blue);">0 원</span></div>
-                    <div class="result-row"><span>공증수수료 (정액 의사록 검인료)</span><span id="notary-fee-view">0 원</span></div>
+                    <div class="result-row"><span>공증수수료</span><span id="notary-fee-view" style="font-weight: bold;">0 원</span></div>
                     <div class="result-row total"><span>실제 총 공과금 합계</span><span id="total-tax-view">0 원</span></div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 4번 슬라이드: 실무 가이드 브리핑 -->
-    <div class="slide content-box">
-        <div class="section-title">등기신청수수료 및 5년 내 중과 실무 핵심 포인트</div>
+    <!-- 4번 섹션: 핵심 정보 브리핑 카드 -->
+    <div class="section">
+        <h2 class="section-title">실무 핵심 포인트</h2>
         <div class="grid-2">
             <div class="card">
                 <h3>대법원 등기신청수수료 산정 원칙</h3>
@@ -371,52 +512,25 @@
                     <li><strong>30,000원 고정 대상:</strong> 신규 원시 법인을 설립하거나 등기소 관할을 완전히 달리하여 시스템 이관이 필요한 관외 본점이전 신청을 진행할 때 부과됩니다.</li>
                 </ul>
             </div>
-            <div class="card" style="border: 1px solid var(--gold-primary); background-color: #fdfbf7;">
+            <div class="card highlight">
                 <h3>5년 이내 과밀 중과세 리스크</h3>
                 <p>수수료 부담 유무와는 별개로, 세법에 따른 권역 규제는 대단히 엄격하게 작동합니다.</p>
                 <ul>
-                    <li><strong>3배 중과 규정:</strong> 수도권 과밀억제권역 내에 위치한 법인이 설립 후 **5년 미만**인 상태에서 유상증자를 실시할 경우, 증자 자본금의 **1.2% 정률 본세**가 전액 부과됩니다.</li>
-                    <li><strong>5년 경과 특례:</strong> 설립일로부터 만 5년이 완전히 지나면 과밀지역 내 증자라 하더라도 중과세 대상에서 전면 제외되어 일반 세율인 **0.4%**로 복귀합니다.</li>
+                    <li><strong>3배 중과 규정:</strong> 수도권 과밀억제권역 내에 위치한 법인이 설립 후 5년 미만인 상태에서 유상증자를 실시할 경우, 증자 자본금의 1.2% 정률 본세가 전액 부과됩니다.</li>
+                    <li><strong>5년 경과 특례:</strong> 설립일로부터 만 5년이 완전히 지나면 과밀지역 내 증자라 하더라도 중과세 대상에서 전면 제외되어 일반 세율인 0.4%로 복귀합니다.</li>
                 </ul>
             </div>
         </div>
-        <div class="slide-footer"><span>현재두법무사사무소</span><span>슬라이드 4 / 4</span></div>
+    </div>
+
+    <!-- 고정 푸터 텍스트 전환 -->
+    <div class="office-footer">
+        <span>현재두법무사사무소</span>
     </div>
 </div>
 
 <script>
-    // --- 슬라이드 넘기기 컨트롤러 엔진 ---
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.slide');
-
-    function showSlide(index) {
-        if (index >= slides.length) currentSlide = 0;
-        else if (index < 0) currentSlide = slides.length - 1;
-        else currentSlide = index;
-
-        slides.forEach((slide, idx) => {
-            if (idx === currentSlide) {
-                slide.classList.add('active');
-            } else {
-                slide.classList.remove('active');
-            }
-        });
-    }
-
-    function changeSlide(direction) {
-        showSlide(currentSlide + direction);
-    }
-
-    document.addEventListener('keydown', function(event) {
-        if (event.key === 'ArrowRight' || event.key === 'Space') {
-            if(document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'SELECT') changeSlide(1);
-        } else if (event.key === 'ArrowLeft') {
-            if(document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'SELECT') changeSlide(-1);
-        }
-    });
-
-    // --- 계산기 구동 및 폼 제어 자바스크립트 엔진 ---
-    function numToComma(num) { return num.toString().replace(/\B(?=(\d3)+(?!\d))/g, ","); }
+    function numToComma(num) { return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
     function commaToNum(str) { return parseInt(str.replace(/,/g, '')) || 0; }
 
     function formatAndCalculateChange(input) {
@@ -430,11 +544,6 @@
         let current = commaToNum(input.value);
         input.value = numToComma(current + amount);
         calculateTotalTax();
-    }
-
-    // 자본금 단위 퀵 가산 버튼 공유용 분기 함수
-    function addCapital(amount) {
-        addCorpCapital(amount);
     }
 
     function resetCorpCapital() {
