@@ -1,727 +1,1829 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>부동산 취득세 종합 안내 시스템</title>
-    <style>
-        :root {
-            --gold-primary: #a38446;
-            --gold-dark: #735b2f;
-            --bg-light: #f9f9fb;
-            --card-bg: #ffffff;
-            --text-dark: #222222;
-            --text-muted: #666666;
-            --accent-blue: #0056b3;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        body, html {
-            margin: 0; padding: 0;
-            background-color: #eef0f3;
-            font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
-            color: var(--text-dark);
-            -webkit-text-size-adjust: none;
-        }
+<title>현재두 법무사 사무소 | 인천 상속등기·법인등기·취득세 계산기</title>
 
-        /* 전체 반응형 래퍼 */
-        .container {
-            width: 100%;
-            max-width: 850px; /* PC 접속 시에도 안정적인 가독성 종횡비 유지 */
-            margin: 0 auto;
-            padding: 15px;
-            box-sizing: border-box;
-        }
+<meta name="description"
+content="인천 현재두 법무사 사무소. 상속등기, 상속포기, 한정승인, 법인설립, 법인변경등기, 부동산등기, 증여등기 및 취득세·법인등기 비용 계산기">
 
-        /* 각 영역 콘텐츠 박스 공통 */
-        .section {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            padding: 25px 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            box-sizing: border-box;
-        }
+<meta name="keywords"
+content="인천법무사, 인천상속등기, 인천법인등기, 상속포기, 한정승인, 법인설립, 대표이사변경, 본점이전, 취득세계산기, 법인등기비용계산기">
 
-        /* 타이틀 메인 커버 */
-        .cover-section {
-            background: linear-gradient(135deg, #f5f1e6 0%, #e8e1d0 100%);
-            text-align: center;
-            border: 2px solid var(--gold-primary);
-        }
+<style>
 
-        .main-title {
-            font-size: 26px;
-            color: var(--gold-dark);
-            margin: 0 0 10px 0;
-            font-weight: bold;
-            line-height: 1.3;
-        }
+*{
+    box-sizing:border-box;
+}
 
-        .main-subtitle {
-            font-size: 14px;
-            color: #555;
-            margin: 0;
-            line-height: 1.5;
-        }
+html{
+    scroll-behavior:smooth;
+}
 
-        .section-title {
-            font-size: 20px;
-            color: var(--gold-dark);
-            border-bottom: 2px solid var(--gold-primary);
-            padding-bottom: 8px;
-            margin-top: 0;
-            margin-bottom: 15px;
-            font-weight: bold;
-        }
+body{
+    margin:0;
+    font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Noto Sans KR",
+    "Malgun Gothic",
+    sans-serif;
+    color:#222;
+    background:#f6f7f9;
+    line-height:1.7;
+}
 
-        .section-desc {
-            color: var(--text-muted);
-            font-size: 13.5px;
-            margin-top: 0;
-            margin-bottom: 15px;
-            line-height: 1.6;
-        }
+a{
+    text-decoration:none;
+    color:inherit;
+}
 
-        /* 요약표 반응형 터치 스크롤 처리 */
-        .table-responsive {
-            width: 100%;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            margin-bottom: 5px;
-            border-radius: 8px;
-            border: 1px solid #e1e4e6;
-        }
+.container{
+    width:100%;
+    max-width:1180px;
+    margin:auto;
+    padding:0 22px;
+}
 
-        table {
-            width: 100%;
-            min-width: 650px; /* 모바일 가로 좁아짐 시 글자 찌그러짐 방지 */
-            border-collapse: collapse;
-            background-color: #fff;
-        }
+/* HEADER */
 
-        th, td {
-            padding: 12px 10px;
-            border: 1px solid #e1e4e6;
-            text-align: center;
-            font-size: 13px;
-            line-height: 1.4;
-        }
+.header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:rgba(255,255,255,.97);
+    border-bottom:1px solid #e8e8e8;
+    backdrop-filter:blur(10px);
+}
 
-        th {
-            background-color: #f2ece0;
-            color: var(--gold-dark);
-            font-weight: bold;
-        }
+.header-inner{
+    height:72px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
 
-        /* 시뮬레이터 카드 정렬 */
-        .simulator-box {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
+.logo{
+    font-size:20px;
+    font-weight:900;
+    letter-spacing:-1px;
+}
 
-        .info-panel {
-            background-color: #f2ece0;
-            padding: 20px;
-            border-radius: 10px;
-            box-sizing: border-box;
-        }
+.logo small{
+    display:block;
+    font-size:11px;
+    color:#777;
+    font-weight:500;
+}
 
-        .info-panel h2 {
-            font-size: 18px;
-            color: var(--gold-dark);
-            margin-top: 0;
-            margin-bottom: 10px;
-        }
+.nav{
+    display:flex;
+    gap:25px;
+    font-size:14px;
+    font-weight:700;
+}
 
-        .info-panel p {
-            font-size: 13px;
-            line-height: 1.6;
-            margin: 0 0 12px 0;
-            color: #333;
-        }
+.nav a:hover{
+    color:#2457a6;
+}
 
-        .info-panel ul {
-            padding-left: 20px;
-            font-size: 12.5px;
-            color: #444;
-            line-height: 1.7;
-            margin: 0;
-        }
+/* HERO */
 
-        .calculator-card {
-            width: 100%;
-            box-sizing: border-box;
-        }
+.hero{
+    background:
+    linear-gradient(135deg,#f2f5f9,#ffffff);
+    padding:100px 0 90px;
+}
 
-        .calculator-card h2 {
-            font-size: 18px;
-            margin: 0 0 15px 0;
-            text-align: center;
-            font-weight: bold;
-            color: var(--gold-dark);
-        }
+.hero-label{
+    color:#2457a6;
+    font-size:13px;
+    font-weight:800;
+    letter-spacing:2px;
+    margin-bottom:18px;
+}
 
-        .form-group {
-            margin-bottom: 12px;
-        }
+.hero h1{
+    margin:0;
+    font-size:clamp(40px,6vw,70px);
+    line-height:1.2;
+    letter-spacing:-4px;
+    font-weight:900;
+}
 
-        .form-group.row {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
+.hero h1 span{
+    color:#2457a6;
+}
 
-        .form-group label {
-            display: block;
-            font-size: 12.5px;
-            font-weight: bold;
-            margin-bottom: 6px;
-            color: #444;
-        }
+.hero p{
+    max-width:720px;
+    margin:25px 0 32px;
+    font-size:18px;
+    color:#666;
+}
 
-        select, input[type="text"] {
-            width: 100%;
-            padding: 11px; /* 모바일 터치 영역 최적화 확장 */
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-size: 14px;
-            box-sizing: border-box;
-            background-color: #fff;
-            appearance: none;
-            -webkit-appearance: none;
-        }
+.buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+}
 
-        select {
-            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23735b2f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
-            background-repeat: no-repeat;
-            background-position: right 12px center;
-            background-size: 16px;
-            padding-right: 35px;
-        }
+.btn{
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+    min-height:50px;
+    padding:0 24px;
+    border-radius:6px;
+    font-weight:800;
+}
 
-        .price-container {
-            background-color: #fffdf4;
-            border: 1.5px solid var(--gold-primary);
-            border-radius: 8px;
-            padding: 12px;
-        }
+.btn-primary{
+    background:#2457a6;
+    color:#fff;
+}
 
-        .quick-buttons {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 6px;
-            margin-top: 8px;
-        }
+.btn-dark{
+    background:#222;
+    color:#fff;
+}
 
-        .quick-btn {
-            background-color: #eaf0f6;
-            border: none;
-            padding: 10px 2px;
-            border-radius: 4px;
-            font-size: 12px;
-            cursor: pointer;
-            font-weight: bold;
-            color: #333;
-            text-align: center;
-        }
+.btn-white{
+    background:#fff;
+    color:#2457a6;
+}
 
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background-color: #e8f4ff;
-            padding: 12px;
-            border-radius: 6px;
-            border: 1px solid #b8daff;
-        }
+.btn-border{
+    background:#fff;
+    border:1px solid #ddd;
+}
 
-        .checkbox-group input {
-            width: 18px; height: 18px;
-            margin: 0;
-            flex-shrink: 0;
-            cursor: pointer;
-        }
+/* QUICK */
 
-        .checkbox-group label {
-            margin-bottom: 0;
-            color: #004085;
-            font-size: 13px;
-            line-height: 1.4;
-            cursor: pointer;
-        }
+.quick{
+    margin-top:-35px;
+    position:relative;
+}
 
-        .result-container {
-            margin-top: 15px;
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            padding: 15px;
-            border: 1px solid #e1e4e6;
-        }
+.quick-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    background:#fff;
+    border:1px solid #e3e3e3;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 10px 35px rgba(0,0,0,.07);
+}
 
-        .result-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-            font-size: 13.5px;
-            color: #555;
-        }
+.quick-item{
+    padding:27px 15px;
+    text-align:center;
+    border-right:1px solid #eee;
+}
 
-        .result-row.total {
-            margin-top: 10px;
-            padding-top: 10px;
-            border-top: 1.5px dashed #ccc;
-            font-size: 16px;
-            font-weight: bold;
-            color: #d9534f;
-        }
+.quick-item:last-child{
+    border-right:0;
+}
 
-        /* 브리핑 안내 그리드 시스템 */
-        .grid-2 {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
+.quick-item:hover{
+    background:#f7f9fc;
+}
 
-        .card {
-            background-color: var(--card-bg);
-            border: 1px solid #e1e4e6;
-            border-radius: 12px;
-            padding: 20px;
-            box-sizing: border-box;
-        }
+.quick-item strong{
+    color:#2457a6;
+    font-size:12px;
+}
 
-        .card.highlight {
-            border: 1px solid var(--gold-primary);
-            background-color: #fdfbf7;
-        }
+.quick-item h3{
+    margin:5px 0;
+    font-size:17px;
+}
 
-        .card h3 {
-            color: var(--gold-dark);
-            margin-top: 0;
-            font-size: 16px;
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
+.quick-item p{
+    margin:0;
+    font-size:12px;
+    color:#888;
+}
 
-        .card p, .card li {
-            font-size: 13.5px;
-            line-height: 1.6;
-            color: #444;
-        }
-        
-        .card p { margin-top: 0; margin-bottom: 12px; }
-        .card ul { padding-left: 20px; margin: 0; }
-        .card li { margin-bottom: 6px; }
+/* SECTION */
 
-        .formula-box {
-            background-color: #f7f3eb;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 15px 0;
-            border-left: 4px solid var(--gold-primary);
-        }
+.section{
+    padding:90px 0;
+}
 
-        /* 하단 푸터 */
-        .office-footer {
-            text-align: center;
-            padding: 20px 0;
-            font-size: 12.5px;
-            color: var(--text-muted);
-            border-top: 1px solid #e1e4e6;
-            margin-top: 10px;
-        }
+.section.gray{
+    background:#f0f2f5;
+}
 
-        .hidden { display: none !important; }
+.label{
+    color:#2457a6;
+    font-size:12px;
+    font-weight:900;
+    letter-spacing:1.5px;
+}
 
-        /*태블릿 및 태블릿 가로 / PC 웹 뷰 환경 미디어 쿼리 */
-        @media (min-width: 600px) {
-            .form-group.row {
-                flex-direction: row;
-            }
-            .form-group.row > div {
-                flex: 1;
-            }
-        }
+.title{
+    margin:7px 0 10px;
+    font-size:36px;
+    line-height:1.3;
+    letter-spacing:-2px;
+    font-weight:900;
+}
 
-        @media (min-width: 768px) {
-            .main-title { font-size: 34px; }
-            .section { padding: 35px 40px; }
-            .simulator-box { flex-direction: row; }
-            .info-panel { width: 40%; flex-shrink: 0; display: flex; flex-direction: column; justify-content: space-between; }
-            .calculator-card { flex-grow: 1; }
-            .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-            .grid-span-2 { grid-column: span 2; }
-        }
-    </style>
+.desc{
+    color:#777;
+    margin:0 0 40px;
+}
+
+/* INHERITANCE */
+
+.inheritance-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:40px;
+    align-items:center;
+}
+
+.inheritance h2{
+    font-size:42px;
+    line-height:1.3;
+    letter-spacing:-3px;
+    margin:10px 0 20px;
+}
+
+.inheritance p{
+    color:#666;
+}
+
+.problem-list{
+    background:#fff;
+    border:1px solid #e4e4e4;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.problem{
+    padding:19px 22px;
+    border-bottom:1px solid #eee;
+    display:flex;
+    justify-content:space-between;
+}
+
+.problem:last-child{
+    border-bottom:0;
+}
+
+.problem span{
+    color:#2457a6;
+    font-weight:900;
+}
+
+/* SERVICES */
+
+.services{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.service{
+    background:#fff;
+    border:1px solid #e4e4e4;
+    border-radius:8px;
+    padding:30px;
+    transition:.2s;
+}
+
+.service:hover{
+    transform:translateY(-3px);
+    border-color:#2457a6;
+}
+
+.service-number{
+    color:#2457a6;
+    font-weight:900;
+}
+
+.service h3{
+    margin:10px 0;
+    font-size:20px;
+}
+
+.service p{
+    color:#777;
+    font-size:14px;
+    margin:0;
+}
+
+/* CALCULATOR */
+
+.calculator-section{
+    background:#f0f2f5;
+}
+
+.calculator{
+    background:#fff;
+    border-radius:12px;
+    border:1px solid #ddd;
+    overflow:hidden;
+}
+
+.calc-tabs{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+}
+
+.calc-tab{
+    padding:20px;
+    border:0;
+    background:#e9edf2;
+    font-size:16px;
+    font-weight:900;
+    cursor:pointer;
+}
+
+.calc-tab.active{
+    background:#2457a6;
+    color:#fff;
+}
+
+.calc-body{
+    padding:35px;
+}
+
+.calc-description{
+    background:#f6f8fb;
+    padding:18px;
+    border-radius:8px;
+    margin-bottom:25px;
+    color:#555;
+    font-size:14px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.form-group{
+    margin-bottom:15px;
+}
+
+.form-group.full{
+    grid-column:1/-1;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:6px;
+    font-size:13px;
+    font-weight:800;
+}
+
+select,
+input{
+    width:100%;
+    height:48px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    padding:0 12px;
+    font-size:14px;
+    background:#fff;
+}
+
+.result{
+    margin-top:20px;
+    padding:22px;
+    background:#f8f9fa;
+    border:1px solid #ddd;
+    border-radius:8px;
+}
+
+.result-row{
+    display:flex;
+    justify-content:space-between;
+    padding:7px 0;
+    font-size:14px;
+}
+
+.result-total{
+    margin-top:10px;
+    padding-top:15px;
+    border-top:2px solid #ddd;
+    font-size:20px;
+    font-weight:900;
+    color:#2457a6;
+}
+
+.note{
+    margin-top:15px;
+    font-size:12px;
+    color:#777;
+}
+
+/* CORPORATE */
+
+.corp-box{
+    background:#fff;
+    border-radius:10px;
+    border:1px solid #ddd;
+    overflow:hidden;
+}
+
+.corp-item{
+    display:flex;
+    justify-content:space-between;
+    padding:22px;
+    border-bottom:1px solid #eee;
+}
+
+.corp-item:last-child{
+    border-bottom:0;
+}
+
+.corp-item strong{
+    font-size:16px;
+}
+
+.corp-item span{
+    color:#777;
+    font-size:14px;
+}
+
+/* BLOG */
+
+.blog-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.blog-card{
+    background:#fff;
+    border:1px solid #ddd;
+    border-radius:10px;
+    padding:30px;
+}
+
+.blog-card h3{
+    margin-top:0;
+}
+
+.blog-card p{
+    color:#777;
+    font-size:14px;
+}
+
+.blog-link{
+    color:#2457a6;
+    font-weight:900;
+}
+
+/* CONTACT */
+
+.contact{
+    background:#2457a6;
+    color:#fff;
+    text-align:center;
+}
+
+.contact .title{
+    color:#fff;
+}
+
+.contact p{
+    color:rgba(255,255,255,.8);
+}
+
+.phone{
+    font-size:38px;
+    font-weight:900;
+    margin:20px 0;
+}
+
+/* FOOTER */
+
+.footer{
+    background:#171717;
+    color:#999;
+    padding:40px 0;
+    font-size:13px;
+}
+
+.footer strong{
+    color:#fff;
+    font-size:16px;
+}
+
+.footer div{
+    margin:5px 0;
+}
+
+/* MOBILE CALL */
+
+.mobile-call{
+    display:none;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+    .container{
+        padding:0 18px;
+    }
+
+    .header-inner{
+        height:64px;
+    }
+
+    .nav{
+        display:none;
+    }
+
+    .hero{
+        padding:70px 0 80px;
+    }
+
+    .hero h1{
+        font-size:42px;
+        letter-spacing:-3px;
+    }
+
+    .hero p{
+        font-size:16px;
+    }
+
+    .quick{
+        margin-top:0;
+        padding-top:15px;
+    }
+
+    .quick-grid{
+        grid-template-columns:1fr 1fr;
+        box-shadow:none;
+    }
+
+    .quick-item:nth-child(1),
+    .quick-item:nth-child(2){
+        border-bottom:1px solid #eee;
+    }
+
+    .quick-item:nth-child(2){
+        border-right:0;
+    }
+
+    .section{
+        padding:70px 0;
+    }
+
+    .title{
+        font-size:30px;
+    }
+
+    .inheritance-grid{
+        grid-template-columns:1fr;
+    }
+
+    .inheritance h2{
+        font-size:33px;
+    }
+
+    .services{
+        grid-template-columns:1fr;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-group.full{
+        grid-column:auto;
+    }
+
+    .calc-body{
+        padding:22px;
+    }
+
+    .blog-grid{
+        grid-template-columns:1fr;
+    }
+
+    .corp-item{
+        display:block;
+    }
+
+    .corp-item span{
+        display:block;
+        margin-top:5px;
+    }
+
+    .phone{
+        font-size:30px;
+    }
+
+    .mobile-call{
+        display:block;
+        position:fixed;
+        left:0;
+        right:0;
+        bottom:0;
+        z-index:2000;
+        background:#2457a6;
+        color:#fff;
+        text-align:center;
+        padding:14px;
+        font-weight:900;
+    }
+
+    body{
+        padding-bottom:55px;
+    }
+}
+
+.hidden{
+    display:none !important;
+}
+
+</style>
 </head>
+
 <body>
+
+<!-- HEADER -->
+
+<header class="header">
+
+<div class="container header-inner">
+
+<a href="#" class="logo">
+현재두 법무사 사무소
+<small>인천 법무사</small>
+</a>
+
+<nav class="nav">
+<a href="#inheritance">상속</a>
+<a href="#services">주요업무</a>
+<a href="#calculator">계산기</a>
+<a href="#corporate">법인등기</a>
+<a href="#blog">법률정보</a>
+<a href="#contact">상담</a>
+</nav>
+
+</div>
+
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero">
 
 <div class="container">
 
-    <!-- 1. 표지 섹션 -->
-    <div class="section cover-section">
-        <h1 class="main-title">부동산 취득세 핵심 가이드</h1>
-        <p class="main-subtitle">매매 · 상속 · 증여 · 이혼 원인별 세액 연산 및 실무 총괄 브리핑</p>
-    </div>
-
-    <!-- 2. 요약 비교표 섹션 -->
-    <div class="section">
-        <h2 class="section-title">취득 원인별 표준 세율 요약 비교</h2>
-        <p class="section-desc">각 원인별 법정 표준세율 및 부가세목 구조 요약표입니다. (기본 비중과 기준이며 좌우로 스크롤 가능합니다.)</p>
-        
-        <div class="table-responsive">
-            <table>
-                <thead>
-                    <tr>
-                        <th>취득 원인 종류</th>
-                        <th>기본 취득세율</th>
-                        <th>지방교육세율</th>
-                        <th>농어촌특별세율</th>
-                        <th>총합계 세율</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>매매 (유상취득)</strong></td>
-                        <td>1.0% ~ 3.0% (주택기준)</td>
-                        <td>취득세액의 10%</td>
-                        <td>0.2% (85㎡ 이하 면제)</td>
-                        <td>가액·주택수별 상이</td>
-                    </tr>
-                    <tr>
-                        <td><strong>상속 (일반 표준)</strong></td>
-                        <td>2.3%</td>
-                        <td>0.2%</td>
-                        <td>0.3% (85㎡ 이하 면제)</td>
-                        <td><strong>2.8%</strong></td>
-                    </tr>
-                    <tr>
-                        <td><strong>상속 (무주택 특례)</strong></td>
-                        <td><strong>0.3% (2% 감면)</strong></td>
-                        <td>0.06%</td>
-                        <td>면제 (85㎡ 이하 면제)</td>
-                        <td><strong>0.36%</strong></td>
-                    </tr>
-                    <tr>
-                        <td><strong>증여 (일반 용도)</strong></td>
-                        <td>3.5%</td>
-                        <td>0.3%</td>
-                        <td>0.2% (85㎡ 이하 면제)</td>
-                        <td><strong>4.0%</strong></td>
-                    </tr>
-                    <tr>
-                        <td><strong>이혼 (재산분할)</strong></td>
-                        <td>1.5%</td>
-                        <td>0.3%</td>
-                        <td>0.2% (85㎡ 이하 면제)</td>
-                        <td><strong>2.0%</strong></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <!-- 3. 계산기 시뮬레이터 섹션 -->
-    <div class="section">
-        <div class="simulator-box">
-            <div class="info-panel">
-                <div>
-                    <h2>통합 취득세 계산 시스템</h2>
-                    <p>본 시뮬레이터는 규제지역(조정대상지역) 여부 및 보유 주택 수에 따른 세액 구조를 즉시 분석합니다.</p>
-                    <ul>
-                        <li><strong>유상거래:</strong> 조정/비조정지역 및 주택수별 중과세 반영</li>
-                        <li><strong>증여취득:</strong> 조정지역 내 3억 이상 주택 증여 시 중과세(12%) 적용</li>
-                        <li><strong>면적제한:</strong> 전용면적 85㎡ 이하 농특세 비과세 원칙</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="calculator-card">
-                <h2>취득세 실시간 연산 (규제지역 반영)</h2>
-                
-                <div class="form-group row">
-                    <div>
-                        <label>취득 원인 종류</label>
-                        <select id="reason" onchange="toggleOptions()">
-                            <option value="sale">매매 / 유상취득</option>
-                            <option value="inheritance">상속</option>
-                            <option value="gift">증여</option>
-                            <option value="divorce">이혼 / 재산분할</option>
-                        </select>
-                    </div>
-                    <div id="region-option">
-                        <label>규제지역 여부</label>
-                        <select id="region" onchange="calculateTax()">
-                            <option value="non-regulated">비조정대상지역</option>
-                            <option value="regulated">조정대상지역</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <div id="house-count-option">
-                        <label>취득 후 주택 수 (세대 기준)</label>
-                        <select id="house-count" onchange="calculateTax()">
-                            <option value="1">1주택</option>
-                            <option value="2">2주택</option>
-                            <option value="3">3주택</option>
-                            <option value="4">4주택 이상</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label>주거 전용 면적 범위</label>
-                        <select id="area" onchange="calculateTax()">
-                            <option value="under">85㎡ 이하 (국민주택규모)</option>
-                            <option value="over">85㎡ 초과</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group price-container">
-                    <label style="color: var(--gold-dark); font-weight: bold;">취득 가액 또는 시가표준액 (원)</label>
-                    <input type="text" id="price" value="600,000,000" onkeyup="formatAndCalculate(this)">
-                    <div class="quick-buttons">
-                        <button class="quick-btn" onclick="addPrice(100000000)">+ 1억</button>
-                        <button class="quick-btn" onclick="addPrice(500000000)">+ 5억</button>
-                        <button class="quick-btn" onclick="addPrice(1000000000)">+ 10억</button>
-                        <button class="quick-btn" onclick="resetPrice()" style="background-color: #f8d7da; color: #721c24;">리셋</button>
-                    </div>
-                </div>
-
-                <div class="form-group hidden" id="inheritance-option">
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="homeless" onchange="calculateTax()">
-                        <label for="homeless"><strong>상속인 세대 기준 무주택자 (1가구 1주택 2% 감면 특례)</strong></label>
-                    </div>
-                </div>
-
-                <div class="result-container">
-                    <div class="result-row"><span>산출 취득세율</span><span id="rate-view" style="font-weight: bold; color: var(--gold-dark);">1.00%</span></div>
-                    <div class="result-row"><span>취득세액</span><span id="tax-view">6,000,000 원</span></div>
-                    <div class="result-row"><span>지방교육세액</span><span id="edu-view">600,000 원</span></div>
-                    <div class="result-row"><span>농어촌특별세액</span><span id="rural-view">0 원 (면제)</span></div>
-                    <div class="result-row total"><span>예상 총 세액 합계</span><span id="total-view">6,600,000 원</span></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 4. 상세 안내 브리핑 (상속 및 감면) -->
-    <div class="section">
-        <h2 class="section-title">상속 취득세 및 무주택 1가구 1주택 감면 특례</h2>
-        <div class="grid-2">
-            <div class="card">
-                <h3>일반 상속세율 구조</h3>
-                <p>사망으로 인하여 소유권이 이전되는 원인으로, 세법이 정한 표준 법정세율 체계가 적용됩니다.</p>
-                <ul>
-                    <li>취득세: 기본 2.3% 부과</li>
-                    <li>지방교육세: 취득가액의 0.2% 매칭</li>
-                    <li>농어촌특별세: 취득가액의 0.3% 부과</li>
-                </ul>
-            </div>
-            <div class="card highlight">
-                <h3>1가구 1주택 특례 (2% 감면)</h3>
-                <p>상속개시일 현재 상속인 세대 구성원 전원이 주택을 소유하지 않은 무주택 세대인 경우 세제 감면이 주어집니다.</p>
-                <ul>
-                    <li><strong>취득세 감면율:</strong> 표준세율에서 2.0%를 차감한 <strong>0.3% 특례세율</strong>만 적용</li>
-                    <li><strong>부가세 인하 효과:</strong> 취득세 본세 감소로 지방교육세와 농특세 부담이 연쇄 감소합니다.</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <!-- 5. 상세 안내 브리핑 (증여 및 이혼) -->
-    <div class="section">
-        <h2 class="section-title">증여 중과세 요건 및 이혼 재산분할 특례</h2>
-        <div class="grid-2">
-            <div class="card">
-                <h3>증여 취득세와 조정지역 중과</h3>
-                <p>무상으로 재산권을 이전받는 거래 행위로, 증여자의 주택 수와 지역에 따라 중과세가 발동할 수 있습니다.</p>
-                <ul>
-                    <li><strong>일반 증여:</strong> 기본 표준세율 3.5% 적용</li>
-                    <li><strong>조정대상지역 중과:</strong> 조정지역 내 공시가격 3억 원 이상 주택을 다주택자로부터 증여받는 경우 <strong>최고 12%</strong>까지 세율이 상향될 수 있습니다.</li>
-                </ul>
-            </div>
-            <div class="card">
-                <h3>이혼 재산분할 특례 (1.5%)</h3>
-                <p>혼인 중 공동으로 형성한 재산을 이혼 시 분할하는 소유권 이전 형태입니다.</p>
-                <ul>
-                    <li><strong>형식적 취득 간주:</strong> 실질적 재산 증식이 아닌 본인 몫의 환원으로 평가합니다.</li>
-                    <li><strong>세율 산식:</strong> 표준세율(2.3%)에서 중과기준세율(2.0%)을 뺀 특례 결과치에 등록 면허 성격이 가산되어 <strong>최종 1.5%의 취득세율</strong>만 부과됩니다.</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <!-- 6. 산식 안내 섹션 -->
-    <div class="section">
-        <h2 class="section-title">주택 유상취득 가액 비례세율 산식 구조</h2>
-        <div class="grid-2">
-            <div class="card grid-span-2">
-                <h3>6억 초과 ~ 9억 이하 비례 연산 매칭 구간 (비조정 1주택 기준)</h3>
-                <p>매매를 원인으로 주택을 취득할 때 세부 문턱 효과(세율이 금액에 따라 갑자기 튀는 현상)를 방지하기 위해 비례 스케일 산식을 가동합니다.</p>
-                <div class="formula-box">
-                    <strong style="color: var(--gold-dark); font-size: 16px;">세율 산출 공식:</strong><br>
-                    <span style="font-size: 18px; font-weight: bold; letter-spacing: 0.5px; color: var(--text-dark); display: inline-block; margin-top: 5px;">세율(%) = ( 취득가액 × 2 / 3억원 ) - 3</span>
-                    <br><span style="font-size: 12px; color: #777; display: inline-block; margin-top: 5px;">* 계산 결과 소수점 이하 다섯째 자리에서 반올림 처리하여 적용</span>
-                </div>
-                <ul>
-                    <li>가액 6억 원 이하 정착점: **1.0% 고정 세율**</li>
-                    <li>가액 7.5억 원 중간 도달점: 정확히 **2.0% 세율** 산출</li>
-                    <li>가액 9억 원 초과 한계점: **3.0% 최고세율** 고정</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <!-- 7. 기한 가이드 섹션 -->
-    <div class="section">
-        <h2 class="section-title">원인별 취득세 신고 · 납부 기한 가이드</h2>
-        <div class="grid-2">
-            <div class="card grid-span-2">
-                <p style="font-size: 14.5px; color: #333; margin-top: 0;">각 원인에 따라 세법상 지정된 법정 자진 신고 및 납부 기한이 상이하므로 시기를 놓치지 않도록 주의해야 합니다.</p>
-                <ul style="line-height: 1.9; font-size: 14px; color: #444;">
-                    <li>📆 <strong>매매 / 유상취득 거래:</strong> 잔금지급일(또는 등기접수일 중 빠른 날)로부터 <strong>60일 이내</strong></li>
-                    <li>📆 <strong>증여 / 무상양도 거래:</strong> 증여계약서 작성일이 속하는 달의 말일부터 <strong>3개월 이내</strong></li>
-                    <li>📆 <strong>상속 원인 자산 취득:</strong> 상속개시일(사망일)이 속하는 달의 말일부터 <strong>6개월 이내</strong> (외국 거주 상속인 존재 시 9개월)</li>
-                    <li>⚠️ <strong>미이행 시 패널티 가산세:</strong> 기한 도과 시 신고불성실가산세(기본 20%) 및 납부지연가산세(일일 단위 일할 계산)가 추가 합산되므로 엄수해야 합니다.</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <!-- 하단 고정 푸터 정보 -->
-    <div class="office-footer">
-        <span>현재두법무사사무소</span>
-    </div>
+<div class="hero-label">
+INCHON JUDICIAL SCRIVENER
 </div>
 
+<h1>
+복잡한 등기,<br>
+<span>쉽게 확인하고</span><br>
+정확하게 진행하세요.
+</h1>
+
+<p>
+상속등기부터 상속포기·한정승인,
+부동산등기, 증여등기, 법인설립과
+법인변경등기까지 필요한 절차를 안내합니다.
+</p>
+
+<div class="buttons">
+
+<a href="#calculator" class="btn btn-primary">
+취득세·등기비용 계산
+</a>
+
+<a href="#services" class="btn btn-border">
+주요 업무 확인
+</a>
+
+<a href="tel:0324251500" class="btn btn-dark">
+032-425-1500
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- QUICK -->
+
+<section class="quick">
+
+<div class="container">
+
+<div class="quick-grid">
+
+<a class="quick-item" href="#inheritance">
+<strong>01</strong>
+<h3>상속등기</h3>
+<p>상속재산·상속인 확인</p>
+</a>
+
+<a class="quick-item" href="#inheritance">
+<strong>02</strong>
+<h3>상속포기·한정승인</h3>
+<p>상속채무 해결</p>
+</a>
+
+<a class="quick-item" href="#corporate">
+<strong>03</strong>
+<h3>법인등기</h3>
+<p>설립·변경·증자</p>
+</a>
+
+<a class="quick-item" href="#calculator">
+<strong>04</strong>
+<h3>등기 비용 계산</h3>
+<p>취득세·법인등기</p>
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- INHERITANCE -->
+
+<section class="section inheritance" id="inheritance">
+
+<div class="container">
+
+<div class="inheritance-grid">
+
+<div>
+
+<div class="label">INHERITANCE</div>
+
+<h2>
+상속은<br>
+등기부터 하는 것이<br>
+아닐 수 있습니다.
+</h2>
+
+<p>
+상속인이 여러 명이거나 연락두절인 경우,
+상속채무가 있는 경우에는 먼저 상속관계를
+확인하고 상속포기·한정승인·상속재산분할 등의
+절차를 검토해야 합니다.
+</p>
+
+<a href="tel:0324251500" class="btn btn-primary">
+상속 상담하기
+</a>
+
+</div>
+
+<div class="problem-list">
+
+<div class="problem">
+상속인 중 연락두절자가 있습니다.
+<span>→</span>
+</div>
+
+<div class="problem">
+상속인간 협의가 되지 않습니다.
+<span>→</span>
+</div>
+
+<div class="problem">
+상속받을 재산보다 빚이 많습니다.
+<span>→</span>
+</div>
+
+<div class="problem">
+이복형제·이부형제가 있습니다.
+<span>→</span>
+</div>
+
+<div class="problem">
+대습상속인이 있습니다.
+<span>→</span>
+</div>
+
+<div class="problem">
+상속재산을 어떻게 나눌지 모르겠습니다.
+<span>→</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- SERVICES -->
+
+<section class="section gray" id="services">
+
+<div class="container">
+
+<div class="label">SERVICES</div>
+
+<h2 class="title">주요 업무</h2>
+
+<p class="desc">
+현재두 법무사 사무소에서 주로 진행하는 업무입니다.
+</p>
+
+<div class="services">
+
+<div class="service">
+<div class="service-number">01</div>
+<h3>상속등기</h3>
+<p>
+협의분할 상속등기, 법정상속,
+상속재산분할 등에 따른 부동산 이전등기
+</p>
+</div>
+
+<div class="service">
+<div class="service-number">02</div>
+<h3>상속포기·한정승인</h3>
+<p>
+상속채무가 많은 경우 상속포기,
+한정승인 및 특별한정승인 절차
+</p>
+</div>
+
+<div class="service">
+<div class="service-number">03</div>
+<h3>부동산등기</h3>
+<p>
+매매·증여·재산분할 등에 따른
+소유권이전등기
+</p>
+</div>
+
+<div class="service">
+<div class="service-number">04</div>
+<h3>법인설립</h3>
+<p>
+주식회사·유한회사 설립 및
+1인법인 설립 관련 절차
+</p>
+</div>
+
+<div class="service">
+<div class="service-number">05</div>
+<h3>법인변경등기</h3>
+<p>
+대표이사·임원·상호·목적·본점주소
+변경 및 자본금증자
+</p>
+</div>
+
+<div class="service">
+<div class="service-number">06</div>
+<h3>증여·재산분할</h3>
+<p>
+부동산 증여 및 이혼에 따른
+재산분할 소유권이전등기
+</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- CALCULATOR -->
+
+<section class="section calculator-section" id="calculator">
+
+<div class="container">
+
+<div class="label">CALCULATOR</div>
+
+<h2 class="title">등기 비용 계산기</h2>
+
+<p class="desc">
+복잡한 계산을 먼저 확인해보세요.
+실제 신고·등기 비용은 개별 조건에 따라 달라질 수 있습니다.
+</p>
+
+
+<div class="calculator">
+
+<div class="calc-tabs">
+
+<button class="calc-tab active"
+onclick="showCalculator('tax',this)">
+부동산 취득세 계산기
+</button>
+
+<button class="calc-tab"
+onclick="showCalculator('corp',this)">
+법인등기 비용 계산기
+</button>
+
+</div>
+
+
+<!-- 취득세 -->
+
+<div id="taxCalculator" class="calc-body">
+
+<div class="calc-description">
+<strong>부동산 취득세 예상 계산</strong><br>
+매매·상속·증여·재산분할 등 취득원인에 따라
+예상 세액을 계산합니다.
+</div>
+
+<div class="form-grid">
+
+<div class="form-group">
+
+<label>취득 원인</label>
+
+<select id="taxReason" onchange="calculateTax()">
+
+<option value="sale">매매 / 유상취득</option>
+<option value="inheritance">상속</option>
+<option value="gift">증여</option>
+<option value="divorce">이혼 / 재산분할</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>취득가액 / 시가표준액</label>
+
+<input
+id="taxPrice"
+type="text"
+value="600,000,000"
+oninput="formatTaxPrice(this)">
+
+</div>
+
+
+<div class="form-group">
+
+<label>주택 수</label>
+
+<select id="taxHouse" onchange="calculateTax()">
+
+<option value="1">1주택</option>
+<option value="2">2주택</option>
+<option value="3">3주택</option>
+<option value="4">4주택 이상</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>지역</label>
+
+<select id="taxRegion" onchange="calculateTax()">
+
+<option value="normal">비조정대상지역</option>
+<option value="regulated">조정대상지역</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>전용면적</label>
+
+<select id="taxArea" onchange="calculateTax()">
+
+<option value="under">85㎡ 이하</option>
+<option value="over">85㎡ 초과</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group" id="homelessBox">
+
+<label>상속 무주택 특례</label>
+
+<select id="taxHomeless" onchange="calculateTax()">
+
+<option value="no">해당 없음</option>
+<option value="yes">상속인 세대 전원 무주택</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+<div class="result">
+
+<div class="result-row">
+<span>취득세율</span>
+<strong id="taxRate">1.00%</strong>
+</div>
+
+<div class="result-row">
+<span>취득세</span>
+<strong id="taxMain">6,000,000원</strong>
+</div>
+
+<div class="result-row">
+<span>지방교육세</span>
+<strong id="taxEdu">600,000원</strong>
+</div>
+
+<div class="result-row">
+<span>농어촌특별세</span>
+<strong id="taxRural">0원</strong>
+</div>
+
+<div class="result-row result-total">
+<span>예상 총 세액</span>
+<strong id="taxTotal">6,600,000원</strong>
+</div>
+
+</div>
+
+<div class="note">
+※ 본 계산기는 이해를 돕기 위한 예상 계산기입니다.
+실제 세액은 주택 수, 취득가액, 면적, 지역,
+감면요건 및 개별 사실관계에 따라 달라질 수 있습니다.
+</div>
+
+</div>
+
+
+<!-- 법인등기 -->
+
+<div id="corpCalculator" class="calc-body hidden">
+
+<div class="calc-description">
+
+<strong>법인등기 비용 예상 계산</strong><br>
+
+자본금과 본점 소재지, 등기 유형 등을 입력하면
+등록면허세와 교육세 등을 포함한 공과금 예상액을 확인할 수 있습니다.
+
+</div>
+
+
+<div class="form-grid">
+
+<div class="form-group">
+
+<label>등기 종류</label>
+
+<select id="corpType" onchange="calculateCorp()">
+
+<option value="capital">법인설립</option>
+<option value="increase">자본금증자</option>
+<option value="director">임원변경</option>
+<option value="head">본점이전</option>
+<option value="purpose">상호·목적변경</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>자본금</label>
+
+<input
+id="corpCapital"
+type="text"
+value="10,000,000"
+oninput="formatCorpCapital(this)">
+
+</div>
+
+
+<div class="form-group">
+
+<label>본점 소재지</label>
+
+<select id="corpArea" onchange="calculateCorp()">
+
+<option value="normal">비과밀억제권역</option>
+<option value="over">과밀억제권역</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>전자등기 여부</label>
+
+<select id="corpElectronic" onchange="calculateCorp()">
+
+<option value="yes">전자등기</option>
+<option value="no">서류등기</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+<div class="result">
+
+<div class="result-row">
+<span>등록면허세</span>
+<strong id="corpTax">112,500원</strong>
+</div>
+
+<div class="result-row">
+<span>지방교육세</span>
+<strong id="corpEdu">22,500원</strong>
+</div>
+
+<div class="result-row">
+<span>등기신청 수수료 등</span>
+<strong id="corpFee">약 2,000원</strong>
+</div>
+
+<div class="result-row result-total">
+<span>예상 공과금</span>
+<strong id="corpTotal">137,000원</strong>
+</div>
+
+</div>
+
+
+<div class="note">
+
+※ 법인등기 공과금은 등기 종류와 자본금,
+본점 소재지 등에 따라 달라집니다.
+전자등기 여부 및 사건별 추가 비용도 발생할 수 있습니다.
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- CORPORATE -->
+
+<section class="section" id="corporate">
+
+<div class="container">
+
+<div class="label">CORPORATE REGISTRATION</div>
+
+<h2 class="title">법인등기</h2>
+
+<p class="desc">
+설립부터 대표이사 변경, 본점이전, 자본금증자까지
+법인 운영 중 발생하는 다양한 변경등기를 안내합니다.
+</p>
+
+<div class="corp-box">
+
+<div class="corp-item">
+<strong>법인설립</strong>
+<span>주식회사·유한회사·1인법인</span>
+</div>
+
+<div class="corp-item">
+<strong>대표이사 변경</strong>
+<span>취임·중임·사임·해임</span>
+</div>
+
+<div class="corp-item">
+<strong>임원 변경</strong>
+<span>이사·감사 변경 및 중임</span>
+</div>
+
+<div class="corp-item">
+<strong>본점주소 이전</strong>
+<span>관내·관외 본점이전</span>
+</div>
+
+<div class="corp-item">
+<strong>자본금증자</strong>
+<span>유상증자·가수금 증자</span>
+</div>
+
+<div class="corp-item">
+<strong>상호·목적 변경</strong>
+<span>정관 및 등기사항 변경</span>
+</div>
+
+</div>
+
+<br>
+
+<a href="#calculator" class="btn btn-primary">
+법인등기 비용 계산하기
+</a>
+
+</div>
+
+</section>
+
+
+<!-- BLOG -->
+
+<section class="section gray" id="blog">
+
+<div class="container">
+
+<div class="label">LEGAL INFORMATION</div>
+
+<h2 class="title">법률정보</h2>
+
+<p class="desc">
+상속·법인·부동산등기에 관한 자세한 내용은
+네이버 블로그에서 확인할 수 있습니다.
+</p>
+
+<div class="blog-grid">
+
+<div class="blog-card">
+
+<h3>상속 관련 정보</h3>
+
+<p>
+상속등기, 상속포기, 한정승인,
+특별한정승인, 상속재산분할,
+연락두절 상속인, 이복형제·이부형제 등
+상속과 관련된 실무 정보를 제공합니다.
+</p>
+
+<a
+class="blog-link"
+href="https://blog.naver.com/hjd21"
+target="_blank"
+rel="noopener">
+상속정보 보러가기 →
+</a>
+
+</div>
+
+
+<div class="blog-card">
+
+<h3>법인등기 관련 정보</h3>
+
+<p>
+법인설립, 대표이사 변경,
+임원변경, 본점이전, 자본금증자,
+상호·목적변경 등 법인등기 정보를 제공합니다.
+</p>
+
+<a
+class="blog-link"
+href="https://blog.naver.com/hjd21"
+target="_blank"
+rel="noopener">
+법인등기 정보 보러가기 →
+</a>
+
+</div>
+
+</div>
+
+<br>
+
+<a
+href="https://blog.naver.com/hjd21"
+target="_blank"
+rel="noopener"
+class="btn btn-primary">
+현재두 법무사 네이버 블로그
+</a>
+
+</div>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section class="section contact" id="contact">
+
+<div class="container">
+
+<div class="label" style="color:#dce8ff;">
+CONSULTATION
+</div>
+
+<h2 class="title">
+상담이 필요한 경우<br>
+현재 상황부터 확인하세요.
+</h2>
+
+<p>
+상속·부동산·법인등기 관련 상담
+</p>
+
+<div class="phone">
+<a href="tel:0324251500">
+032-425-1500
+</a>
+</div>
+
+<a href="tel:0324251500" class="btn btn-white">
+전화 상담하기
+</a>
+
+</div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+<div class="container">
+
+<strong>현재두 법무사 사무소</strong>
+
+<div>
+주소 : 인천광역시 미추홀구 경원대로 873,
+201호(주안동, 인성빌딩)
+</div>
+
+<div>
+전화 : 032-425-1500
+</div>
+
+<div>
+네이버 블로그 :
+<a
+href="https://blog.naver.com/hjd21"
+target="_blank"
+rel="noopener">
+blog.naver.com/hjd21
+</a>
+</div>
+
+<div>
+© 2026 현재두 법무사 사무소. All rights reserved.
+</div>
+
+</div>
+
+</footer>
+
+
+<!-- MOBILE CALL -->
+
+<a href="tel:0324251500" class="mobile-call">
+전화 상담 032-425-1500
+</a>
+
+
 <script>
-    function numToComma(num) { return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
-    function commaToNum(str) { return parseInt(str.replace(/,/g, '')) || 0; }
 
-    function formatAndCalculate(input) {
-        let num = commaToNum(input.value);
-        input.value = numToComma(num);
-        calculateTax();
+/* 숫자 */
+
+function comma(num){
+
+    return Math.round(num)
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g,",");
+}
+
+function number(value){
+
+    return parseInt(
+        String(value).replace(/,/g,"")
+    ) || 0;
+
+}
+
+
+/* 계산기 탭 */
+
+function showCalculator(type,button){
+
+    document.getElementById("taxCalculator")
+    .classList.add("hidden");
+
+    document.getElementById("corpCalculator")
+    .classList.add("hidden");
+
+    document.querySelectorAll(".calc-tab")
+    .forEach(function(tab){
+
+        tab.classList.remove("active");
+
+    });
+
+    button.classList.add("active");
+
+    if(type==="tax"){
+
+        document.getElementById("taxCalculator")
+        .classList.remove("hidden");
+
+    }else{
+
+        document.getElementById("corpCalculator")
+        .classList.remove("hidden");
+
     }
 
-    function addPrice(amount) {
-        let priceInput = document.getElementById('price');
-        let current = commaToNum(priceInput.value);
-        priceInput.value = numToComma(current + amount);
-        calculateTax();
-    }
+}
 
-    function resetPrice() {
-        document.getElementById('price').value = "0";
-        calculateTax();
-    }
 
-    function toggleOptions() {
-        let reason = document.getElementById('reason').value;
-        let inhOption = document.getElementById('inheritance-option');
-        let houseOption = document.getElementById('house-count-option');
-        let regionOption = document.getElementById('region-option');
-        
-        inhOption.classList.add('hidden');
-        houseOption.classList.add('hidden');
-        regionOption.classList.add('hidden');
-        document.getElementById('homeless').checked = false;
+/* 취득세 금액 */
 
-        if (reason === 'sale') {
-            houseOption.classList.remove('hidden');
-            regionOption.classList.remove('hidden');
-        } else if (reason === 'inheritance') {
-            inhOption.classList.remove('hidden');
-        } else if (reason === 'gift') {
-            regionOption.classList.remove('hidden');
-        }
-        calculateTax();
-    }
+function formatTaxPrice(input){
 
-    function calculateTax() {
-        let reason = document.getElementById('reason').value;
-        let price = commaToNum(document.getElementById('price').value);
-        let area = document.getElementById('area').value;
-        let isHomeless = document.getElementById('homeless').checked;
-        let region = document.getElementById('region').value;
-        let houseCount = document.getElementById('house-count').value;
+    let value=number(input.value);
 
-        let taxRate = 0; let eduRate = 0; let ruralRate = 0;
+    input.value=comma(value);
 
-        if (reason === 'sale') {
-            if (region === 'regulated') {
-                if (houseCount === '1') {
-                    if (price <= 600000000) taxRate = 0.01;
-                    else if (price <= 900000000) taxRate = (price * (2 / 300000000) - 3) / 100;
-                    else taxRate = 0.03;
-                } else if (houseCount === '2') {
-                    taxRate = 0.08;
-                } else {
-                    taxRate = 0.12;
+    calculateTax();
+
+}
+
+
+/* 취득세 계산 */
+
+function calculateTax(){
+
+    let reason=
+    document.getElementById("taxReason").value;
+
+    let price=
+    number(document.getElementById("taxPrice").value);
+
+    let house=
+    document.getElementById("taxHouse").value;
+
+    let region=
+    document.getElementById("taxRegion").value;
+
+    let area=
+    document.getElementById("taxArea").value;
+
+    let homeless=
+    document.getElementById("taxHomeless").value;
+
+
+    let rate=0;
+
+    let edu=0;
+
+    let rural=0;
+
+
+    /* 매매 */
+
+    if(reason==="sale"){
+
+        if(region==="regulated"){
+
+            if(house==="1"){
+
+                if(price<=600000000){
+
+                    rate=.01;
+
+                }else if(price<=900000000){
+
+                    rate=(price*(2/300000000)-3)/100;
+
+                }else{
+
+                    rate=.03;
+
                 }
-            } else {
-                if (houseCount === '1' || houseCount === '2') {
-                    if (price <= 600000000) taxRate = 0.01;
-                    else if (price <= 900000000) taxRate = (price * (2 / 300000000) - 3) / 100;
-                    else taxRate = 0.03;
-                } else if (houseCount === '3') {
-                    taxRate = 0.08;
-                } else {
-                    taxRate = 0.12;
-                }
-            }
-            
-            if (taxRate >= 0.08) eduRate = 0.004; 
-            else eduRate = taxRate * 0.1;
-            
-            if (area === 'under') {
-                ruralRate = 0;
-            } else {
-                ruralRate = (taxRate >= 0.08) ? 0.01 : 0.002;
+
+            }else if(house==="2"){
+
+                rate=.08;
+
+            }else{
+
+                rate=.12;
+
             }
 
-        } else if (reason === 'inheritance') {
-            if (isHomeless) {
-                taxRate = 0.003; eduRate = 0.0006;
-                ruralRate = 0;
-            } else {
-                taxRate = 0.023; eduRate = 0.002;
-                ruralRate = (area === 'under') ? 0 : 0.003;
+        }else{
+
+            if(house==="1" || house==="2"){
+
+                if(price<=600000000){
+
+                    rate=.01;
+
+                }else if(price<=900000000){
+
+                    rate=(price*(2/300000000)-3)/100;
+
+                }else{
+
+                    rate=.03;
+
+                }
+
+            }else if(house==="3"){
+
+                rate=.08;
+
+            }else{
+
+                rate=.12;
+
             }
-        } else if (reason === 'gift') {
-            if (region === 'regulated' && price >= 300000000) {
-                taxRate = 0.12; eduRate = 0.004;
-                ruralRate = (area === 'under') ? 0 : 0.01;
-            } else {
-                taxRate = 0.035; eduRate = 0.003;
-                ruralRate = (area === 'under') ? 0 : 0.002;
-            }
-        } else if (reason === 'divorce') {
-            taxRate = 0.015; eduRate = 0.003;
-            ruralRate = (area === 'under') ? 0 : 0.002;
+
         }
 
-        if (area === 'under') ruralRate = 0;
 
-        let tax = Math.floor(price * taxRate);
-        let edu = Math.floor(price * eduRate);
-        let rural = Math.floor(price * ruralRate);
-        let total = tax + edu + rural;
+        if(rate>=.08){
 
-        document.getElementById('rate-view').innerText = (taxRate * 100).toFixed(2) + "%";
-        document.getElementById('tax-view').innerText = numToComma(tax) + " 원";
-        document.getElementById('edu-view').innerText = numToComma(edu) + " 원";
-        document.getElementById('rural-view').innerText = rural === 0 ? "0 원 (면제)" : numToComma(rural) + " 원";
-        document.getElementById('total-view').innerText = numToComma(total) + " 원";
+            edu=.004;
+
+        }else{
+
+            edu=rate*.1;
+
+        }
+
+
+        rural=
+        area==="over"
+        ? (rate>=.08 ? .01 : .002)
+        : 0;
+
     }
 
-    window.onload = function() { 
-        toggleOptions(); 
+
+    /* 상속 */
+
+    else if(reason==="inheritance"){
+
+        if(homeless==="yes"){
+
+            rate=.003;
+
+            edu=.0006;
+
+            rural=0;
+
+        }else{
+
+            rate=.023;
+
+            edu=.002;
+
+            rural=
+            area==="over" ? .003 : 0;
+
+        }
+
     }
+
+
+    /* 증여 */
+
+    else if(reason==="gift"){
+
+        if(
+            region==="regulated" &&
+            price>=300000000
+        ){
+
+            rate=.12;
+
+            edu=.004;
+
+            rural=
+            area==="over" ? .01 : 0;
+
+        }else{
+
+            rate=.035;
+
+            edu=.003;
+
+            rural=
+            area==="over" ? .002 : 0;
+
+        }
+
+    }
+
+
+    /* 재산분할 */
+
+    else if(reason==="divorce"){
+
+        rate=.015;
+
+        edu=.003;
+
+        rural=
+        area==="over" ? .002 : 0;
+
+    }
+
+
+    let tax=
+    Math.floor(price*rate);
+
+    let eduTax=
+    Math.floor(price*edu);
+
+    let ruralTax=
+    Math.floor(price*rural);
+
+    let total=
+    tax+eduTax+ruralTax;
+
+
+    document.getElementById("taxRate")
+    .innerText=(rate*100).toFixed(2)+"%";
+
+    document.getElementById("taxMain")
+    .innerText=comma(tax)+"원";
+
+    document.getElementById("taxEdu")
+    .innerText=comma(eduTax)+"원";
+
+    document.getElementById("taxRural")
+    .innerText=comma(ruralTax)+"원";
+
+    document.getElementById("taxTotal")
+    .innerText=comma(total)+"원";
+
+}
+
+
+/* 법인 자본금 */
+
+function formatCorpCapital(input){
+
+    let value=number(input.value);
+
+    input.value=comma(value);
+
+    calculateCorp();
+
+}
+
+
+/* 법인등기 계산 */
+
+function calculateCorp(){
+
+    let type=
+    document.getElementById("corpType").value;
+
+    let capital=
+    number(document.getElementById("corpCapital").value);
+
+    let area=
+    document.getElementById("corpArea").value;
+
+    let electronic=
+    document.getElementById("corpElectronic").value;
+
+
+    let registrationTax=0;
+
+    let educationTax=0;
+
+    let applicationFee=2000;
+
+
+    /*
+       기본 등록면허세
+
+       설립·증자:
+       자본금 × 0.4%
+
+       과밀억제권역:
+       3배 중과
+
+       최소세액 112,500원 기준
+    */
+
+
+    if(type==="capital" || type==="increase"){
+
+        registrationTax=
+        Math.max(
+            capital*.004,
+            112500
+        );
+
+        if(area==="over"){
+
+            registrationTax*=3;
+
+        }
+
+    }
+
+
+    /*
+       임원·본점·상호·목적 변경
+       기본 등록면허세
+    */
+
+    else{
+
+        registrationTax=40500;
+
+        if(area==="over"){
+
+            registrationTax*=3;
+
+        }
+
+    }
+
+
+    educationTax=
+    registrationTax*.2;
+
+
+    /*
+       전자등기 수수료 차이
+    */
+
+    if(electronic==="no"){
+
+        applicationFee+=3000;
+
+    }
+
+
+    let total=
+    registrationTax+
+    educationTax+
+    applicationFee;
+
+
+    document.getElementById("corpTax")
+    .innerText=comma(registrationTax)+"원";
+
+    document.getElementById("corpEdu")
+    .innerText=comma(educationTax)+"원";
+
+    document.getElementById("corpFee")
+    .innerText=comma(applicationFee)+"원";
+
+    document.getElementById("corpTotal")
+    .innerText=comma(total)+"원";
+
+}
+
+
+/* 초기 실행 */
+
+window.onload=function(){
+
+    calculateTax();
+
+    calculateCorp();
+
+};
+
 </script>
+
 </body>
 </html>
