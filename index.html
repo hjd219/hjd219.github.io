@@ -3,15 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>현재두 법무사 사무소 | 인천 상속등기·법인등기·취득세 계산기</title>
-
-<meta name="description"
-content="인천 현재두 법무사 사무소. 상속등기, 상속포기, 한정승인, 법인설립, 법인변경등기, 부동산등기, 증여등기 및 취득세·법인등기 비용 계산기">
-
-<meta name="keywords"
-content="인천법무사, 인천상속등기, 인천법인등기, 상속포기, 한정승인, 법인설립, 대표이사변경, 본점이전, 취득세계산기, 법인등기비용계산기">
-
+<title>등기로 계산기 | 취득세·법인등기 비용</title>
+<meta name="description" content="현재두 법무사 사무소의 부동산 취득세 및 법인등기 비용 예상 계산기입니다.">
 <style>
 
 *{
@@ -648,267 +641,32 @@ input{
     display:none !important;
 }
 
+
+
+/* CALCULATOR ONLY */
+body{background:#f0f2f5;}
+.header-inner{justify-content:flex-start;}
+.calculator-section{min-height:calc(100vh - 72px);padding:64px 0 80px;}
+.calculator{box-shadow:0 12px 36px rgba(23,45,78,.08);}
+@media(max-width:768px){
+  body{padding-bottom:0;}
+  .calculator-section{min-height:calc(100vh - 64px);padding:42px 0 60px;}
+  .calc-tabs{grid-template-columns:1fr 1fr;}
+  .calc-tab{padding:16px 10px;font-size:14px;}
+}
+
 </style>
 </head>
-
 <body>
-
-<!-- HEADER -->
-
 <header class="header">
-
-<div class="container header-inner">
-
-<a href="#" class="logo">
-현재두 법무사 사무소
-<small>인천 법무사</small>
-</a>
-
-<nav class="nav">
-<a href="#inheritance">상속</a>
-<a href="#services">주요업무</a>
-<a href="#calculator">계산기</a>
-<a href="#corporate">법인등기</a>
-<a href="#blog">법률정보</a>
-<a href="#contact">상담</a>
-</nav>
-
-</div>
-
+  <div class="container header-inner">
+    <a href="https://www.deunggiro.kr/" class="logo">
+      등기로
+      <small>현재두 법무사 사무소</small>
+    </a>
+  </div>
 </header>
-
-
-<!-- HERO -->
-
-<section class="hero">
-
-<div class="container">
-
-<div class="hero-label">
-INCHON JUDICIAL SCRIVENER
-</div>
-
-<h1>
-복잡한 등기,<br>
-<span>쉽게 확인하고</span><br>
-정확하게 진행하세요.
-</h1>
-
-<p>
-상속등기부터 상속포기·한정승인,
-부동산등기, 증여등기, 법인설립과
-법인변경등기까지 필요한 절차를 안내합니다.
-</p>
-
-<div class="buttons">
-
-<a href="#calculator" class="btn btn-primary">
-취득세·등기비용 계산
-</a>
-
-<a href="#services" class="btn btn-border">
-주요 업무 확인
-</a>
-
-<a href="tel:0324251500" class="btn btn-dark">
-032-425-1500
-</a>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- QUICK -->
-
-<section class="quick">
-
-<div class="container">
-
-<div class="quick-grid">
-
-<a class="quick-item" href="#inheritance">
-<strong>01</strong>
-<h3>상속등기</h3>
-<p>상속재산·상속인 확인</p>
-</a>
-
-<a class="quick-item" href="#inheritance">
-<strong>02</strong>
-<h3>상속포기·한정승인</h3>
-<p>상속채무 해결</p>
-</a>
-
-<a class="quick-item" href="#corporate">
-<strong>03</strong>
-<h3>법인등기</h3>
-<p>설립·변경·증자</p>
-</a>
-
-<a class="quick-item" href="#calculator">
-<strong>04</strong>
-<h3>등기 비용 계산</h3>
-<p>취득세·법인등기</p>
-</a>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- INHERITANCE -->
-
-<section class="section inheritance" id="inheritance">
-
-<div class="container">
-
-<div class="inheritance-grid">
-
-<div>
-
-<div class="label">INHERITANCE</div>
-
-<h2>
-상속은<br>
-등기부터 하는 것이<br>
-아닐 수 있습니다.
-</h2>
-
-<p>
-상속인이 여러 명이거나 연락두절인 경우,
-상속채무가 있는 경우에는 먼저 상속관계를
-확인하고 상속포기·한정승인·상속재산분할 등의
-절차를 검토해야 합니다.
-</p>
-
-<a href="tel:0324251500" class="btn btn-primary">
-상속 상담하기
-</a>
-
-</div>
-
-<div class="problem-list">
-
-<div class="problem">
-상속인 중 연락두절자가 있습니다.
-<span>→</span>
-</div>
-
-<div class="problem">
-상속인간 협의가 되지 않습니다.
-<span>→</span>
-</div>
-
-<div class="problem">
-상속받을 재산보다 빚이 많습니다.
-<span>→</span>
-</div>
-
-<div class="problem">
-이복형제·이부형제가 있습니다.
-<span>→</span>
-</div>
-
-<div class="problem">
-대습상속인이 있습니다.
-<span>→</span>
-</div>
-
-<div class="problem">
-상속재산을 어떻게 나눌지 모르겠습니다.
-<span>→</span>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- SERVICES -->
-
-<section class="section gray" id="services">
-
-<div class="container">
-
-<div class="label">SERVICES</div>
-
-<h2 class="title">주요 업무</h2>
-
-<p class="desc">
-현재두 법무사 사무소에서 주로 진행하는 업무입니다.
-</p>
-
-<div class="services">
-
-<div class="service">
-<div class="service-number">01</div>
-<h3>상속등기</h3>
-<p>
-협의분할 상속등기, 법정상속,
-상속재산분할 등에 따른 부동산 이전등기
-</p>
-</div>
-
-<div class="service">
-<div class="service-number">02</div>
-<h3>상속포기·한정승인</h3>
-<p>
-상속채무가 많은 경우 상속포기,
-한정승인 및 특별한정승인 절차
-</p>
-</div>
-
-<div class="service">
-<div class="service-number">03</div>
-<h3>부동산등기</h3>
-<p>
-매매·증여·재산분할 등에 따른
-소유권이전등기
-</p>
-</div>
-
-<div class="service">
-<div class="service-number">04</div>
-<h3>법인설립</h3>
-<p>
-주식회사·유한회사 설립 및
-1인법인 설립 관련 절차
-</p>
-</div>
-
-<div class="service">
-<div class="service-number">05</div>
-<h3>법인변경등기</h3>
-<p>
-대표이사·임원·상호·목적·본점주소
-변경 및 자본금증자
-</p>
-</div>
-
-<div class="service">
-<div class="service-number">06</div>
-<h3>증여·재산분할</h3>
-<p>
-부동산 증여 및 이혼에 따른
-재산분할 소유권이전등기
-</p>
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
+<main>
 <!-- CALCULATOR -->
 
 <section class="section calculator-section" id="calculator">
@@ -1199,219 +957,8 @@ oninput="formatCorpCapital(this)">
 </section>
 
 
-<!-- CORPORATE -->
 
-<section class="section" id="corporate">
-
-<div class="container">
-
-<div class="label">CORPORATE REGISTRATION</div>
-
-<h2 class="title">법인등기</h2>
-
-<p class="desc">
-설립부터 대표이사 변경, 본점이전, 자본금증자까지
-법인 운영 중 발생하는 다양한 변경등기를 안내합니다.
-</p>
-
-<div class="corp-box">
-
-<div class="corp-item">
-<strong>법인설립</strong>
-<span>주식회사·유한회사·1인법인</span>
-</div>
-
-<div class="corp-item">
-<strong>대표이사 변경</strong>
-<span>취임·중임·사임·해임</span>
-</div>
-
-<div class="corp-item">
-<strong>임원 변경</strong>
-<span>이사·감사 변경 및 중임</span>
-</div>
-
-<div class="corp-item">
-<strong>본점주소 이전</strong>
-<span>관내·관외 본점이전</span>
-</div>
-
-<div class="corp-item">
-<strong>자본금증자</strong>
-<span>유상증자·가수금 증자</span>
-</div>
-
-<div class="corp-item">
-<strong>상호·목적 변경</strong>
-<span>정관 및 등기사항 변경</span>
-</div>
-
-</div>
-
-<br>
-
-<a href="#calculator" class="btn btn-primary">
-법인등기 비용 계산하기
-</a>
-
-</div>
-
-</section>
-
-
-<!-- BLOG -->
-
-<section class="section gray" id="blog">
-
-<div class="container">
-
-<div class="label">LEGAL INFORMATION</div>
-
-<h2 class="title">법률정보</h2>
-
-<p class="desc">
-상속·법인·부동산등기에 관한 자세한 내용은
-네이버 블로그에서 확인할 수 있습니다.
-</p>
-
-<div class="blog-grid">
-
-<div class="blog-card">
-
-<h3>상속 관련 정보</h3>
-
-<p>
-상속등기, 상속포기, 한정승인,
-특별한정승인, 상속재산분할,
-연락두절 상속인, 이복형제·이부형제 등
-상속과 관련된 실무 정보를 제공합니다.
-</p>
-
-<a
-class="blog-link"
-href="https://blog.naver.com/hjd21"
-target="_blank"
-rel="noopener">
-상속정보 보러가기 →
-</a>
-
-</div>
-
-
-<div class="blog-card">
-
-<h3>법인등기 관련 정보</h3>
-
-<p>
-법인설립, 대표이사 변경,
-임원변경, 본점이전, 자본금증자,
-상호·목적변경 등 법인등기 정보를 제공합니다.
-</p>
-
-<a
-class="blog-link"
-href="https://blog.naver.com/hjd21"
-target="_blank"
-rel="noopener">
-법인등기 정보 보러가기 →
-</a>
-
-</div>
-
-</div>
-
-<br>
-
-<a
-href="https://blog.naver.com/hjd21"
-target="_blank"
-rel="noopener"
-class="btn btn-primary">
-현재두 법무사 네이버 블로그
-</a>
-
-</div>
-
-</section>
-
-
-<!-- CONTACT -->
-
-<section class="section contact" id="contact">
-
-<div class="container">
-
-<div class="label" style="color:#dce8ff;">
-CONSULTATION
-</div>
-
-<h2 class="title">
-상담이 필요한 경우<br>
-현재 상황부터 확인하세요.
-</h2>
-
-<p>
-상속·부동산·법인등기 관련 상담
-</p>
-
-<div class="phone">
-<a href="tel:0324251500">
-032-425-1500
-</a>
-</div>
-
-<a href="tel:0324251500" class="btn btn-white">
-전화 상담하기
-</a>
-
-</div>
-
-</section>
-
-
-<!-- FOOTER -->
-
-<footer class="footer">
-
-<div class="container">
-
-<strong>현재두 법무사 사무소</strong>
-
-<div>
-주소 : 인천광역시 미추홀구 경원대로 873,
-201호(주안동, 인성빌딩)
-</div>
-
-<div>
-전화 : 032-425-1500
-</div>
-
-<div>
-네이버 블로그 :
-<a
-href="https://blog.naver.com/hjd21"
-target="_blank"
-rel="noopener">
-blog.naver.com/hjd21
-</a>
-</div>
-
-<div>
-© 2026 현재두 법무사 사무소. All rights reserved.
-</div>
-
-</div>
-
-</footer>
-
-
-<!-- MOBILE CALL -->
-
-<a href="tel:0324251500" class="mobile-call">
-전화 상담 032-425-1500
-</a>
-
-
+</main>
 <script>
 
 /* 숫자 */
@@ -1824,6 +1371,5 @@ window.onload=function(){
 };
 
 </script>
-
 </body>
 </html>
