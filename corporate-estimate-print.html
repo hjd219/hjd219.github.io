@@ -43,7 +43,7 @@ h3{font-size:17px;margin:6px 0 9px;color:#10263d}
 </head>
 <body>
 <main class="wrap">
-<div class="toolbar"><button type="button" onclick="window.print()">PDF 저장 / 인쇄</button><a href="/corporate-calculator.html">돌아가기</a></div>
+<div class="toolbar"><button type="button" id="pdfBtn" onclick="downloadPdf()">견적서 PDF 받기</button><a href="/corporate-calculator.html">돌아가기</a></div>
 <section class="sheet" id="sheet">
 <div class="title"><b>등기로</b><span>법인등기 예상 견적서</span><small id="date"></small></div>
 <div class="selected" id="selected"></div>
@@ -82,8 +82,27 @@ h3{font-size:17px;margin:6px 0 9px;color:#10263d}
   }catch(e){
     document.getElementById('sheet').innerHTML='<div class="empty">견적 정보를 불러오지 못했습니다.<br>계산기에서 다시 시도해주세요.</div>';
   }
-  setTimeout(()=>{try{window.print()}catch(e){}},300);
 })();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js"></script>
+<script>
+async function downloadPdf(){
+  const btn=document.getElementById('pdfBtn');
+  if(!window.html2pdf){alert('PDF 생성 모듈을 불러오지 못했습니다. 잠시 후 다시 시도해주세요.');return;}
+  btn.disabled=true;btn.textContent='PDF 생성 중...';
+  const element=document.getElementById('sheet');
+  const opt={
+    margin:[8,8,8,8],
+    filename:'등기로_법인등기_예상견적서.pdf',
+    image:{type:'jpeg',quality:0.96},
+    html2canvas:{scale:2,useCORS:true,backgroundColor:'#ffffff',scrollY:0},
+    jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},
+    pagebreak:{mode:['avoid-all','css','legacy']}
+  };
+  try{await html2pdf().set(opt).from(element).save();}
+  catch(e){alert('PDF 생성에 실패했습니다. 다시 시도해주세요.');}
+  finally{btn.disabled=false;btn.textContent='견적서 PDF 받기';}
+}
 </script>
 </body>
 </html>
