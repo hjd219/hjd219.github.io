@@ -99,9 +99,25 @@ async function downloadPdf(){
     jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},
     pagebreak:{mode:['avoid-all','css','legacy']}
   };
-  try{await html2pdf().set(opt).from(element).save();}
-  catch(e){alert('PDF 생성에 실패했습니다. 다시 시도해주세요.');}
-  finally{btn.disabled=false;btn.textContent='견적서 PDF 받기';}
+  try{
+    const worker=html2pdf().set(opt).from(element);
+    const blob=await worker.outputPdf('blob');
+    const file=new File([blob],opt.filename,{type:'application/pdf'});
+    if(navigator.canShare&&navigator.canShare({files:[file]})){
+      await navigator.share({files:[file],title:'법인등기 예상 견적서'});
+      return;
+    }
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url;a.download=opt.filename;a.style.display='none';
+    document.body.appendChild(a);a.click();a.remove();
+    setTimeout(()=>{try{location.href=url}catch(e){}},250);
+    setTimeout(()=>URL.revokeObjectURL(url),60000);
+  }catch(e){
+    alert('PDF 생성 또는 저장에 실패했습니다. 다시 시도해주세요.');
+  }finally{
+    btn.disabled=false;btn.textContent='견적서 PDF 받기';
+  }
 }
 </script>
 </body>
