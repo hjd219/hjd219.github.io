@@ -43,7 +43,7 @@ h3{font-size:17px;margin:6px 0 9px;color:#10263d}
 </head>
 <body>
 <main class="wrap">
-<div class="toolbar"><button type="button" id="pdfBtn" onclick="downloadPdf()">견적서 PDF 받기</button><a href="/corporate-calculator.html">돌아가기</a></div>
+<div class="toolbar"><button type="button" id="imgBtn" onclick="downloadImage()">견적서 이미지 저장</button><a href="/corporate-calculator.html">돌아가기</a></div>
 <section class="sheet" id="sheet">
 <div class="title"><b>등기로</b><span>법인등기 예상 견적서</span><small id="date"></small></div>
 <div class="selected" id="selected"></div>
@@ -86,37 +86,34 @@ h3{font-size:17px;margin:6px 0 9px;color:#10263d}
 </script>
 <script src="/assets/html2pdf.bundle.min.js?v=20260909"></script>
 <script>
-async function downloadPdf(){
-  const btn=document.getElementById('pdfBtn');
-  if(!window.html2pdf){alert('PDF 생성 모듈을 불러오지 못했습니다. 잠시 후 다시 시도해주세요.');return;}
-  btn.disabled=true;btn.textContent='PDF 생성 중...';
-  const element=document.getElementById('sheet');
-  const opt={
-    margin:[8,8,8,8],
-    filename:'등기로_법인등기_예상견적서.pdf',
-    image:{type:'jpeg',quality:0.96},
-    html2canvas:{scale:2,useCORS:true,backgroundColor:'#ffffff',scrollY:0},
-    jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},
-    pagebreak:{mode:['avoid-all','css','legacy']}
-  };
+async function downloadImage(){
+  const btn=document.getElementById('imgBtn');
+  if(!window.html2pdf){alert('이미지 생성 모듈을 불러오지 못했습니다.');return;}
+  btn.disabled=true;btn.textContent='이미지 생성 중...';
   try{
-    const worker=html2pdf().set(opt).from(element);
-    const blob=await worker.outputPdf('blob');
-    const file=new File([blob],opt.filename,{type:'application/pdf'});
+    const element=document.getElementById('sheet');
+    const worker=html2pdf().set({
+      html2canvas:{scale:2,useCORS:true,backgroundColor:'#ffffff',scrollY:0}
+    }).from(element).toCanvas();
+    const canvas=await worker.get('canvas');
+    const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png',1));
+    if(!blob)throw new Error('blob');
+    const fileName='등기로_법인등기_예상견적서.png';
+    const file=new File([blob],fileName,{type:'image/png'});
     if(navigator.canShare&&navigator.canShare({files:[file]})){
       await navigator.share({files:[file],title:'법인등기 예상 견적서'});
-      return;
+    }else{
+      const url=URL.createObjectURL(blob);
+      const a=document.createElement('a');
+      a.href=url;a.download=fileName;a.style.display='none';
+      document.body.appendChild(a);a.click();a.remove();
+      setTimeout(()=>{try{location.href=url}catch(e){}},250);
+      setTimeout(()=>URL.revokeObjectURL(url),60000);
     }
-    const url=URL.createObjectURL(blob);
-    const a=document.createElement('a');
-    a.href=url;a.download=opt.filename;a.style.display='none';
-    document.body.appendChild(a);a.click();a.remove();
-    setTimeout(()=>{try{location.href=url}catch(e){}},250);
-    setTimeout(()=>URL.revokeObjectURL(url),60000);
   }catch(e){
-    alert('PDF 생성 또는 저장에 실패했습니다. 다시 시도해주세요.');
+    alert('이미지 저장에 실패했습니다. 다시 시도해주세요.');
   }finally{
-    btn.disabled=false;btn.textContent='견적서 PDF 받기';
+    btn.disabled=false;btn.textContent='견적서 이미지 저장';
   }
 }
 </script>
