@@ -121,7 +121,7 @@
     documents:$('documentListCorp').innerHTML
   };
   sessionStorage.setItem('corporateEstimatePrint',JSON.stringify(data));
-  location.href='/corporate-estimate-print.html';
+  location.href='/corporate-estimate-print.html?v='+Date.now();
 }const state={est:false,off:false,name:false,purpose:false,move:false,inc:false},$=id=>document.getElementById(id),won=n=>Math.round(n).toLocaleString('ko-KR')+'원',num=v=>Number(String(v||'0').replace(/[^\d]/g,''))*10000;['estCapital','incCapital','moveCapital'].forEach(id=>$(id).oninput=()=>{let n=$(id).value.replace(/[^\d]/g,'');$(id).value=n?Number(n).toLocaleString():''});document.querySelectorAll('.opt').forEach(btn=>btn.onclick=()=>{let j=btn.dataset.job;state[j]=!state[j];btn.classList.toggle('on',state[j]);sync()});$('notary').onclick=()=>{$('notary').classList.toggle('on');calculate()};$('moveType').onchange=sync;$('duplicate').onchange=calculate;function sync(){$('offBox').classList.toggle('hidden',!state.off);$('estBox').classList.toggle('hidden',!state.est);$('incBox').classList.toggle('hidden',!state.inc);$('moveBox').classList.toggle('hidden',!state.move);let outside=state.move&&$('moveType').value!=='inside';$('duplicateWrap').classList.toggle('hidden',!outside);$('moveCapitalWrap').classList.toggle('hidden',!(state.move&&$('moveType').value==='non_dense'));calculate()}function amountFee(v){let value=num(v);return value<=28000000?280000:Math.ceil(value/1000000)*10000}function updateDocuments(jobs){
  let lines=[];
  const selected=new Set(jobs);
